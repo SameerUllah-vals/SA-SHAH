@@ -32,8 +32,8 @@ namespace LiquadCargoManagment.Models
         public Nullable<long> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
-        public virtual OwnCompany OwnCompany { get; set; }
-        public virtual OwnCompany OwnCompany1 { get; set; }
+        public virtual CustomerCompany CustomerCompany { get; set; }
+        public virtual CustomerCompany CustomerCompany1 { get; set; }
         public virtual Vehicle Vehicle { get; set; }
     }
 }

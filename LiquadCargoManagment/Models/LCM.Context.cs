@@ -89,9 +89,9 @@ namespace LiquadCargoManagment.Models
         public virtual DbSet<VendorType> VendorTypes { get; set; }
         public virtual DbSet<WorkOrder> WorkOrders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<Bilty> Bilties { get; set; }
-        public virtual DbSet<BiltyDetail> BiltyDetails { get; set; }
         public virtual DbSet<DieselExpense> DieselExpenses { get; set; }
         public virtual DbSet<VehicleExpens> VehicleExpenses { get; set; }
+        public virtual DbSet<Bilty> Bilties { get; set; }
+        public virtual DbSet<BiltyDetail> BiltyDetails { get; set; }
     }
 }

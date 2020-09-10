@@ -4578,6 +4578,7 @@
     <Content Include="Views\Admin\WorkOrderGrid.cshtml" />
     <Content Include="Views\Shared\_WorkOrderGrid.cshtml" />
     <Content Include="Views\Admin\Bilty.cshtml" />
+    <Content Include="Views\Shared\_BiltyGrid.cshtml" />
     <None Include="Web.Debug.config" />
     <None Include="Web.Release.config" />
   </ItemGroup>

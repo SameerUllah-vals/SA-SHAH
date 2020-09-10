@@ -14,6 +14,12 @@ namespace LiquadCargoManagment.Models
     
     public partial class Area
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Area()
+        {
+            this.BiltyDetails = new HashSet<BiltyDetail>();
+        }
+    
         public long ID { get; set; }
         public string Code { get; set; }
         public Nullable<long> CityID { get; set; }
@@ -29,5 +35,7 @@ namespace LiquadCargoManagment.Models
     
         public virtual OwnCompany OwnCompany { get; set; }
         public virtual City City { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BiltyDetail> BiltyDetails { get; set; }
     }
 }

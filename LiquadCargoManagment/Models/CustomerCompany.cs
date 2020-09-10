@@ -14,6 +14,13 @@ namespace LiquadCargoManagment.Models
     
     public partial class CustomerCompany
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CustomerCompany()
+        {
+            this.Bilties = new HashSet<Bilty>();
+            this.Bilties1 = new HashSet<Bilty>();
+        }
+    
         public long ID { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
@@ -33,5 +40,9 @@ namespace LiquadCargoManagment.Models
     
         public virtual OwnCompany OwnCompany { get; set; }
         public virtual CustomerGroup CustomerGroup { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bilty> Bilties { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bilty> Bilties1 { get; set; }
     }
 }

@@ -614,11 +614,11 @@
         });
         $.ajax({
             type: "POST",
-            url: "/admin/InsertCustomers",
+            url: "/admin/InsertBilty",
             data: { Details: customers, Expenses: ExpenseArr, Diesal: DiesalArr, Order: Order },
             success: function (r) {
                 Message("Success", r.Message, "success");
-                window.location = "../Admin/WorkOrderGrid";
+                window.location = "../Admin/BiltyGrid";
             }
         });
 

@@ -34,9 +34,6 @@ namespace LiquadCargoManagment.Models
             this.WorkOrders = new HashSet<WorkOrder>();
             this.WorkOrders1 = new HashSet<WorkOrder>();
             this.OrderDetails = new HashSet<OrderDetail>();
-            this.Bilties = new HashSet<Bilty>();
-            this.Bilties1 = new HashSet<Bilty>();
-            this.BiltyDetails = new HashSet<BiltyDetail>();
         }
     
         public long ID { get; set; }
@@ -91,11 +88,5 @@ namespace LiquadCargoManagment.Models
         public virtual ICollection<WorkOrder> WorkOrders1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bilty> Bilties { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bilty> Bilties1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BiltyDetail> BiltyDetails { get; set; }
     }
 }

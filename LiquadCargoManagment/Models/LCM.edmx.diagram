@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a780e3316b2a4a4989c77195441f2ec7" Name="Diagram1">
+      <Diagram DiagramId="a780e3316b2a4a4989c77195441f2ec7" Name="Diagram1" ZoomLevel="76">
         <EntityTypeShape EntityType="LCMModel.Area" Width="1.5" PointX="5.25" PointY="40.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.AssignDriver" Width="1.5" PointX="9" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.Bank" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
@@ -105,20 +105,19 @@
         <AssociationConnector Association="LCMModel.FK_OrderDetail_Product" />
         <AssociationConnector Association="LCMModel.FK_OrderDetail_ProductBroker" />
         <AssociationConnector Association="LCMModel.FK_OrderDetail_WorkOrder" />
-        <EntityTypeShape EntityType="LCMModel.Bilty" Width="1.5" PointX="9.75" PointY="44.375" />
-        <AssociationConnector Association="LCMModel.FK_Bilty_BillToOwnCompany" />
-        <AssociationConnector Association="LCMModel.FK_Bilty_OwnCompany" />
-        <AssociationConnector Association="LCMModel.FK_Bilty_Vehicle" />
-        <EntityTypeShape EntityType="LCMModel.BiltyDetail" Width="1.5" PointX="12.75" PointY="51.875" />
         <EntityTypeShape EntityType="LCMModel.DieselExpense" Width="1.5" PointX="9.75" PointY="61.25" />
         <EntityTypeShape EntityType="LCMModel.VehicleExpens" Width="1.5" PointX="12" PointY="25.75" />
         <AssociationConnector Association="LCMModel.FK_VehicleExpenses_Banks" />
-        <AssociationConnector Association="LCMModel.FK_BiltyDetails_CustomerCompany" />
-        <AssociationConnector Association="LCMModel.FK_BiltyDetails_PackageType" />
-        <AssociationConnector Association="LCMModel.FK_BiltyDetails_Product" />
-        <AssociationConnector Association="LCMModel.FK_BiltyDetails_ProductBroker" />
         <AssociationConnector Association="LCMModel.FK_DieselExpense_Vendor" />
         <AssociationConnector Association="LCMModel.FK_VehicleExpenses_ExpensesType" />
+        <EntityTypeShape EntityType="LCMModel.Bilty" Width="1.5" PointX="9.75" PointY="44.875" />
+        <EntityTypeShape EntityType="LCMModel.BiltyDetail" Width="1.5" PointX="12.75" PointY="49" />
+        <AssociationConnector Association="LCMModel.FK_BiltyDetails_CustomerCompany" />
+        <AssociationConnector Association="LCMModel.FK_Bilty_BillToOwnCompany" />
+        <AssociationConnector Association="LCMModel.FK_Bilty_OwnCompany" />
+        <AssociationConnector Association="LCMModel.FK_Bilty_Vehicle" />
+        <AssociationConnector Association="LCMModel.FK_BiltyDetails_Product" />
+        <AssociationConnector Association="LCMModel.FK_BiltyDetails_ProductBroker" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

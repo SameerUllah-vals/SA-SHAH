@@ -87,7 +87,7 @@
           <Property Name="BiltyID" Type="bigint" />
           <Property Name="Receiver" Type="bigint" Nullable="false" />
           <Property Name="ProductBrokerID" Type="bigint" Nullable="false" />
-          <Property Name="PackageTypeId" Type="bigint" />
+          <Property Name="ProductTypeId" Type="bigint" />
           <Property Name="ProductId" Type="bigint" />
           <Property Name="Weight" Type="float" />
           <Property Name="Unit" Type="float" />
@@ -1351,10 +1351,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Bilty_BillToOwnCompany">
-          <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+          <End Role="CustomerCompany" Type="Self.CustomerCompany" Multiplicity="0..1" />
           <End Role="Bilty" Type="Self.Bilty" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="OwnCompany">
+            <Principal Role="CustomerCompany">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Bilty">
@@ -1363,10 +1363,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Bilty_OwnCompany">
-          <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+          <End Role="CustomerCompany" Type="Self.CustomerCompany" Multiplicity="0..1" />
           <End Role="Bilty" Type="Self.Bilty" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="OwnCompany">
+            <Principal Role="CustomerCompany">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Bilty">
@@ -1387,26 +1387,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BiltyDetails_CustomerCompany">
-          <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="1" />
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
           <End Role="BiltyDetails" Type="Self.BiltyDetails" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="OwnCompany">
+            <Principal Role="Area">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="BiltyDetails">
               <PropertyRef Name="Receiver" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BiltyDetails_PackageType">
-          <End Role="PackageType" Type="Self.PackageType" Multiplicity="0..1" />
-          <End Role="BiltyDetails" Type="Self.BiltyDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PackageType">
-              <PropertyRef Name="PackageTypeID" />
-            </Principal>
-            <Dependent Role="BiltyDetails">
-              <PropertyRef Name="PackageTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1862,11 +1850,11 @@
             <End Role="AssignDrivers" EntitySet="AssignDrivers" />
           </AssociationSet>
           <AssociationSet Name="FK_Bilty_BillToOwnCompany" Association="Self.FK_Bilty_BillToOwnCompany">
-            <End Role="OwnCompany" EntitySet="OwnCompany" />
+            <End Role="CustomerCompany" EntitySet="CustomerCompany" />
             <End Role="Bilty" EntitySet="Bilty" />
           </AssociationSet>
           <AssociationSet Name="FK_Bilty_OwnCompany" Association="Self.FK_Bilty_OwnCompany">
-            <End Role="OwnCompany" EntitySet="OwnCompany" />
+            <End Role="CustomerCompany" EntitySet="CustomerCompany" />
             <End Role="Bilty" EntitySet="Bilty" />
           </AssociationSet>
           <AssociationSet Name="FK_Bilty_Vehicle" Association="Self.FK_Bilty_Vehicle">
@@ -1874,11 +1862,7 @@
             <End Role="Bilty" EntitySet="Bilty" />
           </AssociationSet>
           <AssociationSet Name="FK_BiltyDetails_CustomerCompany" Association="Self.FK_BiltyDetails_CustomerCompany">
-            <End Role="OwnCompany" EntitySet="OwnCompany" />
-            <End Role="BiltyDetails" EntitySet="BiltyDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BiltyDetails_PackageType" Association="Self.FK_BiltyDetails_PackageType">
-            <End Role="PackageType" EntitySet="PackageType" />
+            <End Role="Area" EntitySet="Area" />
             <End Role="BiltyDetails" EntitySet="BiltyDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_BiltyDetails_Product" Association="Self.FK_BiltyDetails_Product">
@@ -2012,6 +1996,7 @@
           <Property Name="OwnCompanyId" Type="Int64" />
           <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Area__OwnCompany__2645B050" FromRole="Area" ToRole="OwnCompany" />
           <NavigationProperty Name="City" Relationship="Self.FK_Area_City" FromRole="Area" ToRole="City" />
+          <NavigationProperty Name="BiltyDetails" Relationship="LCMModel.FK_BiltyDetails_CustomerCompany" FromRole="Area" ToRole="BiltyDetail" />
         </EntityType>
         <EntityType Name="AssignDriver">
           <Key>
@@ -2266,6 +2251,8 @@
           <Property Name="OwnCompanyId" Type="Int64" />
           <NavigationProperty Name="OwnCompany" Relationship="Self.FK__CustomerC__OwnCo__2CF2ADDF" FromRole="CustomerCompany" ToRole="OwnCompany" />
           <NavigationProperty Name="CustomerGroup" Relationship="Self.FK_CustomerCompany_CustomerGroup" FromRole="CustomerCompany" ToRole="CustomerGroup" />
+          <NavigationProperty Name="Bilties" Relationship="LCMModel.FK_Bilty_BillToOwnCompany" FromRole="CustomerCompany" ToRole="Bilty" />
+          <NavigationProperty Name="Bilties1" Relationship="LCMModel.FK_Bilty_OwnCompany" FromRole="CustomerCompany" ToRole="Bilty" />
         </EntityType>
         <EntityType Name="CustomerGroup">
           <Key>
@@ -2647,9 +2634,6 @@
           <NavigationProperty Name="WorkOrders" Relationship="LCMModel.FK_Reciver_OwnCompany" FromRole="OwnCompany" ToRole="WorkOrder" />
           <NavigationProperty Name="WorkOrders1" Relationship="LCMModel.FK_Sender_OwnCompany" FromRole="OwnCompany" ToRole="WorkOrder" />
           <NavigationProperty Name="OrderDetails" Relationship="LCMModel.FK_OrderDetail_OwnCompany" FromRole="OwnCompany" ToRole="OrderDetail" />
-          <NavigationProperty Name="Bilties" Relationship="LCMModel.FK_Bilty_BillToOwnCompany" FromRole="OwnCompany" ToRole="Bilty" />
-          <NavigationProperty Name="Bilties1" Relationship="LCMModel.FK_Bilty_OwnCompany" FromRole="OwnCompany" ToRole="Bilty" />
-          <NavigationProperty Name="BiltyDetails" Relationship="LCMModel.FK_BiltyDetails_CustomerCompany" FromRole="OwnCompany" ToRole="BiltyDetail" />
         </EntityType>
         <EntityType Name="OwnDepartment">
           <Key>
@@ -2715,7 +2699,6 @@
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="OrderDetails" Relationship="LCMModel.FK_OrderDetail_PackageType" FromRole="PackageType" ToRole="OrderDetail" />
-          <NavigationProperty Name="BiltyDetails" Relationship="LCMModel.FK_BiltyDetails_PackageType" FromRole="PackageType" ToRole="BiltyDetail" />
         </EntityType>
         <EntityType Name="PickDropLocation">
           <Key>
@@ -3709,41 +3692,11 @@
             <End Role="WorkOrder" EntitySet="WorkOrders" />
             <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
-          <EntitySet Name="Bilties" EntityType="LCMModel.Bilty" />
-          <AssociationSet Name="FK_Bilty_BillToOwnCompany" Association="LCMModel.FK_Bilty_BillToOwnCompany">
-            <End Role="OwnCompany" EntitySet="OwnCompanies" />
-            <End Role="Bilty" EntitySet="Bilties" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Bilty_OwnCompany" Association="LCMModel.FK_Bilty_OwnCompany">
-            <End Role="OwnCompany" EntitySet="OwnCompanies" />
-            <End Role="Bilty" EntitySet="Bilties" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Bilty_Vehicle" Association="LCMModel.FK_Bilty_Vehicle">
-            <End Role="Vehicle" EntitySet="Vehicles" />
-            <End Role="Bilty" EntitySet="Bilties" />
-          </AssociationSet>
-          <EntitySet Name="BiltyDetails" EntityType="LCMModel.BiltyDetail" />
           <EntitySet Name="DieselExpenses" EntityType="LCMModel.DieselExpense" />
           <EntitySet Name="VehicleExpenses" EntityType="LCMModel.VehicleExpens" />
           <AssociationSet Name="FK_VehicleExpenses_Banks" Association="LCMModel.FK_VehicleExpenses_Banks">
             <End Role="Bank" EntitySet="Banks" />
             <End Role="VehicleExpens" EntitySet="VehicleExpenses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BiltyDetails_CustomerCompany" Association="LCMModel.FK_BiltyDetails_CustomerCompany">
-            <End Role="OwnCompany" EntitySet="OwnCompanies" />
-            <End Role="BiltyDetail" EntitySet="BiltyDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BiltyDetails_PackageType" Association="LCMModel.FK_BiltyDetails_PackageType">
-            <End Role="PackageType" EntitySet="PackageTypes" />
-            <End Role="BiltyDetail" EntitySet="BiltyDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BiltyDetails_Product" Association="LCMModel.FK_BiltyDetails_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="BiltyDetail" EntitySet="BiltyDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BiltyDetails_ProductBroker" Association="LCMModel.FK_BiltyDetails_ProductBroker">
-            <End Role="ProductBroker" EntitySet="ProductBrokers" />
-            <End Role="BiltyDetail" EntitySet="BiltyDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_DieselExpense_Vendor" Association="LCMModel.FK_DieselExpense_Vendor">
             <End Role="Vendor" EntitySet="Vendors" />
@@ -3752,6 +3705,32 @@
           <AssociationSet Name="FK_VehicleExpenses_ExpensesType" Association="LCMModel.FK_VehicleExpenses_ExpensesType">
             <End Role="ExpensesType" EntitySet="ExpensesTypes" />
             <End Role="VehicleExpens" EntitySet="VehicleExpenses" />
+          </AssociationSet>
+          <EntitySet Name="Bilties" EntityType="LCMModel.Bilty" />
+          <EntitySet Name="BiltyDetails" EntityType="LCMModel.BiltyDetail" />
+          <AssociationSet Name="FK_BiltyDetails_CustomerCompany" Association="LCMModel.FK_BiltyDetails_CustomerCompany">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="BiltyDetail" EntitySet="BiltyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bilty_BillToOwnCompany" Association="LCMModel.FK_Bilty_BillToOwnCompany">
+            <End Role="CustomerCompany" EntitySet="CustomerCompanies" />
+            <End Role="Bilty" EntitySet="Bilties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bilty_OwnCompany" Association="LCMModel.FK_Bilty_OwnCompany">
+            <End Role="CustomerCompany" EntitySet="CustomerCompanies" />
+            <End Role="Bilty" EntitySet="Bilties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bilty_Vehicle" Association="LCMModel.FK_Bilty_Vehicle">
+            <End Role="Vehicle" EntitySet="Vehicles" />
+            <End Role="Bilty" EntitySet="Bilties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BiltyDetails_Product" Association="LCMModel.FK_BiltyDetails_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="BiltyDetail" EntitySet="BiltyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BiltyDetails_ProductBroker" Association="LCMModel.FK_BiltyDetails_ProductBroker">
+            <End Role="ProductBroker" EntitySet="ProductBrokers" />
+            <End Role="BiltyDetail" EntitySet="BiltyDetails" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="WorkOrder">
@@ -3879,87 +3858,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Bilty">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="OrderNo" Type="Int64" Nullable="false" />
-          <Property Name="DeliveryDate" Type="DateTime" Precision="0" />
-          <Property Name="BillTo" Type="Int64" />
-          <Property Name="Sender" Type="Int64" />
-          <Property Name="VehicleID" Type="Int64" />
-          <Property Name="Freight" Type="Double" />
-          <Property Name="VehicleExpensesGrandTotal" Type="Double" />
-          <Property Name="DieselExpensesGrandTotal" Type="Double" />
-          <Property Name="TotalLiter" Type="Double" />
-          <Property Name="OrderDetailsTotalQTY" Type="Double" />
-          <Property Name="OrderDetailsTotalWeight" Type="Double" />
-          <Property Name="CreatedBy" Type="Int64" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedBy" Type="Int64" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="OwnCompany" Relationship="LCMModel.FK_Bilty_BillToOwnCompany" FromRole="Bilty" ToRole="OwnCompany" />
-          <NavigationProperty Name="OwnCompany1" Relationship="LCMModel.FK_Bilty_OwnCompany" FromRole="Bilty" ToRole="OwnCompany" />
-          <NavigationProperty Name="Vehicle" Relationship="LCMModel.FK_Bilty_Vehicle" FromRole="Bilty" ToRole="Vehicle" />
-        </EntityType>
-        <Association Name="FK_Bilty_BillToOwnCompany">
-          <End Type="LCMModel.OwnCompany" Role="OwnCompany" Multiplicity="0..1" />
-          <End Type="LCMModel.Bilty" Role="Bilty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OwnCompany">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Bilty">
-              <PropertyRef Name="BillTo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Bilty_OwnCompany">
-          <End Type="LCMModel.OwnCompany" Role="OwnCompany" Multiplicity="0..1" />
-          <End Type="LCMModel.Bilty" Role="Bilty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OwnCompany">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Bilty">
-              <PropertyRef Name="Sender" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Bilty_Vehicle">
-          <End Type="LCMModel.Vehicle" Role="Vehicle" Multiplicity="0..1" />
-          <End Type="LCMModel.Bilty" Role="Bilty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vehicle">
-              <PropertyRef Name="VehicleID" />
-            </Principal>
-            <Dependent Role="Bilty">
-              <PropertyRef Name="VehicleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="BiltyDetail">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BiltyID" Type="Int64" />
-          <Property Name="Receiver" Type="Int64" Nullable="false" />
-          <Property Name="ProductBrokerID" Type="Int64" Nullable="false" />
-          <Property Name="PackageTypeId" Type="Int64" />
-          <Property Name="ProductId" Type="Int64" />
-          <Property Name="Weight" Type="Double" />
-          <Property Name="Unit" Type="Double" />
-          <Property Name="QTY" Type="Double" />
-          <Property Name="TotalWeight" Type="Double" />
-          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="OwnCompany" Relationship="LCMModel.FK_BiltyDetails_CustomerCompany" FromRole="BiltyDetail" ToRole="OwnCompany" />
-          <NavigationProperty Name="PackageType" Relationship="LCMModel.FK_BiltyDetails_PackageType" FromRole="BiltyDetail" ToRole="PackageType" />
-          <NavigationProperty Name="Product" Relationship="LCMModel.FK_BiltyDetails_Product" FromRole="BiltyDetail" ToRole="Product" />
-          <NavigationProperty Name="ProductBroker" Relationship="LCMModel.FK_BiltyDetails_ProductBroker" FromRole="BiltyDetail" ToRole="ProductBroker" />
-        </EntityType>
         <EntityType Name="DieselExpense">
           <Key>
             <PropertyRef Name="ID" />
@@ -3999,11 +3897,79 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DieselExpense_Vendor">
+          <End Type="LCMModel.Vendor" Role="Vendor" Multiplicity="1" />
+          <End Type="LCMModel.DieselExpense" Role="DieselExpense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DieselExpense">
+              <PropertyRef Name="VendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleExpenses_ExpensesType">
+          <End Type="LCMModel.ExpensesType" Role="ExpensesType" Multiplicity="1" />
+          <End Type="LCMModel.VehicleExpens" Role="VehicleExpens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpensesType">
+              <PropertyRef Name="ExpensesTypeID" />
+            </Principal>
+            <Dependent Role="VehicleExpens">
+              <PropertyRef Name="ExpenseTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Bilty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OrderNo" Type="Int64" Nullable="false" />
+          <Property Name="DeliveryDate" Type="DateTime" Precision="0" />
+          <Property Name="BillTo" Type="Int64" />
+          <Property Name="Sender" Type="Int64" />
+          <Property Name="VehicleID" Type="Int64" />
+          <Property Name="Freight" Type="Double" />
+          <Property Name="VehicleExpensesGrandTotal" Type="Double" />
+          <Property Name="DieselExpensesGrandTotal" Type="Double" />
+          <Property Name="TotalLiter" Type="Double" />
+          <Property Name="OrderDetailsTotalQTY" Type="Double" />
+          <Property Name="OrderDetailsTotalWeight" Type="Double" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CustomerCompany" Relationship="LCMModel.FK_Bilty_BillToOwnCompany" FromRole="Bilty" ToRole="CustomerCompany" />
+          <NavigationProperty Name="CustomerCompany1" Relationship="LCMModel.FK_Bilty_OwnCompany" FromRole="Bilty" ToRole="CustomerCompany" />
+          <NavigationProperty Name="Vehicle" Relationship="LCMModel.FK_Bilty_Vehicle" FromRole="Bilty" ToRole="Vehicle" />
+        </EntityType>
+        <EntityType Name="BiltyDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BiltyID" Type="Int64" />
+          <Property Name="Receiver" Type="Int64" Nullable="false" />
+          <Property Name="ProductBrokerID" Type="Int64" Nullable="false" />
+          <Property Name="ProductTypeId" Type="Int64" />
+          <Property Name="ProductId" Type="Int64" />
+          <Property Name="Weight" Type="Double" />
+          <Property Name="Unit" Type="Double" />
+          <Property Name="QTY" Type="Double" />
+          <Property Name="TotalWeight" Type="Double" />
+          <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Area" Relationship="LCMModel.FK_BiltyDetails_CustomerCompany" FromRole="BiltyDetail" ToRole="Area" />
+          <NavigationProperty Name="Product" Relationship="LCMModel.FK_BiltyDetails_Product" FromRole="BiltyDetail" ToRole="Product" />
+          <NavigationProperty Name="ProductBroker" Relationship="LCMModel.FK_BiltyDetails_ProductBroker" FromRole="BiltyDetail" ToRole="ProductBroker" />
+        </EntityType>
         <Association Name="FK_BiltyDetails_CustomerCompany">
-          <End Type="LCMModel.OwnCompany" Role="OwnCompany" Multiplicity="1" />
+          <End Type="LCMModel.Area" Role="Area" Multiplicity="1" />
           <End Type="LCMModel.BiltyDetail" Role="BiltyDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="OwnCompany">
+            <Principal Role="Area">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="BiltyDetail">
@@ -4011,15 +3977,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BiltyDetails_PackageType">
-          <End Type="LCMModel.PackageType" Role="PackageType" Multiplicity="0..1" />
-          <End Type="LCMModel.BiltyDetail" Role="BiltyDetail" Multiplicity="*" />
+        <Association Name="FK_Bilty_BillToOwnCompany">
+          <End Type="LCMModel.CustomerCompany" Role="CustomerCompany" Multiplicity="0..1" />
+          <End Type="LCMModel.Bilty" Role="Bilty" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PackageType">
-              <PropertyRef Name="PackageTypeID" />
+            <Principal Role="CustomerCompany">
+              <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="BiltyDetail">
-              <PropertyRef Name="PackageTypeId" />
+            <Dependent Role="Bilty">
+              <PropertyRef Name="BillTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bilty_OwnCompany">
+          <End Type="LCMModel.CustomerCompany" Role="CustomerCompany" Multiplicity="0..1" />
+          <End Type="LCMModel.Bilty" Role="Bilty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerCompany">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Bilty">
+              <PropertyRef Name="Sender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bilty_Vehicle">
+          <End Type="LCMModel.Vehicle" Role="Vehicle" Multiplicity="0..1" />
+          <End Type="LCMModel.Bilty" Role="Bilty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle">
+              <PropertyRef Name="VehicleID" />
+            </Principal>
+            <Dependent Role="Bilty">
+              <PropertyRef Name="VehicleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4044,30 +4034,6 @@
             </Principal>
             <Dependent Role="BiltyDetail">
               <PropertyRef Name="ProductBrokerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DieselExpense_Vendor">
-          <End Type="LCMModel.Vendor" Role="Vendor" Multiplicity="1" />
-          <End Type="LCMModel.DieselExpense" Role="DieselExpense" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vendor">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="DieselExpense">
-              <PropertyRef Name="VendorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VehicleExpenses_ExpensesType">
-          <End Type="LCMModel.ExpensesType" Role="ExpensesType" Multiplicity="1" />
-          <End Type="LCMModel.VehicleExpens" Role="VehicleExpens" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ExpensesType">
-              <PropertyRef Name="ExpensesTypeID" />
-            </Principal>
-            <Dependent Role="VehicleExpens">
-              <PropertyRef Name="ExpenseTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5256,6 +5222,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DieselExpenses">
+            <EntityTypeMapping TypeName="LCMModel.DieselExpense">
+              <MappingFragment StoreEntitySet="DieselExpense">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Litre" ColumnName="Litre" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="BiltyID" ColumnName="BiltyID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleExpenses">
+            <EntityTypeMapping TypeName="LCMModel.VehicleExpens">
+              <MappingFragment StoreEntitySet="VehicleExpenses">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
+                <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="BankBranch" ColumnName="BankBranch" />
+                <ScalarProperty Name="ExpenseTypeId" ColumnName="ExpenseTypeId" />
+                <ScalarProperty Name="BiltyID" ColumnName="BiltyID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Bilties">
             <EntityTypeMapping TypeName="LCMModel.Bilty">
               <MappingFragment StoreEntitySet="Bilty">
@@ -5288,35 +5280,9 @@
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="PackageTypeId" ColumnName="PackageTypeId" />
+                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
                 <ScalarProperty Name="ProductBrokerID" ColumnName="ProductBrokerID" />
                 <ScalarProperty Name="Receiver" ColumnName="Receiver" />
-                <ScalarProperty Name="BiltyID" ColumnName="BiltyID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DieselExpenses">
-            <EntityTypeMapping TypeName="LCMModel.DieselExpense">
-              <MappingFragment StoreEntitySet="DieselExpense">
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Litre" ColumnName="Litre" />
-                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
-                <ScalarProperty Name="BiltyID" ColumnName="BiltyID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VehicleExpenses">
-            <EntityTypeMapping TypeName="LCMModel.VehicleExpens">
-              <MappingFragment StoreEntitySet="VehicleExpenses">
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
-                <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
-                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
-                <ScalarProperty Name="BankBranch" ColumnName="BankBranch" />
-                <ScalarProperty Name="ExpenseTypeId" ColumnName="ExpenseTypeId" />
                 <ScalarProperty Name="BiltyID" ColumnName="BiltyID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

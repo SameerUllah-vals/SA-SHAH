@@ -18,7 +18,7 @@ namespace LiquadCargoManagment.Models
         public Nullable<long> BiltyID { get; set; }
         public long Receiver { get; set; }
         public long ProductBrokerID { get; set; }
-        public Nullable<long> PackageTypeId { get; set; }
+        public Nullable<long> ProductTypeId { get; set; }
         public Nullable<long> ProductId { get; set; }
         public Nullable<double> Weight { get; set; }
         public Nullable<double> Unit { get; set; }
@@ -26,8 +26,7 @@ namespace LiquadCargoManagment.Models
         public Nullable<double> TotalWeight { get; set; }
         public string Remarks { get; set; }
     
-        public virtual OwnCompany OwnCompany { get; set; }
-        public virtual PackageType PackageType { get; set; }
+        public virtual Area Area { get; set; }
         public virtual Product Product { get; set; }
         public virtual ProductBroker ProductBroker { get; set; }
     }
