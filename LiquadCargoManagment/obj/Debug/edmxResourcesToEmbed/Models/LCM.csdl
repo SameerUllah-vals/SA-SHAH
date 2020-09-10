@@ -16,8 +16,9 @@
     <Property Name="Status" Type="Boolean" />
     <Property Name="IsActive" Type="Boolean" />
     <Property Name="OwnCompanyId" Type="Int64" />
-    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Area__OwnCompany__2645B050" FromRole="Area" ToRole="OwnCompany" />
+    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Area__OwnCompany__2DE6D218" FromRole="Area" ToRole="OwnCompany" />
     <NavigationProperty Name="City" Relationship="Self.FK_Area_City" FromRole="Area" ToRole="City" />
+    <NavigationProperty Name="BiltyDetails" Relationship="Self.FK_BiltyDetails_CustomerCompany" FromRole="Area" ToRole="BiltyDetails" />
   </EntityType>
   <EntityType Name="AssignDriver">
     <Key>
@@ -54,7 +55,51 @@
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" />
     <Property Name="IsDeleted" Type="Boolean" />
-    <NavigationProperty Name="VehicleExpens" Relationship="LCMModel.FK_VehicleExpenses_Banks" FromRole="Bank" ToRole="VehicleExpens" />
+    <NavigationProperty Name="VehicleExpens" Relationship="Self.FK_VehicleExpenses_Banks" FromRole="Banks" ToRole="VehicleExpenses" />
+  </EntityType>
+  <EntityType Name="Bilty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="OrderNo" Type="Int64" Nullable="false" />
+    <Property Name="DeliveryDate" Type="DateTime" Precision="0" />
+    <Property Name="BillTo" Type="Int64" />
+    <Property Name="Sender" Type="Int64" />
+    <Property Name="VehicleID" Type="Int64" />
+    <Property Name="Freight" Type="Double" />
+    <Property Name="VehicleExpensesGrandTotal" Type="Double" />
+    <Property Name="DieselExpensesGrandTotal" Type="Double" />
+    <Property Name="TotalLiter" Type="Double" />
+    <Property Name="OrderDetailsTotalQTY" Type="Double" />
+    <Property Name="OrderDetailsTotalWeight" Type="Double" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int64" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CustomerCompany" Relationship="Self.FK_Bilty_BillToOwnCompany" FromRole="Bilty" ToRole="CustomerCompany" />
+    <NavigationProperty Name="CustomerCompany1" Relationship="Self.FK_Bilty_OwnCompany" FromRole="Bilty" ToRole="CustomerCompany" />
+    <NavigationProperty Name="Vehicle" Relationship="Self.FK_Bilty_Vehicle" FromRole="Bilty" ToRole="Vehicle" />
+  </EntityType>
+  <EntityType Name="BiltyDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BiltyID" Type="Int64" />
+    <Property Name="Receiver" Type="Int64" Nullable="false" />
+    <Property Name="ProductBrokerID" Type="Int64" Nullable="false" />
+    <Property Name="ProductTypeId" Type="Int64" />
+    <Property Name="ProductId" Type="Int64" />
+    <Property Name="Weight" Type="Double" />
+    <Property Name="Unit" Type="Double" />
+    <Property Name="QTY" Type="Double" />
+    <Property Name="TotalWeight" Type="Double" />
+    <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Area" Relationship="Self.FK_BiltyDetails_CustomerCompany" FromRole="BiltyDetails" ToRole="Area" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_BiltyDetails_Product" FromRole="BiltyDetails" ToRole="Product" />
+    <NavigationProperty Name="ProductBroker" Relationship="Self.FK_BiltyDetails_ProductBroker" FromRole="BiltyDetails" ToRole="ProductBroker" />
   </EntityType>
   <EntityType Name="Broker">
     <Key>
@@ -90,7 +135,7 @@
     <Property Name="ModifiedBy" Type="Int64" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <Property Name="OwnCompanyId" Type="Int64" />
-    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Category__OwnCom__29221CFB" FromRole="Category" ToRole="OwnCompany" />
+    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Category__OwnCom__367C1819" FromRole="Category" ToRole="OwnCompany" />
     <NavigationProperty Name="Products" Relationship="Self.FK_Product_Product" FromRole="Category" ToRole="Product" />
   </EntityType>
   <EntityType Name="City">
@@ -139,7 +184,7 @@
     <Property Name="IsDeleted" Type="Boolean" />
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="OwnCompanyId" Type="Int64" />
-    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Company__OwnComp__2BFE89A6" FromRole="Company" ToRole="OwnCompany" />
+    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Company__OwnComp__395884C4" FromRole="Company" ToRole="OwnCompany" />
   </EntityType>
   <EntityType Name="ContactNoType">
     <Key>
@@ -270,7 +315,9 @@
     <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="IsActive" Type="Boolean" />
     <Property Name="OwnCompanyId" Type="Int64" />
-    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__CustomerC__OwnCo__2CF2ADDF" FromRole="CustomerCompany" ToRole="OwnCompany" />
+    <NavigationProperty Name="Bilties" Relationship="Self.FK_Bilty_BillToOwnCompany" FromRole="CustomerCompany" ToRole="Bilty" />
+    <NavigationProperty Name="Bilties1" Relationship="Self.FK_Bilty_OwnCompany" FromRole="CustomerCompany" ToRole="Bilty" />
+    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__CustomerC__OwnCo__3A4CA8FD" FromRole="CustomerCompany" ToRole="OwnCompany" />
     <NavigationProperty Name="CustomerGroup" Relationship="Self.FK_CustomerCompany_CustomerGroup" FromRole="CustomerCompany" ToRole="CustomerGroup" />
   </EntityType>
   <EntityType Name="CustomerGroup">
@@ -293,7 +340,7 @@
     <Property Name="IsActive" Type="Boolean" />
     <Property Name="OwnCompanyId" Type="Int64" />
     <NavigationProperty Name="CustomerCompanies" Relationship="Self.FK_CustomerCompany_CustomerGroup" FromRole="CustomerGroup" ToRole="CustomerCompany" />
-    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__CustomerG__OwnCo__2EDAF651" FromRole="CustomerGroup" ToRole="OwnCompany" />
+    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__CustomerG__OwnCo__3C34F16F" FromRole="CustomerGroup" ToRole="OwnCompany" />
   </EntityType>
   <EntityType Name="DamageType">
     <Key>
@@ -379,6 +426,18 @@
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <Property Name="ModifiedBy" Type="Int64" />
     <Property Name="IsDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="DieselExpense">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BiltyID" Type="Int64" />
+    <Property Name="VendorId" Type="Int64" Nullable="false" />
+    <Property Name="Litre" Type="Double" />
+    <Property Name="Rate" Type="Double" />
+    <Property Name="Amount" Type="Double" />
+    <NavigationProperty Name="Vendor" Relationship="Self.FK_DieselExpense_Vendor" FromRole="DieselExpense" ToRole="Vendor" />
   </EntityType>
   <EntityType Name="DocumentType">
     <Key>
@@ -483,8 +542,8 @@
     <Property Name="IsActive" Type="Boolean" />
     <Property Name="IsDeleted" Type="Boolean" />
     <Property Name="OwnCompanyId" Type="Int64" />
-    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__ExpensesT__OwnCo__2FCF1A8A" FromRole="ExpensesType" ToRole="OwnCompany" />
-    <NavigationProperty Name="VehicleExpenses" Relationship="LCMModel.FK_VehicleExpenses_ExpensesType" FromRole="ExpensesType" ToRole="VehicleExpens" />
+    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__ExpensesT__OwnCo__3E1D39E1" FromRole="ExpensesType" ToRole="OwnCompany" />
+    <NavigationProperty Name="VehicleExpenses" Relationship="Self.FK_VehicleExpenses_ExpensesType" FromRole="ExpensesType" ToRole="VehicleExpenses" />
   </EntityType>
   <EntityType Name="Gener">
     <Key>
@@ -598,6 +657,27 @@
     <Property Name="Format" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="SoftwareSetups" Relationship="Self.FK_SoftwareSetup_NoType" FromRole="NoType" ToRole="SoftwareSetup" />
   </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorkOrderID" Type="Int64" />
+    <Property Name="Reciever" Type="Int64" />
+    <Property Name="Productbroker" Type="Int64" />
+    <Property Name="PackageType" Type="Int64" />
+    <Property Name="Product" Type="Int64" />
+    <Property Name="Weight" Type="Int64" />
+    <Property Name="unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int64" />
+    <Property Name="TotalWeight" Type="Int64" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OwnCompany" Relationship="Self.FK_OrderDetail_OwnCompany" FromRole="OrderDetail" ToRole="OwnCompany" />
+    <NavigationProperty Name="PackageType1" Relationship="Self.FK_OrderDetail_PackageType" FromRole="OrderDetail" ToRole="PackageType" />
+    <NavigationProperty Name="Product1" Relationship="Self.FK_OrderDetail_Product" FromRole="OrderDetail" ToRole="Product" />
+    <NavigationProperty Name="ProductBroker1" Relationship="Self.FK_OrderDetail_ProductBroker" FromRole="OrderDetail" ToRole="ProductBroker" />
+    <NavigationProperty Name="WorkOrder" Relationship="Self.FK_OrderDetail_WorkOrder" FromRole="OrderDetail" ToRole="WorkOrder" />
+  </EntityType>
   <EntityType Name="Organization">
     <Key>
       <PropertyRef Name="OrganizationID" />
@@ -635,27 +715,24 @@
     <Property Name="ModifiedBy" Type="Int64" />
     <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="IsActive" Type="Boolean" />
-    <NavigationProperty Name="Areas" Relationship="Self.FK__Area__OwnCompany__2645B050" FromRole="OwnCompany" ToRole="Area" />
-    <NavigationProperty Name="Categories" Relationship="Self.FK__Category__OwnCom__29221CFB" FromRole="OwnCompany" ToRole="Category" />
+    <NavigationProperty Name="Areas" Relationship="Self.FK__Area__OwnCompany__2DE6D218" FromRole="OwnCompany" ToRole="Area" />
+    <NavigationProperty Name="Categories" Relationship="Self.FK__Category__OwnCom__367C1819" FromRole="OwnCompany" ToRole="Category" />
     <NavigationProperty Name="Cities" Relationship="Self.FK_City_OwnCompany" FromRole="OwnCompany" ToRole="City" />
-    <NavigationProperty Name="Companies" Relationship="Self.FK__Company__OwnComp__2BFE89A6" FromRole="OwnCompany" ToRole="Company" />
-    <NavigationProperty Name="CustomerCompanies" Relationship="Self.FK__CustomerC__OwnCo__2CF2ADDF" FromRole="OwnCompany" ToRole="CustomerCompany" />
-    <NavigationProperty Name="CustomerGroups" Relationship="Self.FK__CustomerG__OwnCo__2EDAF651" FromRole="OwnCompany" ToRole="CustomerGroup" />
-    <NavigationProperty Name="ExpensesTypes" Relationship="Self.FK__ExpensesT__OwnCo__2FCF1A8A" FromRole="OwnCompany" ToRole="ExpensesType" />
-    <NavigationProperty Name="Products" Relationship="Self.FK__Product__OwnComp__367C1819" FromRole="OwnCompany" ToRole="Product" />
-    <NavigationProperty Name="RevenueTypes" Relationship="Self.FK__RevenueTy__OwnCo__3864608B" FromRole="OwnCompany" ToRole="RevenueType" />
-    <NavigationProperty Name="Vehicles" Relationship="Self.FK__Vehicle__OwnComp__40F9A68C" FromRole="OwnCompany" ToRole="Vehicle" />
-    <NavigationProperty Name="VehicleTypes" Relationship="Self.FK__VehicleTy__OwnCo__42E1EEFE" FromRole="OwnCompany" ToRole="VehicleType" />
+    <NavigationProperty Name="Companies" Relationship="Self.FK__Company__OwnComp__395884C4" FromRole="OwnCompany" ToRole="Company" />
+    <NavigationProperty Name="CustomerCompanies" Relationship="Self.FK__CustomerC__OwnCo__3A4CA8FD" FromRole="OwnCompany" ToRole="CustomerCompany" />
+    <NavigationProperty Name="CustomerGroups" Relationship="Self.FK__CustomerG__OwnCo__3C34F16F" FromRole="OwnCompany" ToRole="CustomerGroup" />
+    <NavigationProperty Name="ExpensesTypes" Relationship="Self.FK__ExpensesT__OwnCo__3E1D39E1" FromRole="OwnCompany" ToRole="ExpensesType" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_OwnCompany" FromRole="OwnCompany" ToRole="OrderDetail" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Product__OwnComp__44CA3770" FromRole="OwnCompany" ToRole="Product" />
+    <NavigationProperty Name="RevenueTypes" Relationship="Self.FK__RevenueTy__OwnCo__46B27FE2" FromRole="OwnCompany" ToRole="RevenueType" />
+    <NavigationProperty Name="Vehicles" Relationship="Self.FK__Vehicle__OwnComp__4F47C5E3" FromRole="OwnCompany" ToRole="Vehicle" />
+    <NavigationProperty Name="VehicleTypes" Relationship="Self.FK__VehicleTy__OwnCo__531856C7" FromRole="OwnCompany" ToRole="VehicleType" />
     <NavigationProperty Name="Vendors" Relationship="Self.FK__Vendor__OwnCompa__7755B73D" FromRole="OwnCompany" ToRole="Vendor" />
-    <NavigationProperty Name="VendorTypes" Relationship="Self.FK__VendorTyp__OwnCo__45BE5BA9" FromRole="OwnCompany" ToRole="VendorType" />
+    <NavigationProperty Name="VendorTypes" Relationship="Self.FK__VendorTyp__OwnCo__55F4C372" FromRole="OwnCompany" ToRole="VendorType" />
     <NavigationProperty Name="OwnGroup" Relationship="Self.FK_OwnCompany_OwnGroups" FromRole="OwnCompany" ToRole="OwnGroups" />
+    <NavigationProperty Name="WorkOrders" Relationship="Self.FK_Reciver_OwnCompany" FromRole="OwnCompany" ToRole="WorkOrder" />
+    <NavigationProperty Name="WorkOrders1" Relationship="Self.FK_Sender_OwnCompany" FromRole="OwnCompany" ToRole="WorkOrder" />
     <NavigationProperty Name="UserAccounts" Relationship="Self.FK_UserAccounts_OwnCompany" FromRole="OwnCompany" ToRole="UserAccounts" />
-    <NavigationProperty Name="WorkOrders" Relationship="LCMModel.FK_Reciver_OwnCompany" FromRole="OwnCompany" ToRole="WorkOrder" />
-    <NavigationProperty Name="WorkOrders1" Relationship="LCMModel.FK_Sender_OwnCompany" FromRole="OwnCompany" ToRole="WorkOrder" />
-    <NavigationProperty Name="OrderDetails" Relationship="LCMModel.FK_OrderDetail_OwnCompany" FromRole="OwnCompany" ToRole="OrderDetail" />
-    <NavigationProperty Name="Bilties" Relationship="LCMModel.FK_Bilty_BillToOwnCompany" FromRole="OwnCompany" ToRole="Bilty" />
-    <NavigationProperty Name="Bilties1" Relationship="LCMModel.FK_Bilty_OwnCompany" FromRole="OwnCompany" ToRole="Bilty" />
-    <NavigationProperty Name="BiltyDetails" Relationship="LCMModel.FK_BiltyDetails_CustomerCompany" FromRole="OwnCompany" ToRole="BiltyDetail" />
   </EntityType>
   <EntityType Name="OwnDepartment">
     <Key>
@@ -720,8 +797,7 @@
     <Property Name="IsMaster" Type="Boolean" />
     <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="IsDeleted" Type="Boolean" />
-    <NavigationProperty Name="OrderDetails" Relationship="LCMModel.FK_OrderDetail_PackageType" FromRole="PackageType" ToRole="OrderDetail" />
-    <NavigationProperty Name="BiltyDetails" Relationship="LCMModel.FK_BiltyDetails_PackageType" FromRole="PackageType" ToRole="BiltyDetail" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_PackageType" FromRole="PackageType" ToRole="OrderDetail" />
   </EntityType>
   <EntityType Name="PickDropLocation">
     <Key>
@@ -784,10 +860,10 @@
     <Property Name="IsDeleted" Type="Boolean" />
     <Property Name="IsActive" Type="Boolean" />
     <Property Name="OwnCompanyId" Type="Int64" />
+    <NavigationProperty Name="BiltyDetails" Relationship="Self.FK_BiltyDetails_Product" FromRole="Product" ToRole="BiltyDetails" />
     <NavigationProperty Name="Category1" Relationship="Self.FK_Product_Product" FromRole="Product" ToRole="Category" />
-    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Product__OwnComp__367C1819" FromRole="Product" ToRole="OwnCompany" />
-    <NavigationProperty Name="OrderDetails" Relationship="LCMModel.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
-    <NavigationProperty Name="BiltyDetails" Relationship="LCMModel.FK_BiltyDetails_Product" FromRole="Product" ToRole="BiltyDetail" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
+    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Product__OwnComp__44CA3770" FromRole="Product" ToRole="OwnCompany" />
   </EntityType>
   <EntityType Name="ProductBroker">
     <Key>
@@ -796,8 +872,8 @@
     <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="OrderDetails" Relationship="LCMModel.FK_OrderDetail_ProductBroker" FromRole="ProductBroker" ToRole="OrderDetail" />
-    <NavigationProperty Name="BiltyDetails" Relationship="LCMModel.FK_BiltyDetails_ProductBroker" FromRole="ProductBroker" ToRole="BiltyDetail" />
+    <NavigationProperty Name="BiltyDetails" Relationship="Self.FK_BiltyDetails_ProductBroker" FromRole="ProductBroker" ToRole="BiltyDetails" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_ProductBroker" FromRole="ProductBroker" ToRole="OrderDetail" />
   </EntityType>
   <EntityType Name="Province">
     <Key>
@@ -839,7 +915,7 @@
     <Property Name="DateModified" Type="DateTime" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" />
     <Property Name="OwnCompanyId" Type="Int64" />
-    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__RevenueTy__OwnCo__3864608B" FromRole="RevenueType" ToRole="OwnCompany" />
+    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__RevenueTy__OwnCo__46B27FE2" FromRole="RevenueType" ToRole="OwnCompany" />
   </EntityType>
   <EntityType Name="RolePermission">
     <Key>
@@ -1089,9 +1165,24 @@
     <Property Name="Documents" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="LoadingLimitNHA" Type="Int64" />
     <Property Name="OwnCompanyId" Type="Int64" />
-    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Vehicle__OwnComp__40F9A68C" FromRole="Vehicle" ToRole="OwnCompany" />
+    <NavigationProperty Name="Bilties" Relationship="Self.FK_Bilty_Vehicle" FromRole="Vehicle" ToRole="Bilty" />
+    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Vehicle__OwnComp__4F47C5E3" FromRole="Vehicle" ToRole="OwnCompany" />
     <NavigationProperty Name="VehicleType" Relationship="Self.FK_Vehicle_VehicleType" FromRole="Vehicle" ToRole="VehicleType" />
-    <NavigationProperty Name="Bilties" Relationship="LCMModel.FK_Bilty_Vehicle" FromRole="Vehicle" ToRole="Bilty" />
+  </EntityType>
+  <EntityType Name="VehicleExpens">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BiltyID" Type="Int64" />
+    <Property Name="ExpenseTypeId" Type="Int64" Nullable="false" />
+    <Property Name="BankBranch" Type="Int64" />
+    <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ChequeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ChequeDate" Type="DateTime" Precision="0" />
+    <Property Name="Amount" Type="Double" />
+    <NavigationProperty Name="Bank" Relationship="Self.FK_VehicleExpenses_Banks" FromRole="VehicleExpenses" ToRole="Banks" />
+    <NavigationProperty Name="ExpensesType" Relationship="Self.FK_VehicleExpenses_ExpensesType" FromRole="VehicleExpenses" ToRole="ExpensesType" />
   </EntityType>
   <EntityType Name="VehicleType">
     <Key>
@@ -1107,7 +1198,7 @@
     <Property Name="IsActive" Type="Boolean" />
     <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="OwnCompanyId" Type="Int64" />
-    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__VehicleTy__OwnCo__42E1EEFE" FromRole="VehicleType" ToRole="OwnCompany" />
+    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__VehicleTy__OwnCo__531856C7" FromRole="VehicleType" ToRole="OwnCompany" />
     <NavigationProperty Name="Vehicles" Relationship="Self.FK_Vehicle_VehicleType" FromRole="VehicleType" ToRole="Vehicle" />
   </EntityType>
   <EntityType Name="Vendor">
@@ -1135,9 +1226,9 @@
     <Property Name="ModifiedBy" Type="Int64" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <Property Name="OwnCompanyId" Type="Int64" />
+    <NavigationProperty Name="DieselExpenses" Relationship="Self.FK_DieselExpense_Vendor" FromRole="Vendor" ToRole="DieselExpense" />
     <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Vendor__OwnCompa__7755B73D" FromRole="Vendor" ToRole="OwnCompany" />
     <NavigationProperty Name="VendorType" Relationship="Self.FK_Vendor_VendorType" FromRole="Vendor" ToRole="VendorType" />
-    <NavigationProperty Name="DieselExpenses" Relationship="LCMModel.FK_DieselExpense_Vendor" FromRole="Vendor" ToRole="DieselExpense" />
   </EntityType>
   <EntityType Name="VendorType">
     <Key>
@@ -1153,10 +1244,30 @@
     <Property Name="ModifiedBy" Type="Int64" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <Property Name="OwnCompanyId" Type="Int64" />
-    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__VendorTyp__OwnCo__45BE5BA9" FromRole="VendorType" ToRole="OwnCompany" />
+    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__VendorTyp__OwnCo__55F4C372" FromRole="VendorType" ToRole="OwnCompany" />
     <NavigationProperty Name="Vendors" Relationship="Self.FK_Vendor_VendorType" FromRole="VendorType" ToRole="Vendor" />
   </EntityType>
-  <Association Name="FK__Area__OwnCompany__2645B050">
+  <EntityType Name="WorkOrder">
+    <Key>
+      <PropertyRef Name="WorkorderId" />
+    </Key>
+    <Property Name="WorkorderId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorkOrderNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="billto" Type="Int64" />
+    <Property Name="Sender" Type="Int64" />
+    <Property Name="totalquantity" Type="Int64" />
+    <Property Name="totalweight" Type="Int64" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int64" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_WorkOrder" FromRole="WorkOrder" ToRole="OrderDetail" />
+    <NavigationProperty Name="OwnCompany" Relationship="Self.FK_Reciver_OwnCompany" FromRole="WorkOrder" ToRole="OwnCompany" />
+    <NavigationProperty Name="OwnCompany1" Relationship="Self.FK_Sender_OwnCompany" FromRole="WorkOrder" ToRole="OwnCompany" />
+  </EntityType>
+  <Association Name="FK__Area__OwnCompany__2DE6D218">
     <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
     <End Role="Area" Type="Self.Area" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1180,6 +1291,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_BiltyDetails_CustomerCompany">
+    <End Role="Area" Type="Self.Area" Multiplicity="1" />
+    <End Role="BiltyDetails" Type="Self.BiltyDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BiltyDetails">
+        <PropertyRef Name="Receiver" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_AssignDrivers_Driver">
     <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
     <End Role="AssignDrivers" Type="Self.AssignDriver" Multiplicity="*" />
@@ -1192,7 +1315,79 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Category__OwnCom__29221CFB">
+  <Association Name="FK_VehicleExpenses_Banks">
+    <End Role="Banks" Type="Self.Bank" Multiplicity="1" />
+    <End Role="VehicleExpenses" Type="Self.VehicleExpens" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Banks">
+        <PropertyRef Name="BankID" />
+      </Principal>
+      <Dependent Role="VehicleExpenses">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bilty_BillToOwnCompany">
+    <End Role="CustomerCompany" Type="Self.CustomerCompany" Multiplicity="0..1" />
+    <End Role="Bilty" Type="Self.Bilty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bilty">
+        <PropertyRef Name="BillTo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bilty_OwnCompany">
+    <End Role="CustomerCompany" Type="Self.CustomerCompany" Multiplicity="0..1" />
+    <End Role="Bilty" Type="Self.Bilty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bilty">
+        <PropertyRef Name="Sender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bilty_Vehicle">
+    <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="0..1" />
+    <End Role="Bilty" Type="Self.Bilty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicle">
+        <PropertyRef Name="VehicleID" />
+      </Principal>
+      <Dependent Role="Bilty">
+        <PropertyRef Name="VehicleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BiltyDetails_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="BiltyDetails" Type="Self.BiltyDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BiltyDetails">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BiltyDetails_ProductBroker">
+    <End Role="ProductBroker" Type="Self.ProductBroker" Multiplicity="1" />
+    <End Role="BiltyDetails" Type="Self.BiltyDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBroker">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BiltyDetails">
+        <PropertyRef Name="ProductBrokerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Category__OwnCom__367C1819">
     <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
     <End Role="Category" Type="Self.Category" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1240,7 +1435,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Company__OwnComp__2BFE89A6">
+  <Association Name="FK__Company__OwnComp__395884C4">
     <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
     <End Role="Company" Type="Self.Company" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1276,7 +1471,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CustomerC__OwnCo__2CF2ADDF">
+  <Association Name="FK__CustomerC__OwnCo__3A4CA8FD">
     <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
     <End Role="CustomerCompany" Type="Self.CustomerCompany" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1300,7 +1495,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CustomerG__OwnCo__2EDAF651">
+  <Association Name="FK__CustomerG__OwnCo__3C34F16F">
     <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
     <End Role="CustomerGroup" Type="Self.CustomerGroup" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1324,7 +1519,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ExpensesT__OwnCo__2FCF1A8A">
+  <Association Name="FK_DieselExpense_Vendor">
+    <End Role="Vendor" Type="Self.Vendor" Multiplicity="1" />
+    <End Role="DieselExpense" Type="Self.DieselExpense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DieselExpense">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ExpensesT__OwnCo__3E1D39E1">
     <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
     <End Role="ExpensesType" Type="Self.ExpensesType" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1333,6 +1540,18 @@
       </Principal>
       <Dependent Role="ExpensesType">
         <PropertyRef Name="OwnCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VehicleExpenses_ExpensesType">
+    <End Role="ExpensesType" Type="Self.ExpensesType" Multiplicity="1" />
+    <End Role="VehicleExpenses" Type="Self.VehicleExpens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExpensesType">
+        <PropertyRef Name="ExpensesTypeID" />
+      </Principal>
+      <Dependent Role="VehicleExpenses">
+        <PropertyRef Name="ExpenseTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1360,7 +1579,67 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Product__OwnComp__367C1819">
+  <Association Name="FK_OrderDetail_OwnCompany">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="Reciever" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_PackageType">
+    <End Role="PackageType" Type="Self.PackageType" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PackageType">
+        <PropertyRef Name="PackageTypeID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="PackageType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="Product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_ProductBroker">
+    <End Role="ProductBroker" Type="Self.ProductBroker" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBroker">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="Productbroker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_WorkOrder">
+    <End Role="WorkOrder" Type="Self.WorkOrder" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkOrder">
+        <PropertyRef Name="WorkorderId" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="WorkOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__OwnComp__44CA3770">
     <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1372,7 +1651,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__RevenueTy__OwnCo__3864608B">
+  <Association Name="FK__RevenueTy__OwnCo__46B27FE2">
     <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
     <End Role="RevenueType" Type="Self.RevenueType" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1384,7 +1663,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Vehicle__OwnComp__40F9A68C">
+  <Association Name="FK__Vehicle__OwnComp__4F47C5E3">
     <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
     <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1396,7 +1675,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__VehicleTy__OwnCo__42E1EEFE">
+  <Association Name="FK__VehicleTy__OwnCo__531856C7">
     <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
     <End Role="VehicleType" Type="Self.VehicleType" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1420,7 +1699,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__VendorTyp__OwnCo__45BE5BA9">
+  <Association Name="FK__VendorTyp__OwnCo__55F4C372">
     <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
     <End Role="VendorType" Type="Self.VendorType" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1441,6 +1720,30 @@
       </Principal>
       <Dependent Role="OwnCompany">
         <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reciver_OwnCompany">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="WorkOrder" Type="Self.WorkOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkOrder">
+        <PropertyRef Name="billto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sender_OwnCompany">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="WorkOrder" Type="Self.WorkOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkOrder">
+        <PropertyRef Name="Sender" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1510,6 +1813,8 @@
     <EntitySet Name="Areas" EntityType="Self.Area" />
     <EntitySet Name="AssignDrivers" EntityType="Self.AssignDriver" />
     <EntitySet Name="Banks" EntityType="Self.Bank" />
+    <EntitySet Name="Bilties" EntityType="Self.Bilty" />
+    <EntitySet Name="BiltyDetails" EntityType="Self.BiltyDetail" />
     <EntitySet Name="Brokers" EntityType="Self.Broker" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="Cities" EntityType="Self.City" />
@@ -1527,6 +1832,7 @@
     <EntitySet Name="Departments" EntityType="Self.Department" />
     <EntitySet Name="DepartmentPersons" EntityType="Self.DepartmentPerson" />
     <EntitySet Name="Designations" EntityType="Self.Designation" />
+    <EntitySet Name="DieselExpenses" EntityType="Self.DieselExpense" />
     <EntitySet Name="DocumentTypes" EntityType="Self.DocumentType" />
     <EntitySet Name="Drivers" EntityType="Self.Driver" />
     <EntitySet Name="Employees" EntityType="Self.Employee" />
@@ -1539,6 +1845,7 @@
     <EntitySet Name="NavMenus" EntityType="Self.NavMenu" />
     <EntitySet Name="Notifications" EntityType="Self.Notification" />
     <EntitySet Name="NoTypes" EntityType="Self.NoType" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
     <EntitySet Name="Organizations" EntityType="Self.Organization" />
     <EntitySet Name="OwnCompanies" EntityType="Self.OwnCompany" />
     <EntitySet Name="OwnDepartments" EntityType="Self.OwnDepartment" />
@@ -1566,10 +1873,12 @@
     <EntitySet Name="tblBrands" EntityType="Self.tblBrand" />
     <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />
     <EntitySet Name="Vehicles" EntityType="Self.Vehicle" />
+    <EntitySet Name="VehicleExpenses" EntityType="Self.VehicleExpens" />
     <EntitySet Name="VehicleTypes" EntityType="Self.VehicleType" />
     <EntitySet Name="Vendors" EntityType="Self.Vendor" />
     <EntitySet Name="VendorTypes" EntityType="Self.VendorType" />
-    <AssociationSet Name="FK__Area__OwnCompany__2645B050" Association="Self.FK__Area__OwnCompany__2645B050">
+    <EntitySet Name="WorkOrders" EntityType="Self.WorkOrder" />
+    <AssociationSet Name="FK__Area__OwnCompany__2DE6D218" Association="Self.FK__Area__OwnCompany__2DE6D218">
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
       <End Role="Area" EntitySet="Areas" />
     </AssociationSet>
@@ -1577,11 +1886,39 @@
       <End Role="City" EntitySet="Cities" />
       <End Role="Area" EntitySet="Areas" />
     </AssociationSet>
+    <AssociationSet Name="FK_BiltyDetails_CustomerCompany" Association="Self.FK_BiltyDetails_CustomerCompany">
+      <End Role="Area" EntitySet="Areas" />
+      <End Role="BiltyDetails" EntitySet="BiltyDetails" />
+    </AssociationSet>
     <AssociationSet Name="FK_AssignDrivers_Driver" Association="Self.FK_AssignDrivers_Driver">
       <End Role="Driver" EntitySet="Drivers" />
       <End Role="AssignDrivers" EntitySet="AssignDrivers" />
     </AssociationSet>
-    <AssociationSet Name="FK__Category__OwnCom__29221CFB" Association="Self.FK__Category__OwnCom__29221CFB">
+    <AssociationSet Name="FK_VehicleExpenses_Banks" Association="Self.FK_VehicleExpenses_Banks">
+      <End Role="Banks" EntitySet="Banks" />
+      <End Role="VehicleExpenses" EntitySet="VehicleExpenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bilty_BillToOwnCompany" Association="Self.FK_Bilty_BillToOwnCompany">
+      <End Role="CustomerCompany" EntitySet="CustomerCompanies" />
+      <End Role="Bilty" EntitySet="Bilties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bilty_OwnCompany" Association="Self.FK_Bilty_OwnCompany">
+      <End Role="CustomerCompany" EntitySet="CustomerCompanies" />
+      <End Role="Bilty" EntitySet="Bilties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bilty_Vehicle" Association="Self.FK_Bilty_Vehicle">
+      <End Role="Vehicle" EntitySet="Vehicles" />
+      <End Role="Bilty" EntitySet="Bilties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BiltyDetails_Product" Association="Self.FK_BiltyDetails_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="BiltyDetails" EntitySet="BiltyDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BiltyDetails_ProductBroker" Association="Self.FK_BiltyDetails_ProductBroker">
+      <End Role="ProductBroker" EntitySet="ProductBrokers" />
+      <End Role="BiltyDetails" EntitySet="BiltyDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Category__OwnCom__367C1819" Association="Self.FK__Category__OwnCom__367C1819">
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
       <End Role="Category" EntitySet="Categories" />
     </AssociationSet>
@@ -1597,7 +1934,7 @@
       <End Role="Province" EntitySet="Provinces" />
       <End Role="City" EntitySet="Cities" />
     </AssociationSet>
-    <AssociationSet Name="FK__Company__OwnComp__2BFE89A6" Association="Self.FK__Company__OwnComp__2BFE89A6">
+    <AssociationSet Name="FK__Company__OwnComp__395884C4" Association="Self.FK__Company__OwnComp__395884C4">
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
       <End Role="Company" EntitySet="Companies" />
     </AssociationSet>
@@ -1609,7 +1946,7 @@
       <End Role="CurrencyType" EntitySet="CurrencyTypes" />
       <End Role="SoftwareSetup" EntitySet="SoftwareSetups" />
     </AssociationSet>
-    <AssociationSet Name="FK__CustomerC__OwnCo__2CF2ADDF" Association="Self.FK__CustomerC__OwnCo__2CF2ADDF">
+    <AssociationSet Name="FK__CustomerC__OwnCo__3A4CA8FD" Association="Self.FK__CustomerC__OwnCo__3A4CA8FD">
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
       <End Role="CustomerCompany" EntitySet="CustomerCompanies" />
     </AssociationSet>
@@ -1617,7 +1954,7 @@
       <End Role="CustomerGroup" EntitySet="CustomerGroups" />
       <End Role="CustomerCompany" EntitySet="CustomerCompanies" />
     </AssociationSet>
-    <AssociationSet Name="FK__CustomerG__OwnCo__2EDAF651" Association="Self.FK__CustomerG__OwnCo__2EDAF651">
+    <AssociationSet Name="FK__CustomerG__OwnCo__3C34F16F" Association="Self.FK__CustomerG__OwnCo__3C34F16F">
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
       <End Role="CustomerGroup" EntitySet="CustomerGroups" />
     </AssociationSet>
@@ -1625,9 +1962,17 @@
       <End Role="DateType" EntitySet="DateTypes" />
       <End Role="SoftwareSetup" EntitySet="SoftwareSetups" />
     </AssociationSet>
-    <AssociationSet Name="FK__ExpensesT__OwnCo__2FCF1A8A" Association="Self.FK__ExpensesT__OwnCo__2FCF1A8A">
+    <AssociationSet Name="FK_DieselExpense_Vendor" Association="Self.FK_DieselExpense_Vendor">
+      <End Role="Vendor" EntitySet="Vendors" />
+      <End Role="DieselExpense" EntitySet="DieselExpenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ExpensesT__OwnCo__3E1D39E1" Association="Self.FK__ExpensesT__OwnCo__3E1D39E1">
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
       <End Role="ExpensesType" EntitySet="ExpensesTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VehicleExpenses_ExpensesType" Association="Self.FK_VehicleExpenses_ExpensesType">
+      <End Role="ExpensesType" EntitySet="ExpensesTypes" />
+      <End Role="VehicleExpenses" EntitySet="VehicleExpenses" />
     </AssociationSet>
     <AssociationSet Name="FK_SubcriptionModules_Menu" Association="Self.FK_SubcriptionModules_Menu">
       <End Role="Menu" EntitySet="Menus" />
@@ -1637,19 +1982,39 @@
       <End Role="NoType" EntitySet="NoTypes" />
       <End Role="SoftwareSetup" EntitySet="SoftwareSetups" />
     </AssociationSet>
-    <AssociationSet Name="FK__Product__OwnComp__367C1819" Association="Self.FK__Product__OwnComp__367C1819">
+    <AssociationSet Name="FK_OrderDetail_OwnCompany" Association="Self.FK_OrderDetail_OwnCompany">
+      <End Role="OwnCompany" EntitySet="OwnCompanies" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_PackageType" Association="Self.FK_OrderDetail_PackageType">
+      <End Role="PackageType" EntitySet="PackageTypes" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_Product" Association="Self.FK_OrderDetail_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_ProductBroker" Association="Self.FK_OrderDetail_ProductBroker">
+      <End Role="ProductBroker" EntitySet="ProductBrokers" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_WorkOrder" Association="Self.FK_OrderDetail_WorkOrder">
+      <End Role="WorkOrder" EntitySet="WorkOrders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__OwnComp__44CA3770" Association="Self.FK__Product__OwnComp__44CA3770">
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
       <End Role="Product" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK__RevenueTy__OwnCo__3864608B" Association="Self.FK__RevenueTy__OwnCo__3864608B">
+    <AssociationSet Name="FK__RevenueTy__OwnCo__46B27FE2" Association="Self.FK__RevenueTy__OwnCo__46B27FE2">
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
       <End Role="RevenueType" EntitySet="RevenueTypes" />
     </AssociationSet>
-    <AssociationSet Name="FK__Vehicle__OwnComp__40F9A68C" Association="Self.FK__Vehicle__OwnComp__40F9A68C">
+    <AssociationSet Name="FK__Vehicle__OwnComp__4F47C5E3" Association="Self.FK__Vehicle__OwnComp__4F47C5E3">
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
       <End Role="Vehicle" EntitySet="Vehicles" />
     </AssociationSet>
-    <AssociationSet Name="FK__VehicleTy__OwnCo__42E1EEFE" Association="Self.FK__VehicleTy__OwnCo__42E1EEFE">
+    <AssociationSet Name="FK__VehicleTy__OwnCo__531856C7" Association="Self.FK__VehicleTy__OwnCo__531856C7">
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
       <End Role="VehicleType" EntitySet="VehicleTypes" />
     </AssociationSet>
@@ -1657,13 +2022,21 @@
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
       <End Role="Vendor" EntitySet="Vendors" />
     </AssociationSet>
-    <AssociationSet Name="FK__VendorTyp__OwnCo__45BE5BA9" Association="Self.FK__VendorTyp__OwnCo__45BE5BA9">
+    <AssociationSet Name="FK__VendorTyp__OwnCo__55F4C372" Association="Self.FK__VendorTyp__OwnCo__55F4C372">
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
       <End Role="VendorType" EntitySet="VendorTypes" />
     </AssociationSet>
     <AssociationSet Name="FK_OwnCompany_OwnGroups" Association="Self.FK_OwnCompany_OwnGroups">
       <End Role="OwnGroups" EntitySet="OwnGroups" />
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reciver_OwnCompany" Association="Self.FK_Reciver_OwnCompany">
+      <End Role="OwnCompany" EntitySet="OwnCompanies" />
+      <End Role="WorkOrder" EntitySet="WorkOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sender_OwnCompany" Association="Self.FK_Sender_OwnCompany">
+      <End Role="OwnCompany" EntitySet="OwnCompanies" />
+      <End Role="WorkOrder" EntitySet="WorkOrders" />
     </AssociationSet>
     <AssociationSet Name="FK_UserAccounts_OwnCompany" Association="Self.FK_UserAccounts_OwnCompany">
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
@@ -1685,396 +2058,5 @@
       <End Role="VendorType" EntitySet="VendorTypes" />
       <End Role="Vendor" EntitySet="Vendors" />
     </AssociationSet>
-    <EntitySet Name="WorkOrders" EntityType="LCMModel.WorkOrder" />
-    <AssociationSet Name="FK_Reciver_OwnCompany" Association="LCMModel.FK_Reciver_OwnCompany">
-      <End Role="OwnCompany" EntitySet="OwnCompanies" />
-      <End Role="WorkOrder" EntitySet="WorkOrders" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Sender_OwnCompany" Association="LCMModel.FK_Sender_OwnCompany">
-      <End Role="OwnCompany" EntitySet="OwnCompanies" />
-      <End Role="WorkOrder" EntitySet="WorkOrders" />
-    </AssociationSet>
-    <EntitySet Name="OrderDetails" EntityType="LCMModel.OrderDetail" />
-    <AssociationSet Name="FK_OrderDetail_OwnCompany" Association="LCMModel.FK_OrderDetail_OwnCompany">
-      <End Role="OwnCompany" EntitySet="OwnCompanies" />
-      <End Role="OrderDetail" EntitySet="OrderDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OrderDetail_PackageType" Association="LCMModel.FK_OrderDetail_PackageType">
-      <End Role="PackageType" EntitySet="PackageTypes" />
-      <End Role="OrderDetail" EntitySet="OrderDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OrderDetail_Product" Association="LCMModel.FK_OrderDetail_Product">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="OrderDetail" EntitySet="OrderDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OrderDetail_ProductBroker" Association="LCMModel.FK_OrderDetail_ProductBroker">
-      <End Role="ProductBroker" EntitySet="ProductBrokers" />
-      <End Role="OrderDetail" EntitySet="OrderDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OrderDetail_WorkOrder" Association="LCMModel.FK_OrderDetail_WorkOrder">
-      <End Role="WorkOrder" EntitySet="WorkOrders" />
-      <End Role="OrderDetail" EntitySet="OrderDetails" />
-    </AssociationSet>
-    <EntitySet Name="Bilties" EntityType="LCMModel.Bilty" />
-    <AssociationSet Name="FK_Bilty_BillToOwnCompany" Association="LCMModel.FK_Bilty_BillToOwnCompany">
-      <End Role="OwnCompany" EntitySet="OwnCompanies" />
-      <End Role="Bilty" EntitySet="Bilties" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Bilty_OwnCompany" Association="LCMModel.FK_Bilty_OwnCompany">
-      <End Role="OwnCompany" EntitySet="OwnCompanies" />
-      <End Role="Bilty" EntitySet="Bilties" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Bilty_Vehicle" Association="LCMModel.FK_Bilty_Vehicle">
-      <End Role="Vehicle" EntitySet="Vehicles" />
-      <End Role="Bilty" EntitySet="Bilties" />
-    </AssociationSet>
-    <EntitySet Name="BiltyDetails" EntityType="LCMModel.BiltyDetail" />
-    <EntitySet Name="DieselExpenses" EntityType="LCMModel.DieselExpense" />
-    <EntitySet Name="VehicleExpenses" EntityType="LCMModel.VehicleExpens" />
-    <AssociationSet Name="FK_VehicleExpenses_Banks" Association="LCMModel.FK_VehicleExpenses_Banks">
-      <End Role="Bank" EntitySet="Banks" />
-      <End Role="VehicleExpens" EntitySet="VehicleExpenses" />
-    </AssociationSet>
-    <AssociationSet Name="FK_BiltyDetails_CustomerCompany" Association="LCMModel.FK_BiltyDetails_CustomerCompany">
-      <End Role="OwnCompany" EntitySet="OwnCompanies" />
-      <End Role="BiltyDetail" EntitySet="BiltyDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_BiltyDetails_PackageType" Association="LCMModel.FK_BiltyDetails_PackageType">
-      <End Role="PackageType" EntitySet="PackageTypes" />
-      <End Role="BiltyDetail" EntitySet="BiltyDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_BiltyDetails_Product" Association="LCMModel.FK_BiltyDetails_Product">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="BiltyDetail" EntitySet="BiltyDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_BiltyDetails_ProductBroker" Association="LCMModel.FK_BiltyDetails_ProductBroker">
-      <End Role="ProductBroker" EntitySet="ProductBrokers" />
-      <End Role="BiltyDetail" EntitySet="BiltyDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DieselExpense_Vendor" Association="LCMModel.FK_DieselExpense_Vendor">
-      <End Role="Vendor" EntitySet="Vendors" />
-      <End Role="DieselExpense" EntitySet="DieselExpenses" />
-    </AssociationSet>
-    <AssociationSet Name="FK_VehicleExpenses_ExpensesType" Association="LCMModel.FK_VehicleExpenses_ExpensesType">
-      <End Role="ExpensesType" EntitySet="ExpensesTypes" />
-      <End Role="VehicleExpens" EntitySet="VehicleExpenses" />
-    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="WorkOrder">
-    <Key>
-      <PropertyRef Name="WorkorderId" />
-    </Key>
-    <Property Name="WorkorderId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="WorkOrderNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="OrderDate" Type="DateTime" Precision="3" />
-    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="billto" Type="Int64" />
-    <Property Name="Sender" Type="Int64" />
-    <Property Name="totalquantity" Type="Int64" />
-    <Property Name="totalweight" Type="Int64" />
-    <Property Name="CreatedBy" Type="Int64" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="Int64" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="OwnCompany" Relationship="LCMModel.FK_Reciver_OwnCompany" FromRole="WorkOrder" ToRole="OwnCompany" />
-    <NavigationProperty Name="OwnCompany1" Relationship="LCMModel.FK_Sender_OwnCompany" FromRole="WorkOrder" ToRole="OwnCompany" />
-    <NavigationProperty Name="OrderDetails" Relationship="LCMModel.FK_OrderDetail_WorkOrder" FromRole="WorkOrder" ToRole="OrderDetail" />
-  </EntityType>
-  <Association Name="FK_Reciver_OwnCompany">
-    <End Type="LCMModel.OwnCompany" Role="OwnCompany" Multiplicity="0..1" />
-    <End Type="LCMModel.WorkOrder" Role="WorkOrder" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OwnCompany">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="WorkOrder">
-        <PropertyRef Name="billto" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Sender_OwnCompany">
-    <End Type="LCMModel.OwnCompany" Role="OwnCompany" Multiplicity="0..1" />
-    <End Type="LCMModel.WorkOrder" Role="WorkOrder" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OwnCompany">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="WorkOrder">
-        <PropertyRef Name="Sender" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="OrderDetail">
-    <Key>
-      <PropertyRef Name="OrderId" />
-    </Key>
-    <Property Name="OrderId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="WorkOrderID" Type="Int64" />
-    <Property Name="Reciever" Type="Int64" />
-    <Property Name="Productbroker" Type="Int64" />
-    <Property Name="PackageType" Type="Int64" />
-    <Property Name="Product" Type="Int64" />
-    <Property Name="Weight" Type="Int64" />
-    <Property Name="unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Quantity" Type="Int64" />
-    <Property Name="TotalWeight" Type="Int64" />
-    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="OwnCompany" Relationship="LCMModel.FK_OrderDetail_OwnCompany" FromRole="OrderDetail" ToRole="OwnCompany" />
-    <NavigationProperty Name="PackageType1" Relationship="LCMModel.FK_OrderDetail_PackageType" FromRole="OrderDetail" ToRole="PackageType" />
-    <NavigationProperty Name="Product1" Relationship="LCMModel.FK_OrderDetail_Product" FromRole="OrderDetail" ToRole="Product" />
-    <NavigationProperty Name="ProductBroker1" Relationship="LCMModel.FK_OrderDetail_ProductBroker" FromRole="OrderDetail" ToRole="ProductBroker" />
-    <NavigationProperty Name="WorkOrder" Relationship="LCMModel.FK_OrderDetail_WorkOrder" FromRole="OrderDetail" ToRole="WorkOrder" />
-  </EntityType>
-  <Association Name="FK_OrderDetail_OwnCompany">
-    <End Type="LCMModel.OwnCompany" Role="OwnCompany" Multiplicity="0..1" />
-    <End Type="LCMModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OwnCompany">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="OrderDetail">
-        <PropertyRef Name="Reciever" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_OrderDetail_PackageType">
-    <End Type="LCMModel.PackageType" Role="PackageType" Multiplicity="0..1" />
-    <End Type="LCMModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PackageType">
-        <PropertyRef Name="PackageTypeID" />
-      </Principal>
-      <Dependent Role="OrderDetail">
-        <PropertyRef Name="PackageType" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_OrderDetail_Product">
-    <End Type="LCMModel.Product" Role="Product" Multiplicity="0..1" />
-    <End Type="LCMModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="OrderDetail">
-        <PropertyRef Name="Product" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_OrderDetail_ProductBroker">
-    <End Type="LCMModel.ProductBroker" Role="ProductBroker" Multiplicity="0..1" />
-    <End Type="LCMModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProductBroker">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderDetail">
-        <PropertyRef Name="Productbroker" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_OrderDetail_WorkOrder">
-    <End Type="LCMModel.WorkOrder" Role="WorkOrder" Multiplicity="0..1" />
-    <End Type="LCMModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="WorkOrder">
-        <PropertyRef Name="WorkorderId" />
-      </Principal>
-      <Dependent Role="OrderDetail">
-        <PropertyRef Name="WorkOrderID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="Bilty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="OrderNo" Type="Int64" Nullable="false" />
-    <Property Name="DeliveryDate" Type="DateTime" Precision="0" />
-    <Property Name="BillTo" Type="Int64" />
-    <Property Name="Sender" Type="Int64" />
-    <Property Name="VehicleID" Type="Int64" />
-    <Property Name="Freight" Type="Double" />
-    <Property Name="VehicleExpensesGrandTotal" Type="Double" />
-    <Property Name="DieselExpensesGrandTotal" Type="Double" />
-    <Property Name="TotalLiter" Type="Double" />
-    <Property Name="OrderDetailsTotalQTY" Type="Double" />
-    <Property Name="OrderDetailsTotalWeight" Type="Double" />
-    <Property Name="CreatedBy" Type="Int64" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="Int64" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="OwnCompany" Relationship="LCMModel.FK_Bilty_BillToOwnCompany" FromRole="Bilty" ToRole="OwnCompany" />
-    <NavigationProperty Name="OwnCompany1" Relationship="LCMModel.FK_Bilty_OwnCompany" FromRole="Bilty" ToRole="OwnCompany" />
-    <NavigationProperty Name="Vehicle" Relationship="LCMModel.FK_Bilty_Vehicle" FromRole="Bilty" ToRole="Vehicle" />
-  </EntityType>
-  <Association Name="FK_Bilty_BillToOwnCompany">
-    <End Type="LCMModel.OwnCompany" Role="OwnCompany" Multiplicity="0..1" />
-    <End Type="LCMModel.Bilty" Role="Bilty" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OwnCompany">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Bilty">
-        <PropertyRef Name="BillTo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Bilty_OwnCompany">
-    <End Type="LCMModel.OwnCompany" Role="OwnCompany" Multiplicity="0..1" />
-    <End Type="LCMModel.Bilty" Role="Bilty" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OwnCompany">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Bilty">
-        <PropertyRef Name="Sender" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Bilty_Vehicle">
-    <End Type="LCMModel.Vehicle" Role="Vehicle" Multiplicity="0..1" />
-    <End Type="LCMModel.Bilty" Role="Bilty" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Vehicle">
-        <PropertyRef Name="VehicleID" />
-      </Principal>
-      <Dependent Role="Bilty">
-        <PropertyRef Name="VehicleID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="BiltyDetail">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="BiltyID" Type="Int64" />
-    <Property Name="Receiver" Type="Int64" Nullable="false" />
-    <Property Name="ProductBrokerID" Type="Int64" Nullable="false" />
-    <Property Name="PackageTypeId" Type="Int64" />
-    <Property Name="ProductId" Type="Int64" />
-    <Property Name="Weight" Type="Double" />
-    <Property Name="Unit" Type="Double" />
-    <Property Name="QTY" Type="Double" />
-    <Property Name="TotalWeight" Type="Double" />
-    <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="OwnCompany" Relationship="LCMModel.FK_BiltyDetails_CustomerCompany" FromRole="BiltyDetail" ToRole="OwnCompany" />
-    <NavigationProperty Name="PackageType" Relationship="LCMModel.FK_BiltyDetails_PackageType" FromRole="BiltyDetail" ToRole="PackageType" />
-    <NavigationProperty Name="Product" Relationship="LCMModel.FK_BiltyDetails_Product" FromRole="BiltyDetail" ToRole="Product" />
-    <NavigationProperty Name="ProductBroker" Relationship="LCMModel.FK_BiltyDetails_ProductBroker" FromRole="BiltyDetail" ToRole="ProductBroker" />
-  </EntityType>
-  <EntityType Name="DieselExpense">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="BiltyID" Type="Int64" />
-    <Property Name="VendorId" Type="Int64" Nullable="false" />
-    <Property Name="Litre" Type="Double" />
-    <Property Name="Rate" Type="Double" />
-    <Property Name="Amount" Type="Double" />
-    <NavigationProperty Name="Vendor" Relationship="LCMModel.FK_DieselExpense_Vendor" FromRole="DieselExpense" ToRole="Vendor" />
-  </EntityType>
-  <EntityType Name="VehicleExpens">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="BiltyID" Type="Int64" />
-    <Property Name="ExpenseTypeId" Type="Int64" Nullable="false" />
-    <Property Name="BankBranch" Type="Int64" />
-    <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ChequeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ChequeDate" Type="DateTime" Precision="0" />
-    <Property Name="Amount" Type="Double" />
-    <NavigationProperty Name="Bank" Relationship="LCMModel.FK_VehicleExpenses_Banks" FromRole="VehicleExpens" ToRole="Bank" />
-    <NavigationProperty Name="ExpensesType" Relationship="LCMModel.FK_VehicleExpenses_ExpensesType" FromRole="VehicleExpens" ToRole="ExpensesType" />
-  </EntityType>
-  <Association Name="FK_VehicleExpenses_Banks">
-    <End Type="LCMModel.Bank" Role="Bank" Multiplicity="1" />
-    <End Type="LCMModel.VehicleExpens" Role="VehicleExpens" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Bank">
-        <PropertyRef Name="BankID" />
-      </Principal>
-      <Dependent Role="VehicleExpens">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_BiltyDetails_CustomerCompany">
-    <End Type="LCMModel.OwnCompany" Role="OwnCompany" Multiplicity="1" />
-    <End Type="LCMModel.BiltyDetail" Role="BiltyDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OwnCompany">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="BiltyDetail">
-        <PropertyRef Name="Receiver" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_BiltyDetails_PackageType">
-    <End Type="LCMModel.PackageType" Role="PackageType" Multiplicity="0..1" />
-    <End Type="LCMModel.BiltyDetail" Role="BiltyDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PackageType">
-        <PropertyRef Name="PackageTypeID" />
-      </Principal>
-      <Dependent Role="BiltyDetail">
-        <PropertyRef Name="PackageTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_BiltyDetails_Product">
-    <End Type="LCMModel.Product" Role="Product" Multiplicity="0..1" />
-    <End Type="LCMModel.BiltyDetail" Role="BiltyDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="BiltyDetail">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_BiltyDetails_ProductBroker">
-    <End Type="LCMModel.ProductBroker" Role="ProductBroker" Multiplicity="1" />
-    <End Type="LCMModel.BiltyDetail" Role="BiltyDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProductBroker">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="BiltyDetail">
-        <PropertyRef Name="ProductBrokerID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DieselExpense_Vendor">
-    <End Type="LCMModel.Vendor" Role="Vendor" Multiplicity="1" />
-    <End Type="LCMModel.DieselExpense" Role="DieselExpense" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Vendor">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="DieselExpense">
-        <PropertyRef Name="VendorId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_VehicleExpenses_ExpensesType">
-    <End Type="LCMModel.ExpensesType" Role="ExpensesType" Multiplicity="1" />
-    <End Type="LCMModel.VehicleExpens" Role="VehicleExpens" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ExpensesType">
-        <PropertyRef Name="ExpensesTypeID" />
-      </Principal>
-      <Dependent Role="VehicleExpens">
-        <PropertyRef Name="ExpenseTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

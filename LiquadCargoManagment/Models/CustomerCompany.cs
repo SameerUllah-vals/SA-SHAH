@@ -38,11 +38,11 @@ namespace LiquadCargoManagment.Models
         public Nullable<bool> IsActive { get; set; }
         public Nullable<long> OwnCompanyId { get; set; }
     
-        public virtual OwnCompany OwnCompany { get; set; }
-        public virtual CustomerGroup CustomerGroup { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bilty> Bilties { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bilty> Bilties1 { get; set; }
+        public virtual OwnCompany OwnCompany { get; set; }
+        public virtual CustomerGroup CustomerGroup { get; set; }
     }
 }

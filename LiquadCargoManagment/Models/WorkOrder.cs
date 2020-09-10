@@ -33,9 +33,9 @@ namespace LiquadCargoManagment.Models
         public Nullable<long> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
-        public virtual OwnCompany OwnCompany { get; set; }
-        public virtual OwnCompany OwnCompany1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual OwnCompany OwnCompany { get; set; }
+        public virtual OwnCompany OwnCompany1 { get; set; }
     }
 }
