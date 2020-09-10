@@ -1,0 +1,64 @@
+﻿@using Newtonsoft.Json;
+@using LiquadCargoManagment.Helpers;
+@model IEnumerable<LiquadCargoManagment.Models.Area>
+
+<table class="table display table-striped" id="example">
+    <thead>
+        <tr>
+            <td>Code</td>
+            <td>Area</td>
+            <td>City</td>
+            <td>Date</td>
+            <td>Description</td>
+            <td>Operation</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            //string jsonData = JsonConvert.SerializeObject(item);
+            string jsonData = "{";
+            jsonData += " 'ID' : '" + item.ID + "', ";
+            jsonData += " 'Code' : '" + item.Code + "', ";
+            jsonData += " 'Name' : '" + item.Name + "', ";
+            jsonData += " 'CityID' : '" + item.CityID + "', ";
+            jsonData += " 'Description' : '" + item.Description + "' ";
+            jsonData += "}";
+        <tr>
+            <td>@item.Code</td>
+            <td>@item.Name</td>
+            <td>@item.City.CityName</td>
+            @if (item.DateCreated != null)
+            {
+                <td>
+                    @Convert.ToDateTime(item.DateCreated).ToString(LiquadCargoManagment.Models.SoftwareFormatting.DateFormat)
+                </td>
+            }
+            else
+            {
+                <td></td>
+            }
+            <td>@item.Description</td>
+            <td>
+                @{string action =  Session["Allow"] .ToString();
+                    action = action.ToUpper();}
+                @if (action.Contains("R"))
+                {
+                    <button type="button" onclick="viewRecord(@jsonData,this)" class="btn btn-primary btn-xs">
+                        <i class="fa fa-eye"></i>
+                    </button>
+                }
+                @if (action.Contains("U"))
+                {
+                    <button type="button" onclick="viewRecord(@jsonData,this)" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button>
+                }
+                @if (action.Contains("D"))
+                {
+                    <button type="button" onclick="DeleteModel(@item.ID)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

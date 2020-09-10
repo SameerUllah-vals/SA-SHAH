@@ -1,0 +1,39 @@
+﻿
+@using Newtonsoft.Json;
+@model IEnumerable<LiquadCargoManagment.Models.TaxRateRegistration>
+
+<table class="table display table-striped" id="example">
+    <thead>
+        <tr>
+
+            <td>Tax Rate Name</td>
+            <td>Province/Federal</td>
+            <td>Tax Rate %</td>
+            <td>Operation</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            //string jsonData = JsonConvert.SerializeObject(item);
+            string jsonData = "{";
+            jsonData += " 'ID' : '" + item.ID + "', ";
+            jsonData += " 'TaxRateName' : '" + item.TaxRateName + "', ";
+            jsonData += " 'ProvinceID' : '" + item.ProvinceID + "', ";
+            jsonData += " 'TaxRatePercent' : '" + item.TaxRatePercent + "' ";
+            jsonData += "}";
+            <tr>
+                <td>@item.TaxRateName</td>
+                <td>@item.ProvinceID</td>
+                <td>@item.TaxRatePercent</td>
+                <td>
+                    <button type="button" onclick="$('#modal-add').modal('show'); viewRecordRead(@jsonData,this)" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></button>
+                    <button type="button" onclick="viewRecord(@jsonData,this)" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button>
+                    <button type="button" onclick="DeleteModel(@item.ID)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

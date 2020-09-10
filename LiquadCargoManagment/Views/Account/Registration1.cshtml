@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewBag.Title = "Registration";
+}
+
+
+<div class="content-header">
+
+    <div class="header-section">
+        <h1>
+            Registration<br><small>Create a new user and activate deactivate users</small>
+        </h1>
+    </div>
+
+</div>
+<ul class="breadcrumb breadcrumb-top">
+    <li>Account</li>
+    <li><a href="javascript:;">Registration</a></li>
+</ul>
+
+<!-- END Datatables Header -->
+<!-- Datatables Content -->
+<div class="block full">
+    <div class="block-title row">
+        <div class="col-md-12"><a id="" class="btn btn-primary btn-sm pull-right" onclick="$('#modal-add').modal('show'); ClearItem()" href="#">Add New | <i class="fa fa-plus"></i></a></div>
+    </div>
+
+    <div class="" id="grid">
+        @Html.Partial("_Registration")
+    </div>
+</div>
+
+<!-- END Datatables Content -->
+
+
+
+
+
+<div id="modal-add" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h2 class="modal-title"><i class="fa fa-pencil-alt"></i> Registration</h2>
+            </div>
+            <!-- END Modal Header -->
+            <!-- Modal Body -->
+            @using (Ajax.BeginForm("addRegistration", "Account", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "fnSuccess", OnFailure = "fnFailed" }))
+            {
+                <div class="modal-body">
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="UserID" id="hfEditID" />
+                                    <label class="control-label">Username</label>
+                                    <input type="text" id="UserName" name="UserName" class="form-control" required />
+                                </td>
+                                <td>
+                                    <label class="control-label">Password</label>
+                                    <input type="text" id="UserPassword" name="UserPassword" class="form-control" required />
+                                </td>
+                                <td>
+                                    <label class="control-label">Confirm Password</label>
+                                    <input type="text" id="ConfirmPassword" name="" class="form-control" required />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label class="control-label">Role</label>
+                                    <select class="form-control" disabled>
+                                        <option value="1" selected>User</option>
+                                    </select>
+
+
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="submit" id="btnSaveEdit" class="btn btn-primary pull-right"><b><i class="fa fa-save"></i> Save</b></button>
+                </div>
+            }
+            <!-- END Modal Body -->
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="~/css/customDataTable.css" />
+<link rel="stylesheet" href="~/css/DataTableThemeController.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" />
+
+<script>
+    $(document).ready(function () {
+        $("#example").DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ]
+        });
+    });
+
+    function fnSuccess(response) {
+        if (response.Status != "OK") {
+            Message("Required", response.Message, "error");
+        }
+        else {
+            $('#modal-add').modal('hide');
+            Message("Success", "Record Saved Success", "success");
+            $("#grid").html(response.html);
+            ClearItem();
+            GetOrders();
+        }
+    }
+    function fnFailed(error) {
+        alert('Request Failed');
+    }
+
+    function Message(title, text, type) {
+        Swal.fire({
+            title: title + '!',
+            text: text,
+            icon: type,
+            confirmButtonText: 'OK'
+        })
+    }
+    function GetOrders() {
+        $('#example').DataTable();
+    }
+
+    function ClearItem() {
+        $("input[type='text']").val('');
+        $("input[type='hidden']").val('');
+    }
+    function viewRecord(object, e) {
+        console.log(object);
+        $("#modal-add").modal('show');
+        $("#UserName").val(object.UserName);
+        $("#UserPassword").val(object.UserPassword);
+        $("#Description").val(object.Description);
+        let OrderID = object.UserID;
+        $("#hfEditID").val(OrderID);
+
+    }
+
+    function DeleteModel(Id) {
+        debugger;
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: `../Account/DeleteRegistration`,
+                    type: 'POST',
+                    data: { ID: Id },
+                    success: function (res) {
+                        if (res.Status != "OK") {
+                            Message("Error", res.Message, "error");
+                        }
+                        else {
+                            $("#grid").html(res.html);
+                            GetOrders();
+                            Message("Success", "Record Deleted Success", "success");
+                        }
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                });
+
+            }
+        })
+
+    }
+</script>

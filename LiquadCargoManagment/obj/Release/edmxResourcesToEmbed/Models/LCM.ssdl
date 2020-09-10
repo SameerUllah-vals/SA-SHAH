@@ -1,0 +1,1988 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LCMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="CityID" Type="bigint" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="OwnCompanyId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="AssignDrivers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VehicleID" Type="bigint" />
+    <Property Name="DriverID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Banks">
+    <Key>
+      <PropertyRef Name="BankID" />
+    </Key>
+    <Property Name="BankID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccountNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccountTitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="BranchManager" Type="nvarchar" MaxLength="50" />
+    <Property Name="BranchManagerContact" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="SecContactPerson" Type="nvarchar" MaxLength="50" />
+    <Property Name="SecContactNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="LandLineNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Website" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="text" />
+    <Property Name="Description" Type="text" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Bilty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderDate" Type="date" Nullable="false" />
+    <Property Name="OrderNo" Type="bigint" Nullable="false" />
+    <Property Name="DeliveryDate" Type="date" />
+    <Property Name="BillTo" Type="bigint" />
+    <Property Name="Sender" Type="bigint" />
+    <Property Name="VehicleID" Type="bigint" />
+    <Property Name="Freight" Type="float" />
+    <Property Name="VehicleExpensesGrandTotal" Type="float" />
+    <Property Name="DieselExpensesGrandTotal" Type="float" />
+    <Property Name="TotalLiter" Type="float" />
+    <Property Name="OrderDetailsTotalQTY" Type="float" />
+    <Property Name="OrderDetailsTotalWeight" Type="float" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="BiltyDetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BiltyID" Type="bigint" />
+    <Property Name="Receiver" Type="bigint" Nullable="false" />
+    <Property Name="ProductBrokerID" Type="bigint" Nullable="false" />
+    <Property Name="PackageTypeId" Type="bigint" />
+    <Property Name="ProductId" Type="bigint" />
+    <Property Name="Weight" Type="float" />
+    <Property Name="Unit" Type="float" />
+    <Property Name="QTY" Type="float" />
+    <Property Name="TotalWeight" Type="float" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Brokers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="bigint" />
+    <Property Name="Phone2" Type="bigint" />
+    <Property Name="HomeNo" Type="bigint" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" />
+    <Property Name="NIC" Type="bigint" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="OwnCompanyId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityID" />
+    </Key>
+    <Property Name="CityID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OwnCompanyID" Type="bigint" />
+    <Property Name="CityCode" Type="varchar" MaxLength="50" />
+    <Property Name="CityName" Type="varchar" MaxLength="50" />
+    <Property Name="ProvinceID" Type="bigint" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyID" />
+    </Key>
+    <Property Name="CompanyID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyCode" Type="nvarchar" MaxLength="15" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CompanyEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompanyWebSite" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="ModifiedDate" Type="date" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" />
+    <Property Name="OtherContact" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="GroupID" Type="bigint" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="STN" Type="nvarchar" MaxLength="50" />
+    <Property Name="NTN" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tax" Type="float" />
+    <Property Name="CustomerType" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="OwnCompanyId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="ContactNoType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContactNoType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Format" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Container">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContainerNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Type" Type="bigint" />
+    <Property Name="ShippingCompany" Type="nvarchar" MaxLength="50" />
+    <Property Name="Owner" Type="nvarchar" MaxLength="50" />
+    <Property Name="OwnerContact" Type="bigint" />
+    <Property Name="Description" Type="text" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="OwnershipType" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="ContainerType">
+    <Key>
+      <PropertyRef Name="ContainerTypeID" />
+    </Key>
+    <Property Name="ContainerTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContainerType" Type="varchar" MaxLength="50" />
+    <Property Name="Size" Type="bigint" />
+    <Property Name="Wheels" Type="bigint" />
+    <Property Name="BodyType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="DimensionUnitType" Type="varchar" MaxLength="10" />
+    <Property Name="LowerDeckInnerLength" Type="float" />
+    <Property Name="LowerDeckInnerWidth" Type="float" />
+    <Property Name="LowerDeckInnerHeight" Type="float" />
+    <Property Name="UpperDeckInnerLength" Type="float" />
+    <Property Name="UpperDeckInnerWidth" Type="float" />
+    <Property Name="UpperDeckInnerHeight" Type="float" />
+    <Property Name="LowerDeckOuterLength" Type="float" />
+    <Property Name="LowerDeckOuterWidth" Type="float" />
+    <Property Name="LowerDeckOuterHeight" Type="float" />
+    <Property Name="UpperDeckOuterLength" Type="float" />
+    <Property Name="UpperDeckOuterWidth" Type="float" />
+    <Property Name="UpperDeckOuterHeight" Type="float" />
+    <Property Name="UpperPortionInnerLength" Type="float" />
+    <Property Name="UpperPortionInnerwidth" Type="float" />
+    <Property Name="UpperPortionInnerHeight" Type="float" />
+    <Property Name="LowerPortionInnerLength" Type="float" />
+    <Property Name="LowerPortionInnerWidth" Type="float" />
+    <Property Name="LowerPortionInnerHeight" Type="float" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="TareWeight" Type="float" />
+    <Property Name="TareWeightUnit" Type="float" />
+    <Property Name="CubicCapacity" Type="float" />
+    <Property Name="CubicCapacityUnit" Type="varchar" MaxLength="20" />
+    <Property Name="PayLoadWeight" Type="float" />
+    <Property Name="PayLoadWeightUnit" Type="varchar" MaxLength="20" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="CreatedByUserID" Type="bigint" />
+    <Property Name="ModifiedByUserID" Type="bigint" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CountryName" Type="varchar" MaxLength="50" />
+    <Property Name="CountryDialCode" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CurrencyType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CurrencyType" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerName" Type="varchar" MaxLength="50" />
+    <Property Name="CustomerCode" Type="varchar" MaxLength="50" />
+    <Property Name="CustomerAdd" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="CustomerContact1" Type="varchar" MaxLength="50" />
+    <Property Name="CustomerContact2" Type="varchar" MaxLength="50" />
+    <Property Name="CustomerEmail" Type="varchar" MaxLength="50" />
+    <Property Name="WebAdd" Type="varchar" MaxLength="50" />
+    <Property Name="Customerlogo" Type="image" />
+    <Property Name="GroupID" Type="bigint" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="CreatedByUserID" Type="varchar" MaxLength="50" />
+    <Property Name="ModifiedByUserID" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="CustomerCompany">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="GroupID" Type="bigint" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" />
+    <Property Name="ContactOther" Type="varchar" MaxLength="50" />
+    <Property Name="EmailAdd" Type="varchar" MaxLength="50" />
+    <Property Name="WebAdd" Type="varchar" MaxLength="200" />
+    <Property Name="Address" Type="varchar" MaxLength="200" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="OwnCompanyId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="CustomerGroup">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="GroupID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" />
+    <Property Name="ContactOther" Type="varchar" MaxLength="50" />
+    <Property Name="EmailAdd" Type="varchar" MaxLength="50" />
+    <Property Name="WebAdd" Type="varchar" MaxLength="200" />
+    <Property Name="Address" Type="varchar" MaxLength="200" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="OwnCompanyId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="DamageType">
+    <Key>
+      <PropertyRef Name="DamageTypeID" />
+    </Key>
+    <Property Name="DamageTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="CreatedByID" Type="bigint" />
+    <Property Name="ModifiedByID" Type="bigint" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="DateType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Format" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartID" />
+    </Key>
+    <Property Name="DepartID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartCode" Type="varchar" MaxLength="50" />
+    <Property Name="DepartName" Type="varchar" MaxLength="50" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" />
+    <Property Name="ContactOther" Type="varchar" MaxLength="50" />
+    <Property Name="EmailAdd" Type="varchar" MaxLength="50" />
+    <Property Name="WebAdd" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
+    <Property Name="CustomerID" Type="bigint" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="CreatedByUserID" Type="bigint" />
+    <Property Name="ModifiedByUser" Type="bigint" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="DepartmentPerson">
+    <Key>
+      <PropertyRef Name="PersonalID" />
+    </Key>
+    <Property Name="PersonalID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="BusinessEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="GroupID" Type="bigint" />
+    <Property Name="CompanyID" Type="bigint" />
+    <Property Name="DepartmentID" Type="bigint" />
+    <Property Name="Designation" Type="nvarchar" MaxLength="50" />
+    <Property Name="Cell" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="OtherContact" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddressOffice" Type="nvarchar" MaxLength="255" />
+    <Property Name="AddressOther" Type="nvarchar" MaxLength="255" />
+    <Property Name="Description" Type="nvarchar" MaxLength="255" />
+    <Property Name="IsIndividual" Type="bit" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Designation">
+    <Key>
+      <PropertyRef Name="DesignationId" />
+    </Key>
+    <Property Name="DesignationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DesignationName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="DieselExpense">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BiltyID" Type="bigint" />
+    <Property Name="VendorId" Type="bigint" Nullable="false" />
+    <Property Name="Litre" Type="float" />
+    <Property Name="Rate" Type="float" />
+    <Property Name="Amount" Type="float" />
+  </EntityType>
+  <EntityType Name="DocumentType">
+    <Key>
+      <PropertyRef Name="DocumentTypeID" />
+    </Key>
+    <Property Name="DocumentTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="CreatedByID" Type="bigint" />
+    <Property Name="ModifiedByID" Type="bigint" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Driver">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="FatherName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+    <Property Name="BloodGroup" Type="nvarchar" MaxLength="50" />
+    <Property Name="CellNo" Type="bigint" />
+    <Property Name="OtherContact" Type="bigint" />
+    <Property Name="HomeNo" Type="bigint" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="NIC" Type="bigint" />
+    <Property Name="IdentityMark" Type="nvarchar" MaxLength="50" />
+    <Property Name="NICIssueDate" Type="datetime" />
+    <Property Name="NICExpiryDate" Type="datetime" />
+    <Property Name="LicenseNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="LicenseCategory" Type="nvarchar" MaxLength="50" />
+    <Property Name="LicenseIssueDate" Type="datetime" />
+    <Property Name="LicenseExpiryDate" Type="datetime" />
+    <Property Name="LicenseIssuingAuthority" Type="nvarchar" MaxLength="50" />
+    <Property Name="LicenseStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmergencyContactName" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmergencyContactNo" Type="bigint" />
+    <Property Name="ContactRelation" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="DriverImageID" Type="bigint" />
+    <Property Name="Document" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeCode" Type="nvarchar" MaxLength="15" />
+    <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompanyID" Type="bigint" />
+    <Property Name="DesignationID" Type="bigint" />
+    <Property Name="DepartmentID" Type="bigint" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="BasicSalary" Type="bigint" />
+    <Property Name="JoiningDate" Type="datetime" />
+    <Property Name="ProbationPeriod" Type="int" />
+    <Property Name="EmployeeRate" Type="int" />
+    <Property Name="BankAccount" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankAccountNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankAccountTitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Ima" Type="bit" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="date" />
+    <Property Name="ImageName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ImagePath" Type="nvarchar(max)" />
+    <Property Name="ContentType" Type="nvarchar" MaxLength="250" />
+    <Property Name="Data" Type="varbinary(max)" />
+    <Property Name="CNIC" Type="bigint" />
+    <Property Name="Alias" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShiftID" Type="bigint" />
+    <Property Name="IsManager" Type="bit" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="ExpensesType">
+    <Key>
+      <PropertyRef Name="ExpensesTypeID" />
+    </Key>
+    <Property Name="ExpensesTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExpensesTypeName" Type="varchar" MaxLength="50" />
+    <Property Name="ExpensesTypeCode" Type="varchar" MaxLength="50" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="CreatedByUserID" Type="bigint" />
+    <Property Name="ModifiedByUserID" Type="bigint" />
+    <Property Name="Remarks" Type="varchar" MaxLength="500" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="OwnCompanyId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Gener">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="GroupID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupCode" Type="varchar" MaxLength="50" />
+    <Property Name="GroupName" Type="varchar" MaxLength="50" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" />
+    <Property Name="ContactOther" Type="varchar" MaxLength="50" />
+    <Property Name="EmailAdd" Type="varchar" MaxLength="50" />
+    <Property Name="WebAdd" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
+    <Property Name="Logo" Type="image" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="CreatedByUserID" Type="bigint" />
+    <Property Name="ModifiedByUserID" Type="bigint" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CompanyAccess" Type="varchar" MaxLength="50" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="LocationType">
+    <Key>
+      <PropertyRef Name="LocationTypeID" />
+    </Key>
+    <Property Name="LocationTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationTypeName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MenuID" />
+    </Key>
+    <Property Name="MenuID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="SequenceOrder" Type="int" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Nature">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="NavMenu">
+    <Key>
+      <PropertyRef Name="FormID" />
+    </Key>
+    <Property Name="FormID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FormName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Url" Type="nvarchar" MaxLength="200" />
+    <Property Name="icon" Type="nvarchar" MaxLength="150" />
+    <Property Name="SequenceOrder" Type="int" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="SecondLevelMenuID" Type="bigint" Nullable="false" />
+    <Property Name="formTarget" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Notifications">
+    <Key>
+      <PropertyRef Name="NotificationID" />
+    </Key>
+    <Property Name="NotificationID" Type="bigint" Nullable="false" />
+    <Property Name="Message" Type="nvarchar" MaxLength="250" />
+    <Property Name="IsRead" Type="bit" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="Link" Type="nvarchar(max)" />
+    <Property Name="NotifiedTo" Type="bigint" />
+    <Property Name="NotifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="NoType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Format" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WorkOrderID" Type="bigint" />
+    <Property Name="Reciever" Type="bigint" />
+    <Property Name="Productbroker" Type="bigint" />
+    <Property Name="PackageType" Type="bigint" />
+    <Property Name="Product" Type="bigint" />
+    <Property Name="Weight" Type="bigint" />
+    <Property Name="unit" Type="nvarchar" MaxLength="50" />
+    <Property Name="Quantity" Type="bigint" />
+    <Property Name="TotalWeight" Type="bigint" />
+    <Property Name="Remarks" Type="text" />
+  </EntityType>
+  <EntityType Name="Organization">
+    <Key>
+      <PropertyRef Name="OrganizationID" />
+    </Key>
+    <Property Name="OrganizationID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Telephone" Type="bigint" />
+    <Property Name="ContactNo" Type="bigint" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="250" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="Modifiedby" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="OwnCompany">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubcriptionID" Type="bigint" />
+    <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="GroupID" Type="bigint" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" />
+    <Property Name="ContactOther" Type="varchar" MaxLength="50" />
+    <Property Name="EmailAdd" Type="varchar" MaxLength="50" />
+    <Property Name="WebAdd" Type="varchar" MaxLength="200" />
+    <Property Name="Address" Type="varchar" MaxLength="200" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="OwnDepartment">
+    <Key>
+      <PropertyRef Name="DepartID" />
+    </Key>
+    <Property Name="DepartID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartCode" Type="varchar" MaxLength="50" />
+    <Property Name="DepartName" Type="varchar" MaxLength="50" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" />
+    <Property Name="ContactOther" Type="varchar" MaxLength="50" />
+    <Property Name="EmailAdd" Type="varchar" MaxLength="50" />
+    <Property Name="WebAdd" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
+    <Property Name="CustomerID" Type="bigint" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="CreatedByUserID" Type="bigint" />
+    <Property Name="ModifiedByUser" Type="bigint" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="GROUPID" Type="bigint" Nullable="false" />
+    <Property Name="COMPANYID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OwnGroups">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="GroupID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Contact" Type="varchar" MaxLength="50" />
+    <Property Name="ContactOther" Type="varchar" MaxLength="50" />
+    <Property Name="EmailAdd" Type="varchar" MaxLength="50" />
+    <Property Name="WebAdd" Type="varchar" MaxLength="200" />
+    <Property Name="Address" Type="varchar" MaxLength="200" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="PackageType">
+    <Key>
+      <PropertyRef Name="PackageTypeID" />
+    </Key>
+    <Property Name="PackageTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PackageTypeCode" Type="varchar" MaxLength="50" />
+    <Property Name="PackageTypeName" Type="varchar" MaxLength="50" />
+    <Property Name="Length" Type="float" />
+    <Property Name="Width" Type="float" />
+    <Property Name="Height" Type="float" />
+    <Property Name="DimensionUnit" Type="varchar" MaxLength="10" />
+    <Property Name="Weight" Type="float" />
+    <Property Name="WeightUnit" Type="varchar" MaxLength="10" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="CreatedByUserID" Type="bigint" />
+    <Property Name="ModifiedByUserID" Type="bigint" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsMaster" Type="bit" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="PickDropLocation">
+    <Key>
+      <PropertyRef Name="PickDropID" />
+    </Key>
+    <Property Name="PickDropID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PickDropCode" Type="varchar" MaxLength="50" />
+    <Property Name="AreaID" Type="bigint" />
+    <Property Name="Address" Type="varchar" MaxLength="200" />
+    <Property Name="ProvinceID" Type="bigint" />
+    <Property Name="LocationTypeID" Type="bigint" />
+    <Property Name="OwnerID" Type="bigint" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="CreatedByUserID" Type="bigint" />
+    <Property Name="ModifiedByUserID" Type="bigint" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+    <Property Name="PickDropLocationName" Type="varchar" MaxLength="100" />
+    <Property Name="IsPort" Type="bit" />
+    <Property Name="LAT" Type="varchar" MaxLength="50" />
+    <Property Name="LON" Type="varchar" MaxLength="50" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="CityID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="PrincipleCompany">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OwnCompanyID" Type="bigint" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Category" Type="bigint" />
+    <Property Name="Weight" Type="float" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="Width" Type="float" />
+    <Property Name="Height" Type="float" />
+    <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+    <Property Name="Volume" Type="float" />
+    <Property Name="Length" Type="float" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="OwnCompanyId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="ProductBroker">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="ProvinceID" />
+    </Key>
+    <Property Name="ProvinceID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProvinceName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProvinceID" Type="bigint" />
+    <Property Name="CityID" Type="bigint" />
+    <Property Name="Description" Type="text" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedByID" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedByID" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="RevenueType">
+    <Key>
+      <PropertyRef Name="RevenueTypeID" />
+    </Key>
+    <Property Name="RevenueTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="CreatedById" Type="bigint" />
+    <Property Name="ModifiedByID" Type="bigint" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="OwnCompanyId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="RolePermission">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleID" Type="bigint" />
+    <Property Name="FormID" Type="bigint" />
+    <Property Name="Parameter" Type="nchar" MaxLength="10" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="isDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="isDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="SecondLevelMenu">
+    <Key>
+      <PropertyRef Name="SecLevelID" />
+    </Key>
+    <Property Name="SecLevelID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuID" Type="bigint" />
+    <Property Name="SecLevelMenu" Type="nvarchar" MaxLength="50" />
+    <Property Name="SequenceOrder" Type="int" />
+  </EntityType>
+  <EntityType Name="Section">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="SectionName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Group" Type="nvarchar" MaxLength="50" />
+    <Property Name="Dept" Type="nvarchar" MaxLength="50" />
+    <Property Name="ListofPerson" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="ShipmentType">
+    <Key>
+      <PropertyRef Name="ShipmentType_ID" />
+    </Key>
+    <Property Name="ShipmentType_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShipmentTypeDetail" Type="nvarchar" MaxLength="150" />
+    <Property Name="ShipmentType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="ShippingLine">
+    <Key>
+      <PropertyRef Name="ShippingLineID" />
+    </Key>
+    <Property Name="ShippingLineID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" />
+    <Property Name="PrimaryContact" Type="bigint" />
+    <Property Name="SecondaryContact" Type="bigint" />
+    <Property Name="LandLine" Type="bigint" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="CreatedById" Type="bigint" />
+    <Property Name="ModifiedByID" Type="bigint" />
+    <Property Name="LiftOffLiftOnCharges" Type="float" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="ShippingType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="isDeleted" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SoftwareSetup">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CurrencyTypeID" Type="bigint" />
+    <Property Name="DateTypeID" Type="bigint" />
+    <Property Name="ContactNoTypeID" Type="bigint" />
+    <Property Name="NoTypeID" Type="bigint" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="SubcriptionModules">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubcriptionID" Type="bigint" />
+    <Property Name="MenuID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Subcriptions">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="NumberOfMonths" Type="int" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="TaxRateRegistration">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaxRateName" Type="nvarchar" MaxLength="50" />
+    <Property Name="TaxRatePercent" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="ProvinceID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="TaxTypes">
+    <Key>
+      <PropertyRef Name="TaxID" />
+    </Key>
+    <Property Name="TaxID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Percentage" Type="float" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="isDelete" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblBrand">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="isDeleted" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserAccounts">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OwnCompanyId" Type="bigint" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="RoleID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Vehicle">
+    <Key>
+      <PropertyRef Name="VehicleID" />
+    </Key>
+    <Property Name="VehicleID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="RegNo" Type="varchar" MaxLength="50" />
+    <Property Name="ChasisNo" Type="varchar" MaxLength="50" />
+    <Property Name="EngineNo" Type="varchar" MaxLength="50" />
+    <Property Name="Length" Type="float" />
+    <Property Name="Width" Type="float" />
+    <Property Name="Height" Type="float" />
+    <Property Name="DimensionUnitType" Type="varchar" MaxLength="50" />
+    <Property Name="VehicleTypeID" Type="bigint" Nullable="false" />
+    <Property Name="VehicleModel" Type="varchar" MaxLength="50" />
+    <Property Name="VehicleColor" Type="varchar" MaxLength="50" />
+    <Property Name="BodyType" Type="varchar" MaxLength="50" />
+    <Property Name="ManufacturingYear" Type="varchar" MaxLength="50" />
+    <Property Name="ManufacturerName" Type="varchar" MaxLength="50" />
+    <Property Name="PurchasingDate" Type="datetime" />
+    <Property Name="PurchasingAmount" Type="bigint" />
+    <Property Name="PurchaseFromName" Type="varchar" MaxLength="50" />
+    <Property Name="PurchaseFromDetail" Type="varchar" MaxLength="200" />
+    <Property Name="OwnerName" Type="varchar" MaxLength="50" />
+    <Property Name="OwnerContact" Type="varchar" MaxLength="50" />
+    <Property Name="OwnerNIC" Type="varchar" MaxLength="50" />
+    <Property Name="PrincipleCompanyId" Type="bigint" />
+    <Property Name="Comission" Type="int" />
+    <Property Name="Amount" Type="float" />
+    <Property Name="Amount2" Type="float" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+    <Property Name="IsOwnVehicle" Type="bit" />
+    <Property Name="Make" Type="nvarchar" MaxLength="50" />
+    <Property Name="MaximumLoadingCapacity" Type="bigint" />
+    <Property Name="OwnershipStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="Documents" Type="nvarchar" MaxLength="200" />
+    <Property Name="LoadingLimitNHA" Type="bigint" />
+    <Property Name="OwnCompanyId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="VehicleExpenses">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BiltyID" Type="bigint" />
+    <Property Name="ExpenseTypeId" Type="bigint" Nullable="false" />
+    <Property Name="BankBranch" Type="bigint" />
+    <Property Name="PaymentMethod" Type="nvarchar" MaxLength="50" />
+    <Property Name="ChequeNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="ChequeDate" Type="date" />
+    <Property Name="Amount" Type="float" />
+  </EntityType>
+  <EntityType Name="VehicleType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="Description" Type="varchar" MaxLength="500" />
+    <Property Name="OwnCompanyId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Vendor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="VendorTypeID" Type="bigint" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="OwnerContactName" Type="nvarchar" MaxLength="50" />
+    <Property Name="OwnerContactNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="PrimaryContactPerson" Type="nvarchar" MaxLength="50" />
+    <Property Name="PrimaryContactNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="SecContactPerson" Type="nvarchar" MaxLength="50" />
+    <Property Name="SecContactNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="PTCLNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Website" Type="nvarchar" MaxLength="200" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="OwnCompanyId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="VendorType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="OwnCompanyId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="WorkOrder">
+    <Key>
+      <PropertyRef Name="WorkorderId" />
+    </Key>
+    <Property Name="WorkorderId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WorkOrderNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="OrderDate" Type="datetime" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="billto" Type="bigint" />
+    <Property Name="Sender" Type="bigint" />
+    <Property Name="totalquantity" Type="bigint" />
+    <Property Name="totalweight" Type="bigint" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <Association Name="FK__Area__OwnCompany__2645B050">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="Area" Type="Self.Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="OwnCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Category__OwnCom__29221CFB">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="Category" Type="Self.Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Category">
+        <PropertyRef Name="OwnCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Company__OwnComp__2BFE89A6">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="Company" Type="Self.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="OwnCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CustomerC__OwnCo__2CF2ADDF">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="CustomerCompany" Type="Self.CustomerCompany" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CustomerCompany">
+        <PropertyRef Name="OwnCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CustomerG__OwnCo__2EDAF651">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="CustomerGroup" Type="Self.CustomerGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CustomerGroup">
+        <PropertyRef Name="OwnCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ExpensesT__OwnCo__2FCF1A8A">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="ExpensesType" Type="Self.ExpensesType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ExpensesType">
+        <PropertyRef Name="OwnCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__OwnComp__367C1819">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="OwnCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__RevenueTy__OwnCo__3864608B">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="RevenueType" Type="Self.RevenueType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RevenueType">
+        <PropertyRef Name="OwnCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vehicle__OwnComp__40F9A68C">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Vehicle">
+        <PropertyRef Name="OwnCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VehicleTy__OwnCo__42E1EEFE">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="VehicleType" Type="Self.VehicleType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="VehicleType">
+        <PropertyRef Name="OwnCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vendor__OwnCompa__7755B73D">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="Vendor" Type="Self.Vendor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Vendor">
+        <PropertyRef Name="OwnCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VendorTyp__OwnCo__45BE5BA9">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="VendorType" Type="Self.VendorType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="VendorType">
+        <PropertyRef Name="OwnCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Area_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="Area" Type="Self.Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityID" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="CityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssignDrivers_Driver">
+    <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+    <End Role="AssignDrivers" Type="Self.AssignDrivers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Driver">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AssignDrivers">
+        <PropertyRef Name="DriverID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bilty_BillToOwnCompany">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="Bilty" Type="Self.Bilty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bilty">
+        <PropertyRef Name="BillTo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bilty_OwnCompany">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="Bilty" Type="Self.Bilty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bilty">
+        <PropertyRef Name="Sender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bilty_Vehicle">
+    <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="0..1" />
+    <End Role="Bilty" Type="Self.Bilty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicle">
+        <PropertyRef Name="VehicleID" />
+      </Principal>
+      <Dependent Role="Bilty">
+        <PropertyRef Name="VehicleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BiltyDetails_CustomerCompany">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="1" />
+    <End Role="BiltyDetails" Type="Self.BiltyDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BiltyDetails">
+        <PropertyRef Name="Receiver" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BiltyDetails_PackageType">
+    <End Role="PackageType" Type="Self.PackageType" Multiplicity="0..1" />
+    <End Role="BiltyDetails" Type="Self.BiltyDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PackageType">
+        <PropertyRef Name="PackageTypeID" />
+      </Principal>
+      <Dependent Role="BiltyDetails">
+        <PropertyRef Name="PackageTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BiltyDetails_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="BiltyDetails" Type="Self.BiltyDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BiltyDetails">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BiltyDetails_ProductBroker">
+    <End Role="ProductBroker" Type="Self.ProductBroker" Multiplicity="1" />
+    <End Role="BiltyDetails" Type="Self.BiltyDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBroker">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BiltyDetails">
+        <PropertyRef Name="ProductBrokerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_OwnCompany">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="OwnCompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_Province">
+    <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="ProvinceID" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="ProvinceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomerCompany_CustomerGroup">
+    <End Role="CustomerGroup" Type="Self.CustomerGroup" Multiplicity="0..1" />
+    <End Role="CustomerCompany" Type="Self.CustomerCompany" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerGroup">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="CustomerCompany">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DieselExpense_Vendor">
+    <End Role="Vendor" Type="Self.Vendor" Multiplicity="1" />
+    <End Role="DieselExpense" Type="Self.DieselExpense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DieselExpense">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_OwnCompany">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="Reciever" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_PackageType">
+    <End Role="PackageType" Type="Self.PackageType" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PackageType">
+        <PropertyRef Name="PackageTypeID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="PackageType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="Product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_ProductBroker">
+    <End Role="ProductBroker" Type="Self.ProductBroker" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBroker">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="Productbroker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_WorkOrder">
+    <End Role="WorkOrder" Type="Self.WorkOrder" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkOrder">
+        <PropertyRef Name="WorkorderId" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="WorkOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OwnCompany_OwnGroups">
+    <End Role="OwnGroups" Type="Self.OwnGroups" Multiplicity="0..1" />
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnGroups">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="OwnCompany">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Product">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="Category" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reciver_OwnCompany">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="WorkOrder" Type="Self.WorkOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkOrder">
+        <PropertyRef Name="billto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sender_OwnCompany">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="WorkOrder" Type="Self.WorkOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkOrder">
+        <PropertyRef Name="Sender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SoftwareSetup_ContactNoType">
+    <End Role="ContactNoType" Type="Self.ContactNoType" Multiplicity="0..1" />
+    <End Role="SoftwareSetup" Type="Self.SoftwareSetup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactNoType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SoftwareSetup">
+        <PropertyRef Name="ContactNoTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SoftwareSetup_CurrencyType">
+    <End Role="CurrencyType" Type="Self.CurrencyType" Multiplicity="0..1" />
+    <End Role="SoftwareSetup" Type="Self.SoftwareSetup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CurrencyType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SoftwareSetup">
+        <PropertyRef Name="CurrencyTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SoftwareSetup_DateType">
+    <End Role="DateType" Type="Self.DateType" Multiplicity="0..1" />
+    <End Role="SoftwareSetup" Type="Self.SoftwareSetup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DateType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SoftwareSetup">
+        <PropertyRef Name="DateTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SoftwareSetup_NoType">
+    <End Role="NoType" Type="Self.NoType" Multiplicity="0..1" />
+    <End Role="SoftwareSetup" Type="Self.SoftwareSetup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NoType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SoftwareSetup">
+        <PropertyRef Name="NoTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubcriptionModules_Menu">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+    <End Role="SubcriptionModules" Type="Self.SubcriptionModules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="MenuID" />
+      </Principal>
+      <Dependent Role="SubcriptionModules">
+        <PropertyRef Name="MenuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubcriptionModules_SubcriptionModules">
+    <End Role="Subcriptions" Type="Self.Subcriptions" Multiplicity="0..1" />
+    <End Role="SubcriptionModules" Type="Self.SubcriptionModules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subcriptions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SubcriptionModules">
+        <PropertyRef Name="SubcriptionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaxRateRegistration_TaxRateRegistration">
+    <End Role="TaxRateRegistration" Type="Self.TaxRateRegistration" Multiplicity="1" />
+    <End Role="TaxRateRegistration1" Type="Self.TaxRateRegistration" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TaxRateRegistration">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TaxRateRegistration1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAccounts_OwnCompany">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserAccounts" Type="Self.UserAccounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserAccounts">
+        <PropertyRef Name="OwnCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vehicle_VehicleType">
+    <End Role="VehicleType" Type="Self.VehicleType" Multiplicity="1" />
+    <End Role="Vehicle" Type="Self.Vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Vehicle">
+        <PropertyRef Name="VehicleTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VehicleExpenses_Banks">
+    <End Role="Banks" Type="Self.Banks" Multiplicity="1" />
+    <End Role="VehicleExpenses" Type="Self.VehicleExpenses" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Banks">
+        <PropertyRef Name="BankID" />
+      </Principal>
+      <Dependent Role="VehicleExpenses">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VehicleExpenses_ExpensesType">
+    <End Role="ExpensesType" Type="Self.ExpensesType" Multiplicity="1" />
+    <End Role="VehicleExpenses" Type="Self.VehicleExpenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExpensesType">
+        <PropertyRef Name="ExpensesTypeID" />
+      </Principal>
+      <Dependent Role="VehicleExpenses">
+        <PropertyRef Name="ExpenseTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vendor_VendorType">
+    <End Role="VendorType" Type="Self.VendorType" Multiplicity="0..1" />
+    <End Role="Vendor" Type="Self.Vendor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VendorType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Vendor">
+        <PropertyRef Name="VendorTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LCMModelStoreContainer">
+    <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AssignDrivers" EntityType="Self.AssignDrivers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Banks" EntityType="Self.Banks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bilty" EntityType="Self.Bilty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BiltyDetails" EntityType="Self.BiltyDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Brokers" EntityType="Self.Brokers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContactNoType" EntityType="Self.ContactNoType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Container" EntityType="Self.Container" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContainerType" EntityType="Self.ContainerType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CurrencyType" EntityType="Self.CurrencyType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomerCompany" EntityType="Self.CustomerCompany" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomerGroup" EntityType="Self.CustomerGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DamageType" EntityType="Self.DamageType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DateType" EntityType="Self.DateType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DepartmentPerson" EntityType="Self.DepartmentPerson" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DieselExpense" EntityType="Self.DieselExpense" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DocumentType" EntityType="Self.DocumentType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExpensesType" EntityType="Self.ExpensesType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gener" EntityType="Self.Gener" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LocationType" EntityType="Self.LocationType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nature" EntityType="Self.Nature" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NavMenu" EntityType="Self.NavMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NoType" EntityType="Self.NoType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OwnCompany" EntityType="Self.OwnCompany" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OwnDepartment" EntityType="Self.OwnDepartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OwnGroups" EntityType="Self.OwnGroups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PackageType" EntityType="Self.PackageType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PickDropLocation" EntityType="Self.PickDropLocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PrincipleCompany" EntityType="Self.PrincipleCompany" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductBroker" EntityType="Self.ProductBroker" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RevenueType" EntityType="Self.RevenueType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RolePermission" EntityType="Self.RolePermission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SecondLevelMenu" EntityType="Self.SecondLevelMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShipmentType" EntityType="Self.ShipmentType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShippingLine" EntityType="Self.ShippingLine" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShippingType" EntityType="Self.ShippingType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SoftwareSetup" EntityType="Self.SoftwareSetup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubcriptionModules" EntityType="Self.SubcriptionModules" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subcriptions" EntityType="Self.Subcriptions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaxRateRegistration" EntityType="Self.TaxRateRegistration" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaxTypes" EntityType="Self.TaxTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBrand" EntityType="Self.tblBrand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAccounts" EntityType="Self.UserAccounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vehicle" EntityType="Self.Vehicle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleExpenses" EntityType="Self.VehicleExpenses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleType" EntityType="Self.VehicleType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VendorType" EntityType="Self.VendorType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkOrder" EntityType="Self.WorkOrder" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Area__OwnCompany__2645B050" Association="Self.FK__Area__OwnCompany__2645B050">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="Area" EntitySet="Area" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Category__OwnCom__29221CFB" Association="Self.FK__Category__OwnCom__29221CFB">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="Category" EntitySet="Category" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Company__OwnComp__2BFE89A6" Association="Self.FK__Company__OwnComp__2BFE89A6">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="Company" EntitySet="Company" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CustomerC__OwnCo__2CF2ADDF" Association="Self.FK__CustomerC__OwnCo__2CF2ADDF">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="CustomerCompany" EntitySet="CustomerCompany" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CustomerG__OwnCo__2EDAF651" Association="Self.FK__CustomerG__OwnCo__2EDAF651">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="CustomerGroup" EntitySet="CustomerGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ExpensesT__OwnCo__2FCF1A8A" Association="Self.FK__ExpensesT__OwnCo__2FCF1A8A">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="ExpensesType" EntitySet="ExpensesType" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__OwnComp__367C1819" Association="Self.FK__Product__OwnComp__367C1819">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__RevenueTy__OwnCo__3864608B" Association="Self.FK__RevenueTy__OwnCo__3864608B">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="RevenueType" EntitySet="RevenueType" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vehicle__OwnComp__40F9A68C" Association="Self.FK__Vehicle__OwnComp__40F9A68C">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="Vehicle" EntitySet="Vehicle" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VehicleTy__OwnCo__42E1EEFE" Association="Self.FK__VehicleTy__OwnCo__42E1EEFE">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="VehicleType" EntitySet="VehicleType" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vendor__OwnCompa__7755B73D" Association="Self.FK__Vendor__OwnCompa__7755B73D">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="Vendor" EntitySet="Vendor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VendorTyp__OwnCo__45BE5BA9" Association="Self.FK__VendorTyp__OwnCo__45BE5BA9">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="VendorType" EntitySet="VendorType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Area_City" Association="Self.FK_Area_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Area" EntitySet="Area" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssignDrivers_Driver" Association="Self.FK_AssignDrivers_Driver">
+      <End Role="Driver" EntitySet="Driver" />
+      <End Role="AssignDrivers" EntitySet="AssignDrivers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bilty_BillToOwnCompany" Association="Self.FK_Bilty_BillToOwnCompany">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="Bilty" EntitySet="Bilty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bilty_OwnCompany" Association="Self.FK_Bilty_OwnCompany">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="Bilty" EntitySet="Bilty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bilty_Vehicle" Association="Self.FK_Bilty_Vehicle">
+      <End Role="Vehicle" EntitySet="Vehicle" />
+      <End Role="Bilty" EntitySet="Bilty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BiltyDetails_CustomerCompany" Association="Self.FK_BiltyDetails_CustomerCompany">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="BiltyDetails" EntitySet="BiltyDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BiltyDetails_PackageType" Association="Self.FK_BiltyDetails_PackageType">
+      <End Role="PackageType" EntitySet="PackageType" />
+      <End Role="BiltyDetails" EntitySet="BiltyDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BiltyDetails_Product" Association="Self.FK_BiltyDetails_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="BiltyDetails" EntitySet="BiltyDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BiltyDetails_ProductBroker" Association="Self.FK_BiltyDetails_ProductBroker">
+      <End Role="ProductBroker" EntitySet="ProductBroker" />
+      <End Role="BiltyDetails" EntitySet="BiltyDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_OwnCompany" Association="Self.FK_City_OwnCompany">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="City" EntitySet="City" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_Province" Association="Self.FK_City_Province">
+      <End Role="Province" EntitySet="Province" />
+      <End Role="City" EntitySet="City" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomerCompany_CustomerGroup" Association="Self.FK_CustomerCompany_CustomerGroup">
+      <End Role="CustomerGroup" EntitySet="CustomerGroup" />
+      <End Role="CustomerCompany" EntitySet="CustomerCompany" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DieselExpense_Vendor" Association="Self.FK_DieselExpense_Vendor">
+      <End Role="Vendor" EntitySet="Vendor" />
+      <End Role="DieselExpense" EntitySet="DieselExpense" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_OwnCompany" Association="Self.FK_OrderDetail_OwnCompany">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_PackageType" Association="Self.FK_OrderDetail_PackageType">
+      <End Role="PackageType" EntitySet="PackageType" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_Product" Association="Self.FK_OrderDetail_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_ProductBroker" Association="Self.FK_OrderDetail_ProductBroker">
+      <End Role="ProductBroker" EntitySet="ProductBroker" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_WorkOrder" Association="Self.FK_OrderDetail_WorkOrder">
+      <End Role="WorkOrder" EntitySet="WorkOrder" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OwnCompany_OwnGroups" Association="Self.FK_OwnCompany_OwnGroups">
+      <End Role="OwnGroups" EntitySet="OwnGroups" />
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Product" Association="Self.FK_Product_Product">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reciver_OwnCompany" Association="Self.FK_Reciver_OwnCompany">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="WorkOrder" EntitySet="WorkOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sender_OwnCompany" Association="Self.FK_Sender_OwnCompany">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="WorkOrder" EntitySet="WorkOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SoftwareSetup_ContactNoType" Association="Self.FK_SoftwareSetup_ContactNoType">
+      <End Role="ContactNoType" EntitySet="ContactNoType" />
+      <End Role="SoftwareSetup" EntitySet="SoftwareSetup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SoftwareSetup_CurrencyType" Association="Self.FK_SoftwareSetup_CurrencyType">
+      <End Role="CurrencyType" EntitySet="CurrencyType" />
+      <End Role="SoftwareSetup" EntitySet="SoftwareSetup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SoftwareSetup_DateType" Association="Self.FK_SoftwareSetup_DateType">
+      <End Role="DateType" EntitySet="DateType" />
+      <End Role="SoftwareSetup" EntitySet="SoftwareSetup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SoftwareSetup_NoType" Association="Self.FK_SoftwareSetup_NoType">
+      <End Role="NoType" EntitySet="NoType" />
+      <End Role="SoftwareSetup" EntitySet="SoftwareSetup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubcriptionModules_Menu" Association="Self.FK_SubcriptionModules_Menu">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="SubcriptionModules" EntitySet="SubcriptionModules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubcriptionModules_SubcriptionModules" Association="Self.FK_SubcriptionModules_SubcriptionModules">
+      <End Role="Subcriptions" EntitySet="Subcriptions" />
+      <End Role="SubcriptionModules" EntitySet="SubcriptionModules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaxRateRegistration_TaxRateRegistration" Association="Self.FK_TaxRateRegistration_TaxRateRegistration">
+      <End Role="TaxRateRegistration" EntitySet="TaxRateRegistration" />
+      <End Role="TaxRateRegistration1" EntitySet="TaxRateRegistration" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAccounts_OwnCompany" Association="Self.FK_UserAccounts_OwnCompany">
+      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="UserAccounts" EntitySet="UserAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vehicle_VehicleType" Association="Self.FK_Vehicle_VehicleType">
+      <End Role="VehicleType" EntitySet="VehicleType" />
+      <End Role="Vehicle" EntitySet="Vehicle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VehicleExpenses_Banks" Association="Self.FK_VehicleExpenses_Banks">
+      <End Role="Banks" EntitySet="Banks" />
+      <End Role="VehicleExpenses" EntitySet="VehicleExpenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VehicleExpenses_ExpensesType" Association="Self.FK_VehicleExpenses_ExpensesType">
+      <End Role="ExpensesType" EntitySet="ExpensesType" />
+      <End Role="VehicleExpenses" EntitySet="VehicleExpenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vendor_VendorType" Association="Self.FK_Vendor_VendorType">
+      <End Role="VendorType" EntitySet="VendorType" />
+      <End Role="Vendor" EntitySet="Vendor" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

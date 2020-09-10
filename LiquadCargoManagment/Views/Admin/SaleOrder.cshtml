@@ -1,0 +1,360 @@
+﻿
+@{
+    ViewBag.Title = "Sales Order";
+}
+
+
+<div class="content-header">
+
+    <div class="header-section">
+        <h1>
+            Sales Order <br><small>Create Read Update Delete Sales Order</small>
+        </h1>
+    </div>
+
+</div>
+<ul class="breadcrumb breadcrumb-top">
+    <li>Admin</li>
+    <li><a href="javascript:;">SalesOrder</a></li>
+</ul>
+
+<!-- END Datatables Header -->
+<!-- Datatables Content -->
+<div class="block full">
+    <div class="block-title row">
+        <div class="col-md-12">
+            <h2>Sale Order</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <form>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Sales Order No</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Order Date</label>
+                        <input type="datetime-local" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Own Company</label>
+                        <select class="form-control">
+                            <option>Qabail</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="block full">
+    <div class="block-title row">
+        <div class="col-md-12">
+            <h2>Vehicle Details</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <form>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Vehicle Reg No</label>
+                        <select class="form-control">
+                            <option>Qabail</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>OwnerShip</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <label>Owner Name</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <label>Vehicle Type</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <label>Vehicle Capacity</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Loading Point</label>
+                        <select class="form-control">
+                            <option>Qabail</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Destination Point</label>
+                        <select class="form-control">
+                            <option>Qabail</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="block full">
+    <div class="block-title row">
+        <div class="col-md-12">
+            <h2>Product Details</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <form>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Product</label>
+                        <select class="form-control">
+                            <option>Product</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Product Type</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <label>Product Qty</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <label>Unit</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-info" style="margin-top:23px;">Add Line</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="block full">
+    <div class="block-title row">
+        <div class="col-md-12">
+            <h2>Vehicle Expenses</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <form>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Vehicle Type</label>
+                        <select class="form-control">
+                            <option>vehicle Advance</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Payment Method</label>
+                        <select class="form-control">
+                            <option>Bank</option>
+                            <option>Cash</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Bank Br</label>
+                        <select class="form-control" disabled>
+                            <option>HBL</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <label>Cheque #</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <label>Cheque Date</label>
+                        <input type="datetime-local" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <label>Amount</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-info" style="margin-top:23px;">Add Line</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9"></div>
+                    <div class="col-md-2">
+                        <label>Grand Total</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-12">
+            <form>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Other Expenses</label>
+                        <select class="form-control">
+                            <option>Diesel</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Account</label>
+                        <select class="form-control">
+                            <option>Taj Petrolium</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Liter</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <label>Rate</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <label>Amount Rs.</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-info" style="margin-top:23px;">Add Line</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-2">
+                        <label>Grand Total</label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-warning">Print</button>
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="submit" class="btn btn-info">Update</button>
+                        <button type="submit" class="btn btn-danger">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- END Datatables Content -->
+
+
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="~/css/customDataTable.css" />
+<link rel="stylesheet" href="~/css/DataTableThemeController.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" />
+
+@*<script>
+    $(document).ready(function () {
+        $("#example").DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ]
+        });
+    });
+
+    function fnSuccess(response) {
+        if (response.Status != "OK") {
+            Message("Required", response.Message, "error");
+        }
+        else {
+            $('#modal-add').modal('hide');
+            Message("Success", "Record Saved Success", "success");
+            $("#grid").html(response.html);
+            ClearItem();
+            GetOrders();
+        }
+    }
+    function fnFailed(error) {
+        window.location.reload();
+    }
+
+    function Message(title, text, type) {
+        Swal.fire({
+            title: title + '!',
+            text: text,
+            icon: type,
+            confirmButtonText: 'OK'
+        })
+    }
+    function GetOrders() {
+        $('#example').DataTable();
+    }
+
+    function ClearItem() {
+        $("input[type='text']").val('');
+        $("input[type='hidden']").val('');
+    }
+    function viewRecord(object, e) {
+        console.log(object);
+        $("#modal-add").modal('show');
+        $("#Code").val(object.Code);
+        $("#Name").val(object.Name);
+        $("#CityID").val(object.CityID);
+        $("#Description").val(object.Description);
+        let OrderID = object.ID;
+        $("#hfEditID").val(OrderID);
+
+    }
+
+    function DeleteModel(Id) {
+        debugger;
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: `../Admin/DeleteSales Order`,
+                    type: 'POST',
+                    data: { ID: Id },
+                    success: function (res) {
+                        if (res.Status != "OK") {
+                            Message("Error", res.Message, "error");
+                        }
+                        else {
+                            $("#grid").html(res.html);
+                            GetOrders();
+                            Message("Success", "Record Deleted Success", "success");
+                        }
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                });
+
+            }
+        })
+
+    }
+</script>*@

@@ -1,0 +1,60 @@
+﻿
+@using Newtonsoft.Json;
+@model IEnumerable<LiquadCargoManagment.Models.UserAccount>
+
+<table class="table display table-striped" id="example">
+    <thead>
+        <tr>
+
+            <td>Image</td>
+            <td>FUll Name</td>
+            <td>Email</td>
+            <td>Username</td>
+            <td>Passwords</td>
+            <td>Operation</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+        <tr>
+            @{
+                string Image = LiquadCargoManagment.Helpers.ApplicationHelper.UserProfileImagePath + item.Image;
+            }
+            @if (Image.Contains("."))
+            {
+                <td><img src="@Image.Replace("~", "")" class="img-responsive" width="70" height="70" /></td>
+            }
+            else
+            {
+                <td></td>
+            }
+            <td>@item.FullName</td>
+            <td>@item.Email</td>
+            <td>@item.UserName</td>
+            <td>
+
+                @item.UserPassword
+            </td>
+            <td>
+                @{string action =  Session["Allow"] .ToString();
+                    action = action.ToUpper();}
+                @if (action.Contains("R"))
+                {
+                    <a href="@Url.Action("EditUserList","Account",new { id = item.UserID })" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a>
+                }
+                @if (action.Contains("U"))
+                {
+                    <a href="@Url.Action("EditUserList","Account",new { id = item.UserID })" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></a>
+                }
+                @if (action.Contains("D"))
+                {
+            <button type="button" onclick="DeleteModel(@item.UserID)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

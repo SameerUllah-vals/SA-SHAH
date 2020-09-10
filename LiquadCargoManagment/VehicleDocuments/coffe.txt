@@ -1,0 +1,62 @@
+string userAns;
+            double Total = 0;
+            start:
+            Console.WriteLine("Welcome ! Choose your fvrt coffee\n1 - Small Cofee (20)\n2 - Medium Coffe (40)\n" +
+                "3 - Large Coffee (50)");
+            string _coffe = Console.ReadLine();
+            switch (_coffe)
+            {
+                case "1":
+                    Total += 20;
+                thank:                    
+                    Console.WriteLine("Thanks you choose to small coffe\nDo you want to continue?Y/N");
+                    userAns = Console.ReadLine();
+                    switch (userAns)
+                    {
+                        case "Y":
+                            goto start;
+                        case "N":
+                            Console.WriteLine("Thanks Your total is: " + Total);
+                            break;
+                        default:
+                            Console.WriteLine("Choose Valid option");
+                            goto thank;
+                    }
+                    break;
+                case "2":
+                    Total += 40;
+                    Console.WriteLine("Thanks you choose to Medium coffe\nDo you want to continue?Y/N");
+                    userAns = Console.ReadLine();
+                    switch (userAns)
+                    {
+                        case "Y":
+                            goto start;
+                        case "N":
+                            Console.WriteLine("Thanks Your total is: " + Total);
+                            break;
+                        default:
+                            Console.WriteLine("Choose Valid option");
+                            goto thank;
+                    }
+                    break;
+                case "3":
+                    Total += 60;
+                    Console.WriteLine("Thanks you choose to Large coffe\nDo you want to continue?Y/N");
+                    userAns = Console.ReadLine();
+                    switch (userAns)
+                    {
+                        case "Y":
+                            goto start;
+                        case "N":
+                            Console.WriteLine("Thanks Your total is: " + Total);
+                            break;
+                        default:
+                            Console.WriteLine("Choose Valid option");
+                            goto thank;
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Please Select valid Product");
+                    goto start;
+            }
+            Console.Read();

@@ -1,0 +1,85 @@
+﻿@model IEnumerable<LiquadCargoManagment.Models.Vehicle>
+
+<table class="table display table-striped" id="example">
+    <thead>
+        <tr>
+
+            <td>Code</td>
+            <td>Reg#</td>
+            <td>Vehicle Type</td>
+            <td>Owner Name</td>
+            <td>Owner Contact</td>
+            <td>Description</td>
+            <td>Operation</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            //string jsonData = JsonConvert.SerializeObject(item);
+            string jsonData = "{";
+            jsonData += " 'VehicleID' : '" + item.VehicleID + "', ";
+            jsonData += " 'RegNo' : '" + item.RegNo + "', ";
+            jsonData += " 'Code' : '" + item.Code + "', ";
+            jsonData += " 'BodyType' : '" + item.BodyType + "', ";
+            jsonData += " 'ChasisNo' : '" + item.ChasisNo + "', ";
+            jsonData += " 'Description' : '" + item.Description + "', ";
+            jsonData += " 'DimensionUnitType' : '" + item.DimensionUnitType + "', ";
+            jsonData += " 'Documents' : '" + item.Documents + "', ";
+            jsonData += " 'EngineNo' : '" + item.EngineNo + "' ,";
+            jsonData += " 'Height' : '" + item.Height + "' ,";
+            jsonData += " 'Width' : '" + item.Width + "' ,";
+            jsonData += " 'IsOwnVehicle' : '" + item.IsOwnVehicle + "' ,";
+            jsonData += " 'Length' : '" + item.Length + "' ,";
+            jsonData += " 'LoadingLimitNHA' : '" + item.LoadingLimitNHA + "' ,";
+            jsonData += " 'Make' : '" + item.Make + "' ,";
+            jsonData += " 'ManufacturerName' : '" + item.ManufacturerName + "' ,";
+            jsonData += " 'ManufacturingYear' : '" + item.ManufacturingYear + "' ,";
+            jsonData += " 'MaximumLoadingCapacity' : '" + item.MaximumLoadingCapacity + "' ,";
+            jsonData += " 'OwnerContact' : '" + item.OwnerContact + "' ,";
+            jsonData += " 'OwnerName' : '" + item.OwnerName + "' ,";
+            jsonData += " 'OwnerNIC' : '" + item.OwnerNIC + "' ,";
+            jsonData += " 'PurchaseFromDetail' : '" + item.PurchaseFromDetail + "' ,";
+            jsonData += " 'PurchaseFromName' : '" + item.PurchaseFromName + "' ,";
+            jsonData += " 'PurchasingAmount' : '" + item.PurchasingAmount + "' ,";
+            jsonData += " 'PurchasingDate' : '" + item.PurchasingDate + "' ,";
+            jsonData += " 'VehicleColor' : '" + item.VehicleColor + "' ,";
+            jsonData += " 'VehicleModel' : '" + item.VehicleModel + "' ,";
+            jsonData += " 'VehicleTypeID' : '" + item.VehicleTypeID + "'";
+            jsonData += "}";
+        <tr>
+            <td>@item.Code</td>
+            <td>@item.RegNo</td>
+            <td>@item.VehicleType.Name</td>
+            <td>@item.OwnerName</td>
+            @if (item.OwnerContact != null)
+            {
+                <td>@string.Format(LiquadCargoManagment.Models.SoftwareFormatting.ContactNoFormat, Convert.ToInt64(item.OwnerContact))</td>
+            }
+            else
+            {
+                <td></td>
+            }
+            <td>@item.Description</td>
+            <td>
+                @{string action =  Session["Allow"] .ToString();
+                    action = action.ToUpper();}
+                @if (action.Contains("R"))
+                {
+                    <button type="button" onclick="viewRecordRead(@jsonData,this)" class="btn btn-primary btn-xs">
+                        <i class="fa fa-eye"></i>
+                    </button>
+                }
+                @if (action.Contains("U"))
+                {
+                    <button type="button" onclick="viewRecord(@jsonData,this)" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button>
+                }
+                @if (action.Contains("D"))
+                {
+                    <button type="button" onclick="DeleteModel(@item.VehicleID)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

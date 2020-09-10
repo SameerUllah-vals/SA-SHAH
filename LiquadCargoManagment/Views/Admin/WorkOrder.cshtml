@@ -1,0 +1,356 @@
+﻿
+@{
+    ViewBag.Title = "WorkOrder";
+}
+
+
+@{
+    ViewBag.Title = "WorkOrder";
+}
+
+
+<div id="page-content" style="min-height: 199px;">
+
+    @*<div class="content-header">
+
+        <div class="header-section">
+            <h1>
+                Work Order <br><small>Create Read Update Delete TaxRateRegistration</small>
+            </h1>
+        </div>
+
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Admin</li>
+        <li><a href="javascript:;">Work Order</a></li>
+    </ul>*@
+    <!-- END Datatables Content -->
+
+
+
+
+    <div class="block full">
+
+        <div class="block-title row">
+            <div class="col-md-12">
+                <h2>Work Order</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+
+                <label>Work Order No</label>
+                <input type="number" class="form-control" autocomplete="off" name="WorkOrderNo" required  pattern="[0-9]+([,\.][0-9]+)?">
+            </div>
+            <div class="col-md-3">
+                <label>Order Date</label>
+                <input type="text" class="form-control date" name="OrderDate">
+            </div>
+            <div class="col-md-3">
+                <label>Bill To</label>
+                @Html.DropDownList("billto", ViewBag.bill as SelectList, "Select", new { @class = "form-control Search", @id = "billTo" })
+            </div>
+            <div class="col-md-3">
+                <label>Sender</label>
+                @Html.DropDownList("Sender", ViewBag.Sender as SelectList, "Select", new { @class = "form-control Search", @id = "sender" })
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="block full">
+        <div class="block-title row">
+            <div class="col-md-12">
+                <h2>Order Details</h2>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table id="Add" class="table table-responsive" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        @*<td><label>Work Order ID</label></td>*@
+                        <td><label>Receiver</label></td>
+                        <td style="width:140px">
+                            <label>Product Broker</label>
+                            <button type="button" class="btn btn-primary btn-xs" onclick="$('#Inform').modal('show')"><i class="fa fa-plus"></i></button>
+
+                        </td>
+                        <td><label>Package Type</label></td>
+                        <td><label>Product</label></td>
+                        <td><label>Weight</label></td>
+                        <td><label>Unit</label></td>
+                        <td><label>Quantity</label></td>
+                        <td><label>Total Weight</label></td>
+                        <td><label>Remarks</label></td>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+                    <tr>
+
+                        <td>
+                            @Html.DropDownList("Reciever", ViewBag.li as SelectList, "Select", new { @class = "form-control Search", @id = "txtReciever" })
+                            @Html.ValidationMessage("Reciever", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("ProductBroker", ViewBag.pb as SelectList, "Select", new { @class = "form-control Search", @id = "txtProductBroker" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("PackageType", ViewBag.pt as SelectList, "Select", new { @class = "form-control Search", @id = "txtPackageType" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("Product", ViewBag.p as SelectList, "Select", new { @class = "form-control Search", @id = "txtProduct" })
+                        </td>
+                        <td style="width:70px;">
+                            <input type="text" class="form-control" autocomplete="off" name="Weight" id="txtWeight">
+                        </td>
+                        <td style="width:70px;">
+                            <input type="text" class="form-control" autocomplete="off" name="unit" id="txtunit">
+                        </td>
+                        <td style="width:70px;">
+                            <input type="text" class="form-control" autocomplete="off" onkeyup="Grandtotal('#Add',6,'qty')" name="Quantity" id="txtQuantity">
+                        </td>
+                        <td style="width:100px;">
+                            <input type="text" class="form-control" autocomplete="off" name="TotalWeight" onkeyup="Grandtotal('#Add', 7,'weight')" id="txtTotalWeight">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" autocomplete="off" name="Remarks" id="txtRemarks">
+                        </td>
+                        @*<td><input type="button" value="Remove" onclick="Remove(this)" /></td>*@
+                        <td><button type="button" id="btnSaveEdit" class="btn btn-info" onclick="AddRow(this)">Add Line</button></td>
+                    </tr>
+
+
+                </tbody>
+                <tfoot>
+                    <tr class="grand_total">
+                        <td colspan="6"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><button type="submit" class="btn btn-info" id="Addbtn"><b><i class="fa fa-save"></i> Save</b></button></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+
+    </div>
+
+    @*Popup View Product Broker*@
+    <div class="modal fade" id="Inform" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Product Broker</h4>
+                </div>
+                @using (Ajax.BeginForm("SaveProductBroker", "Admin", new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnProductBrokerSuccess", OnFailure = "OnFailure" }))
+                {
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Name</label>
+                                        <input type="text" class="form-control" name="Name" />
+                                        @*@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })*@
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Address</label>
+                                        <input type="text" name="Address" class="form-control" />
+                                        @Html.ValidationMessage("Address", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info"><b><i class="fa fa-save"></i> Save</b></button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script src="/Scripts/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="/css/customDataTable.css">
+<link rel="stylesheet" href="/css/DataTableThemeController.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+<link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />
+<script src="~/Scripts/chosen.jquery.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https:/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script>
+
+    //SEARCHABLE DROPDOWN
+
+    //$(document).ready(function () {
+    //    $(".Search").chosen();
+    //});
+
+    //SEARCHABLE DROPDOWN
+
+    $(document).ready(function () {
+        $(".date").datepicker({
+            altField: ".date",
+            altFormat: "d MM, yy"
+        });
+    })
+
+    $(document).ready(function () {
+        $("#example").DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ]
+        });
+    });
+
+    //function Successfully(response) {
+    //    if (response.Status != "OK") {
+    //        Message("Required", response.message, "error");
+    //    }
+    //    else {
+    //        $('#modal-add').modal('hide');
+    //        Message("Success", "Record Saved Success", "success");
+    //        $("#grid").html(response.html);
+    //        ClearItem();
+    //        GetOrders();
+    //    }
+    //}
+
+    function Message(title, text, type) {
+        Swal.fire({
+            title: title + '!',
+            text: text,
+            icon: type,
+            confirmButtonText: 'OK'
+        })
+    }
+    function GetOrders() {
+        $('#example').DataTable();
+    }
+
+    function ClearItem() {
+        $("input[type='text']").val('');
+        $("input[type='hidden']").val('');
+    }
+
+
+    function AddRow(A) {
+        debugger;
+        var parent = $(A).parent("td").parent("tr").html();
+        parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
+        $("#Add").find("tbody").append(`<tr>${parent}</tr>`);
+    }
+    function remove(e) {
+        $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
+    }
+    function OnProductBrokerSuccess(response) {
+        if (response.Status != "OK") {
+            Message("Error", response.Message, "error");
+        }
+        else {
+            $("#txtProductBroker").html('');
+            debugger;
+            for (var i = 0; i < response.html.length; i++) {
+                $("#txtProductBroker").append(`<option value="${response.html[i].Id}">${response.html[i].Name}</option>`);
+            }
+            Message("Success", response.Message, "success");
+            $("#Inform").modal('hide');
+        }
+    }
+    function OnFailure() {
+        //alert("Request Failed");
+    }
+    function Remove(button) {
+        //Determine the reference of the Row using the Button.
+        var row = $(button).closest("tr");
+        var name = $("tr", row).eq(0).html();
+        if (confirm("Do you want to delete: " + name)) {
+            //Get the reference of the Table.
+            var table = $("#Add")[0];
+
+            //Delete the Table row using it's Index.
+            table.deleteRow(row[0].rowIndex);
+        }
+    };
+    function Grandtotal(q, totalColumnIndex, type) {
+        let grTotal = 0;
+        for (var i = 0; i < $(q).find("tbody tr").length; i++) {
+            grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
+        }
+        if (type == "qty")
+            $(q).find("tr.grand_total td:eq(1)").text(grTotal);
+        else
+            $(q).find("tr.grand_total td:eq(2)").text(grTotal);
+
+    }
+    $("body").on("click", "#Addbtn", function () {
+        let Order = {}
+        let OrderNo = $("input[name='WorkOrderNo']").val();
+        let OrderDate = $("input[name='OrderDate']").val();
+        let billTo = $("#billTo").val();
+        let Sender = $("#sender").val();
+        if (OrderNo == "" || OrderDate == "" || billTo == "" || Sender == "") {
+            Message("Required", "Enter all requried fields", "error");
+            return;
+        }
+        Order.WorkOrderNo = OrderNo;
+        Order.OrderDate = OrderDate;
+        Order.billto = billTo;
+        Order.Sender = Sender;
+        Order.totalquantity = $("#Add").find("tr.grand_total td:eq(1)").text();
+        Order.totalweight = $("#Add").find("tr.grand_total td:eq(2)").text();
+        var customers = new Array();
+        $("#Add tbody tr").each(function () {
+            var row = $(this);
+            var customer = {};
+            //customer.WordOrderID = row.find("td").eq(0).find("input").val();
+            customer.Reciever = row.find("td:eq(0) select option:selected").val();
+            customer.ProductBroker = row.find("td:eq(1) select option:selected").val();
+            customer.PackageType = row.find("td:eq(2) select option:selected").val();
+            customer.Product = row.find("td:eq(3) select option:selected").val();
+            customer.Weight = row.find("td:eq(4) input").val();
+            customer.unit = row.find("td:eq(5) input").val();
+            customer.Quantity = row.find("td:eq(6) input").val();
+            customer.TotalWeight = row.find("td:eq(7) input").val();
+            customer.Remarks = row.find("td:eq(8) input").val();
+            customers.push(customer);
+        });
+        $.ajax({
+            type: "POST",
+            url: "/admin/InsertCustomers",
+            data: { Details: customers, Order: Order },
+            success: function (r) {
+                Message("Success", r.Message, "success");
+                window.location = "../Admin/WorkOrderGrid";
+            }
+        });
+
+    });
+</script>

@@ -1,0 +1,70 @@
+﻿
+@using Newtonsoft.Json;
+@model IEnumerable<LiquadCargoManagment.Models.Product>
+
+<table class="table display table-striped" id="example">
+    <thead>
+        <tr>
+
+            <td>Code</td>
+            <td>Name</td>
+            <td>Product Type</td>
+            <td>Unit</td>
+            <td>Volume</td>
+            <td>Description</td>
+            <td>Operation</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            //string jsonData = JsonConvert.SerializeObject(item);
+            string jsonData = "{";
+            jsonData += " 'ID' : '" + item.ID + "', ";
+            jsonData += " 'Code' : '" + item.Code + "', ";
+            jsonData += " 'Name' : '" + item.Name + "', ";
+            jsonData += " 'Category' : '" + item.Category + "', ";
+            jsonData += " 'Unit' : '" + item.Unit + "', ";
+            jsonData += " 'Volume' : '" + item.Volume + "', ";
+            jsonData += " 'Height' : '" + item.Height + "', ";
+            jsonData += " 'Width' : '" + item.Width + "', ";
+            jsonData += " 'Length' : '" + item.Length + "' ,";
+            jsonData += " 'Weight' : '" + item.Weight + "' ,";
+            jsonData += " 'Description' : '" + item.Description + "' ,";
+            jsonData += "}";
+            <tr>
+                <td>@item.Code</td>
+                <td>@item.Name</td>
+                <td>@item.Category1.Name</td>
+                <td>@item.Unit</td>
+                @if (item.Volume != null)
+                {
+                <td>@string.Format(LiquadCargoManagment.Models.SoftwareFormatting.NumberFormat, item.Volume == null ? 0 : item.Volume)</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>@item.Description</td>
+                <td>
+                    @{string action =  Session["Allow"] .ToString();
+                      action = action.ToUpper();}
+                    @if (action.Contains("R"))
+                    {
+                        <button type="button" onclick="viewRecordRead(@jsonData,this)" class="btn btn-primary btn-xs">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                    }
+                    @if (action.Contains("U"))
+                    {
+                    <button type="button" onclick="viewRecord(@jsonData,this)" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button>
+                    }
+                    @if (action.Contains("D"))
+                    {
+                    <button type="button" onclick="DeleteModel(@item.ID)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

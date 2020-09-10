@@ -1,0 +1,42 @@
+﻿
+@model IEnumerable<LiquadCargoManagment.Models.WorkOrder>
+
+@using LiquadCargoManagment.Models;
+    <div class="table-responsive">
+        <table class="table display table-striped" id="example">
+            <thead>
+                <tr>
+                    <td>Order No</td>
+                    <td>Order Date</td>
+                    <td>Bill To</td>
+                    <td>Sender</td>
+                    <td>Total Qty</td>
+                    <td>Total Weight</td>
+                    <td>User</td>
+                    <td>Operation</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.WorkOrderNo</td>
+                        <td>@Convert.ToDateTime(item.OrderDate).ToString(SoftwareFormatting.DateFormat)</td>
+                        <td>@item.OwnCompany1.Name</td>
+                        <td>@item.OwnCompany.Name</td>
+                        <td>@string.Format(SoftwareFormatting.NumberFormat, item.totalquantity)</td>
+                        <td>@string.Format(SoftwareFormatting.NumberFormat, item.totalweight)</td>
+                        <td>@item.CustomerName</td>
+                        <td>
+                            <a href="@Url.Action("Bilty","Admin",new { Id = item.WorkorderId})" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a>
+                            <button type="button" onclick="viewRecord()" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button>
+                            <button type="button" onclick="DeleteModel(@item.WorkorderId)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+

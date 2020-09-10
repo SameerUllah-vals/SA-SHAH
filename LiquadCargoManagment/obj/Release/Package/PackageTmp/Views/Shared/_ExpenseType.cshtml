@@ -1,0 +1,43 @@
+﻿
+@using Newtonsoft.Json;
+@model IEnumerable<LiquadCargoManagment.Models.ExpensesType>
+<table class="table display table-striped" id="example">
+    <thead>
+        <tr>
+
+            <td>Code</td>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Operation</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string jsonData = JsonConvert.SerializeObject(item);
+        <tr>
+            <td>@item.ExpensesTypeCode</td>
+            <td>@item.ExpensesTypeName</td>
+            <td>@item.Remarks</td>
+            <td>
+                @{string action =  Session["Allow"] .ToString();
+                    action = action.ToUpper();}
+                @if (action.Contains("R"))
+                {
+                    <button type="button" onclick="viewRecordRead(@jsonData,this)" class="btn btn-primary btn-xs">
+                        <i class="fa fa-eye"></i>
+                    </button>
+                }
+                @if (action.Contains("U"))
+                {
+                    <button type="button" onclick="viewRecord(@jsonData,this)" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button>
+                }
+                @if (action.Contains("D"))
+                {
+                    <button type="button" onclick="DeleteModel(@item.ExpensesTypeID)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

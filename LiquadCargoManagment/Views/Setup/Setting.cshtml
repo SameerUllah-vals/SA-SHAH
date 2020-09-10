@@ -1,0 +1,107 @@
+﻿@using Newtonsoft.Json;
+@{
+    ViewBag.Title = "Setting";
+}
+
+
+@using (Ajax.BeginForm("Setting", "Setup", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "fnSuccess", OnFailure = "fnFailed" }, new { enctype = "multipart/form-data" }))
+{
+    <div class="block full">
+        <div class="block-title row">
+
+            <div class="col-md-12">
+                <h1><strong>This settings will apply all over the software</strong></h1>
+                <button class="btn btn-sm btn-primary pull-right"><i class="fa fa-save"></i> | Save Changes</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="hidden" value="" name="ID" id="hfEditID" />
+            <div class="col-md-6">
+                <label>Currency (Under Development)</label>
+                @Html.DropDownList("CurrencyTypeID", ViewBag.Currency as SelectList, "-Select-", new { @class = "form-control", @disabled = true })
+            </div>
+            <div class="col-md-6">
+                <label>Date</label>
+                @Html.DropDownList("DateTypeID", ViewBag.DateType as SelectList, "-Select-", new { @class = "form-control" })
+            </div>
+            <div class="col-md-6">
+                <label>Contact No</label>
+                @Html.DropDownList("ContactNoTypeID", ViewBag.ContactType as SelectList, "-Select-", new { @class = "form-control" })
+
+            </div>
+            <div class="col-md-6">
+                <label>Number/Price Format</label>
+                @Html.DropDownList("NoTypeID", ViewBag.NumType as SelectList, "-Select-", new { @class = "form-control" })
+
+            </div>
+            <div class="col-md-2">
+                <label>Logo</label>
+                <input type="file" name="file" />
+
+            </div>
+            <div class="col-md-2">
+                <label>Remove Logo</label>
+               <button type="button" class="btn btn-danger" onclick="RemoveLogo()"><i class="fa fa-trash"></i>| Remove Logo</button>
+            </div>
+        </div>
+      
+    </div>
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(function () {
+        $.ajax({
+            url: `../Setup/GetCurrentSetting`,
+            type: 'GET',
+            success: function (res) {
+                $("#CurrencyTypeID").val(res.CurrencyTypeID);
+                $("#DateTypeID").val(res.DateTypeID);
+                $("#ContactNoTypeID").val(res.ContactNoTypeID);
+                $("#NoTypeID").val(res.NoTypeID);
+                $("#hfEditID").val(res.ID);
+                
+            },
+            error: function () {
+                Message("Error", "System can't find default setting due to request failed", "error");
+            }
+        });
+    });
+    function fnSuccess(response) {
+        if (response.status == "OK")
+            Message("Success", response.Message, "success");
+        else if (response.status == "ExtensionNotMatched")
+            Message("Warning", response.Message, "warning");
+        else
+            Message("Error",response.Message, "error");
+
+    }
+    function fnFailed() {
+        Message("Error", "Request failed", "error");
+
+    }
+    function Message(title, text, type) {
+        Swal.fire({
+            title: title + '!',
+            text: text,
+            icon: type,
+            confirmButtonText: 'OK'
+        })
+    }
+
+    function RemoveLogo() {
+        $.ajax({
+            url: `../Setup/RemoveLogo`,
+            type: 'GET',
+            success: function (res) {
+                if (res.status === "OK")
+                    Message("Success", res.Message, "success");
+                else
+                    Message("Not Found", res.Message, "info");
+            },
+            error: function () {
+                Message("Error", "Request failed", "error");
+            }
+        });
+    }
+</script>

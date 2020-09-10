@@ -1,0 +1,89 @@
+﻿@model IEnumerable<LiquadCargoManagment.Models.Vendor>
+
+@using Newtonsoft.Json;
+@using LiquadCargoManagment.Models;
+<table class="table display table-striped" id="example">
+    <thead>
+        <tr>
+
+            <td>Code</td>
+            <td>Vendor Type</td>
+            <td>Name</td>
+            <td>Owner Name</td>
+            <td>Owner Contact</td>
+            <td>Contact Person</td>
+            <td>Contact No</td>
+            <td>Email</td>
+            <td>Address</td>
+            <td>Operation</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            //string jsonData = JsonConvert.SerializeObject(item);
+            string jsonData = "{";
+            jsonData += " 'ID' : '" + item.ID + "', ";
+            jsonData += " 'Code' : '" + item.Code + "', ";
+            jsonData += " 'Name' : '" + item.Name + "', ";
+            jsonData += " 'VType' : '" + item.VendorTypeID + "', ";
+            jsonData += " 'OwName' : '" + item.OwnerContactName + "', ";
+            jsonData += " 'OwContact' : '" + item.OwnerContactNo + "', ";
+            jsonData += " 'PPersonName' : '" + item.PrimaryContactPerson + "', ";
+            jsonData += " 'PPersonContact' : '" + item.PrimaryContactNo + "', ";
+            jsonData += " 'SPersonName' : '" + item.SecContactPerson + "', ";
+            jsonData += " 'SPersonContact' : '" + item.SecContactNo + "', ";
+            jsonData += " 'PTCLNo' : '" + item.PTCLNo + "', ";
+            jsonData += " 'Email' : '" + item.Email + "', ";
+            jsonData += " 'Website' : '" + item.Website + "', ";
+            jsonData += " 'Address' : '" + item.Address + "', ";
+            jsonData += " 'Description' : '" + item.Description + "', ";
+            jsonData += " 'SPersonName' : '" + item.SecContactPerson + "' ";
+            jsonData += "}";
+            <tr>
+                <td>@item.Code</td>
+                <td>@item.VendorType.Name</td>
+                <td>@item.Name</td>
+                <td>@item.OwnerContactName</td>
+                @if (item.OwnerContactNo != null)
+                {
+                    <td>@string.Format(LiquadCargoManagment.Models.SoftwareFormatting.ContactNoFormat, Convert.ToInt64(item.OwnerContactNo))</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>@item.PrimaryContactPerson</td>
+                @if (item.PrimaryContactNo != null)
+                {
+                    <td>@string.Format(LiquadCargoManagment.Models.SoftwareFormatting.ContactNoFormat, Convert.ToInt64(item.PrimaryContactNo))</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>@item.Email</td>
+                <td>@item.Address</td>
+                <td>
+                    @{string action = Session["Allow"].ToString();
+                        action = action.ToUpper();}
+                    @if (action.Contains("R"))
+                    {
+                        <button type="button" onclick="viewRecordRead(@jsonData,this)" class="btn btn-primary btn-xs">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                    }
+                    @if (action.Contains("U"))
+                    {
+                        <button type="button" onclick="viewRecord(@jsonData,this)" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button>
+                    }
+                    @if (action.Contains("D"))
+                    {
+                        <button type="button" onclick="DeleteModel(@item.ID)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<LiquadCargoManagment.Models.PrincipleCompany>
+
+@using Newtonsoft.Json;
+@using LiquadCargoManagment.Models;
+<table class="table display table-striped" id="example">
+    <thead>
+        <tr>
+
+            <td>Code</td>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Operation</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string jsonData = JsonConvert.SerializeObject(item);
+            <tr>
+                <td>@item.Code</td>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>
+                    <button type="button" onclick="viewRecordRead(@jsonData,this)" class="btn btn-primary btn-xs">
+                        <i class="fa fa-eye"></i>
+                    </button>
+                    <button type="button" onclick="viewRecord(@jsonData,this)" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button>
+
+                    <button type="button" onclick="DeleteModel(@item.ID)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,24 @@
+﻿@using Newtonsoft.Json;
+@model IEnumerable<LiquadCargoManagment.Models.Province>
+<table class="table display table-striped" id="example">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Operation</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string jsonData = "{";
+            jsonData += " 'ProvinceID' : '" + item.ProvinceID + "', ";
+            jsonData += " 'ProvinceName' : '" + item.ProvinceName + "' ";
+            jsonData += "}";
+            <tr>
+                <td>@item.ProvinceName</td>
+                <td><button type="button" onclick="viewRecordRead(@jsonData,this)" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></button> <button type="button" onclick="viewRecord(@jsonData,this)" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button> <button type="button" onclick="DeleteModel(@item.ProvinceID)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
