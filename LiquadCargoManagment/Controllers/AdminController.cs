@@ -1,6 +1,7 @@
 ﻿using LiquadCargoManagment.DataTransferObject;
 using LiquadCargoManagment.Helpers;
 using LiquadCargoManagment.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -2216,8 +2217,8 @@ namespace LiquadCargoManagment.Controllers
             List<ProductBroker> li = lcm.ProductBrokers.ToList();
             ViewBag.ProductBroker = new SelectList(li, "Id", "Name");
 
-            List<PackageType> Pt = lcm.PackageTypes.ToList();
-            ViewBag.pt = new SelectList(Pt, "PackageTypeID", "PackageTypeName");
+            List<Category> Pt = lcm.Categories.ToList();
+            ViewBag.pt = new SelectList(Pt, "ID", "Name");
 
             List<Product> P = lcm.Products.ToList();
             ViewBag.p = new SelectList(P, "ID", "Name");
@@ -2242,6 +2243,15 @@ namespace LiquadCargoManagment.Controllers
                 vm.WorkOrder = new WorkOrder();
             }
             return View(vm);
+        }
+
+        //Cascading dropdown of Product and PackageType
+
+            public JsonResult getProductList(int ID)
+        {
+            context.Configuration.ProxyCreationEnabled = false;
+            List<Product> ProductList = context.Products.Where(x => x.ID == ID).ToList();
+            return Json(ProductList, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult InsertBilty(List<BiltyDetail> Details, List<VehicleExpens> Expenses, List<DieselExpense> Diesal,Bilty Order)
@@ -2303,6 +2313,74 @@ namespace LiquadCargoManagment.Controllers
         }
 
         #endregion
+        public ActionResult BiltyData()
+        {
+          
+            return View();
+        }
+        [HttpPost]
+        public ActionResult BiltyData(LiquadCargoManagment.Models.BiltyGrid grid)
+        {
+           
 
+            return View();
+        }
+        //[HttpPost]
+        //public ActionResult Orders(BiltyDetail bill)
+        //{
+        //    string Message = "";
+        //    string Status = "OK";
+        //    try
+        //    {
+        //        LCMEntities obj = new LCMEntities();
+        //        //List<Department> li = obj.Departments.ToList();
+        //        //ViewBag.dept_list = new SelectList(li, "dept_ID", "dept_Name");
+
+        //        Bilty bilty = new Bilty();
+        //        empl.emp_Name = emp.emp_Name;
+        //        empl.emp_Address = emp.emp_Address;
+        //        empl.emp_Gender = emp.emp_Gender;
+        //        empl.emp_dep_ID = emp.emp_dep_ID;
+        //        obj.Employees.Add(empl);
+        //        obj.SaveChanges();
+        //        int latestEmployeeID = empl.emp_ID;
+
+
+        //        Location loc = new Location();
+        //        loc.l_Name = emp.l_Name;
+        //        loc.l_emp_ID = latestEmployeeID;
+        //        obj.Locations.Add(loc);
+        //        obj.SaveChanges();
+        //        Message = "Saved successfully";
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        Message = ex.Message;
+        //        Status = ex.GetType().Name;
+
+        //    }
+        //    string view = RenderPartialToString("_List", obj.Employees.ToList());
+
+        //    return Json(new { message = Message, status = Status, html = view }, JsonRequestBehavior.AllowGet);
+        //}
+
+        //public string RenderPartialToString(string viewName, object model)
+        //{
+        //    ViewData.Model = model;
+        //    using (StringWriter writer = new StringWriter())
+        //    {
+        //        ViewEngineResult vResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
+        //        ViewContext vContext = new ViewContext(this.ControllerContext, vResult.View, ViewData, new TempDataDictionary(), writer);
+        //        vResult.View.Render(vContext, writer);
+        //        return writer.ToString();
+        //    }
+        //}
+        //Cascading Dropdown
+        public ActionResult products()
+        {
+            return View();
+        }
     }
 }
