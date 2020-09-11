@@ -69,7 +69,7 @@
                         @*<td><label>Sr #</label></td>*@
                         <td><label>Receiver</label></td>
                         <td><label>Product Broker</label></td>
-                        <td><label>Package Type</label></td>
+                        <td><label>Product Type</label></td>
                         <td><label>Product</label></td>
                         <td><label>Weight</label></td>
                         <td><label>Unit</label></td>
@@ -89,7 +89,7 @@
                             @Html.DropDownList("ProductBroker", ViewBag.pb as SelectList, "Select", new { @class = "form-control Search", @id = "txtProductBroker" })
                         </td>
                         <td>
-                            @Html.DropDownList("PackageType", ViewBag.pt as SelectList, "Select", new { @class = "form-control Search", @id = "txtPackageType" })
+                            @Html.DropDownList("Category", ViewBag.pt as SelectList, "Select", new { @class = "form-control Search", @id = "txtPackageType" })
                         </td>
                         <td>
                             @Html.DropDownList("Product", ViewBag.p as SelectList, "Select", new { @class = "form-control Search", @id = "txtProduct" })

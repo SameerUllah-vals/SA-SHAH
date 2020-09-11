@@ -2207,7 +2207,7 @@ namespace LiquadCargoManagment.Controllers
             List<OwnCompany> Sender = lcm.OwnCompanies.ToList();
             ViewBag.Sender = new SelectList(Sender, "ID", "Name");
 
-            List<OwnCompany> Oc = lcm.OwnCompanies.ToList();
+            List<CustomerCompany> Oc = lcm.CustomerCompanies.ToList();
             ViewBag.li = new SelectList(Oc, "ID", "Name");
 
             List<ExpensesType> expense = lcm.ExpensesTypes.ToList();
@@ -2216,8 +2216,8 @@ namespace LiquadCargoManagment.Controllers
             List<ProductBroker> li = lcm.ProductBrokers.ToList();
             ViewBag.ProductBroker = new SelectList(li, "Id", "Name");
 
-            List<PackageType> Pt = lcm.PackageTypes.ToList();
-            ViewBag.pt = new SelectList(Pt, "PackageTypeID", "PackageTypeName");
+            List<Category> Pt = lcm.Categories.ToList();
+            ViewBag.pt = new SelectList(Pt, "ID", "Name");
 
             List<Product> P = lcm.Products.ToList();
             ViewBag.p = new SelectList(P, "ID", "Name");
