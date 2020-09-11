@@ -29,7 +29,7 @@
                         <td>@item.CustomerName</td>
                         <td>
                             <a href="@Url.Action("Bilty","Admin",new { Id = item.WorkorderId})" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a>
-                            <button type="button" onclick="viewRecord()" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button>
+                            <button type="button" onclick="viewRecord(@item.WorkorderId)" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button>
                             <button type="button" onclick="DeleteModel(@item.WorkorderId)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
                         </td>
                     </tr>

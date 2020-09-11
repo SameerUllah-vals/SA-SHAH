@@ -95,16 +95,16 @@
                             @Html.DropDownList("Product", ViewBag.p as SelectList, "Select", new { @class = "form-control Search", @id = "txtProduct" })
                         </td>
                         <td style="width:50px">
-                            <input type="text" class="form-control" autocomplete="off" name="Weight" pattern="([0-9]{1,3}).([0-9]{1,3})" onkeypress="return inputLimiter(event,'custom')" onkeyup="Grandtotal('#Add',5,'weight')" id="txtWeight">
+                            <input type="text" class="form-control amount" autocomplete="off" name="Weight" pattern="([0-9]{1,3}).([0-9]{1,3})" onkeypress="return inputLimiter(event,'custom')" onkeyup="Grandtotal('#Add',4,'weight')" id="txtWeight">
                         </td>
                         <td style="width:50px">
-                            <input type="text" class="form-control" autocomplete="off" name="unit" onkeyup="Grandtotal('#Add',6,'unit')" id="txtunit">
+                            <input type="text" class="form-control " autocomplete="off" name="unit" onkeyup="Grandtotal('#Add',5,'unit')" id="txtunit">
                         </td>
                         <td style="width:50px">
-                            <input type="text" class="form-control" autocomplete="off" onkeyup="Grandtotal('#Add',7,'qty')" name="Quantity" id="txtQuantity">
+                            <input type="text" class="form-control amount" autocomplete="off" onkeyup="Grandtotal('#Add',6,'qty')" name="Quantity" id="txtQuantity">
                         </td>
                         <td style="width:100px">
-                            <input type="text" class="form-control" autocomplete="off" name="TotalWeight" onkeyup="Grandtotal('#Add', 8,'totalweight')" id="txtTotalWeight">
+                            <input type="text" class="form-control txtTotalWeight" autocomplete="off" readonly="readonly" name="TotalWeight" onkeyup="Grandtotal('#Add', 7,'totalweight')" id="txtTotalWeight">
                         </td>
                         <td>
                             <input type="text" class="form-control" autocomplete="off" name="Remarks" id="txtRemarks">
@@ -117,7 +117,7 @@
                 </tbody>
                 <tfoot>
                     <tr class="grand_total" style="font-weight:bold;">
-                        <td colspan="5">Grand Total</td>
+                        <td colspan="4">Grand Total</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -292,6 +292,7 @@
             altField: "#OrderDate",
             altFormat: "d MM, yy"
         });
+
     });
     $(document).ready(function () {
         $("#DeliveryDate").datepicker({
@@ -450,7 +451,7 @@
     //    txtTotalWeight.val("");
     //    txtRemarks.val("");
     //});
-
+    
     // Broduct Broker Popup Script
     function Successfully(response) {
         console.log(response);
@@ -499,132 +500,152 @@
         }
     };
 
+  
+    $(document).ready(function () {
+        
+        //$("input[type=text]").change(function () {
+        //    CalculateTotal();
+        //})
+        alert("ok");
 
-    function Grandtotal(q, totalColumnIndex, type) {
-        let grTotal = 0;
-        for (var i = 0; i < $(q).find("tbody tr").length; i++) {
-            grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
-        }
-        if (type == "weight") {
-            $(q).find("tr.grand_total td:eq(1)").text(grTotal);
-        }
-
-        else if (type == "unit") {
-            $(q).find("tr.grand_total td:eq(2)").text(grTotal);
-        }
-        else if (type == "qty") {
-            $(q).find("tr.grand_total td:eq(3)").text(grTotal);
-        }
-        else if (type == "totalweight") {
-            $(q).find("tr.grand_total td:eq(4)").text(grTotal);
-        }
-    }
-
-    function GrandtotalExpense(q, totalColumnIndex, exp) {
-        let grTotal = 0;
-        for (var i = 0; i < $(t).find("tbody tr").length; i++) {
-            grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
-        }
-        if (exp == "total") {
-            $(t).find("tr.grand_total td:eq(1)").text(grTotal);
-        }
-    }
-    //$("input").each(function () {
-    //    $(this).each(function () {
-    //        $(this).keyup(function () {
-    //            Sum.call(this);
-    //        })
-    //    })
-    //})
-
-    //function Sum() {
-    //    var sum = 0;
-    //    var thisrow = $(this).closest('tr');
-
-    //    $(thisrow).find("td:not(.txtTotalweight) input").each(function () {
-    //        sum += parseInt(this.value);
-    //    });
-
-    //    $(thisrow).find(".txtTotalweight").html(sum);
-    //}
-
-    $("body").on("click", "#Addbtn", function () {
-        let Order = {}
-        let OrderNo = $("#WorkOrderNo").val();
-        let OrderDate = $("#OrderDate").val();
-        let DeliveryDate = $("#DeliveryDate").val();
-        let billTo = $("#billTo").val();
-        let Sender = $("#sender").val();
-        let VehicleId = $("#VehicleID").val();
-        let Freight = $("#Freight").val();
-        if (OrderNo == "" || OrderDate == "" || billTo == "" || Sender == "") {
-            Message("Required", "Enter all requried fields", "error");
-            return;
-        }
-        Order.OrderNo = OrderNo;
-        Order.OrderDate = OrderDate;
-        Order.BillTo = billTo;
-        Order.Sender = Sender;
-        Order.VehicleID = VehicleId;
-        Order.Freight = Freight;
-        Order.DeliveryDate = DeliveryDate;
-        Order.OrderDetailsTotalQTY = $("#Add").find("tr.grand_total td:eq(2)").text();
-        Order.OrderDetailsTotalWeight = $("#Add").find("tr.grand_total td:eq(3)").text();
-        Order.VehicleExpensesGrandTotal = $("#AddExpense").find("tr.grand_total td:eq(5)").text();
-        Order.DieselExpensesGrandTotal = $("#AddDeisel").find("tr.grand_total td:eq(4)").text();
+        //function CalculateTotal() {
+        //    var Weight = $("#txtWeight").val();
+        //    var Quantity = $("#txtQuantity").val();
+        //    var Total = (UnitPrice * Quantity);
 
 
-        var customers = new Array();
-        var ExpenseArr = new Array();
-        var DiesalArr = new Array();
-        $("#Add tbody tr").each(function () {
-            var row = $(this);
-            var customer = {};
-            //customer.WordOrderID = row.find("td").eq(0).find("input").val();
-            customer.Reciever = row.find("td:eq(0) select option:selected").val();
-            customer.ProductBroker = row.find("td:eq(1) select option:selected").val();
-            customer.PackageType = row.find("td:eq(2) select option:selected").val();
-            customer.Product = row.find("td:eq(3) select option:selected").val();
-            customer.Weight = row.find("td:eq(4) input").val();
-            customer.unit = row.find("td:eq(5) input").val();
-            customer.Quantity = row.find("td:eq(6) input").val();
-            customer.TotalWeight = row.find("td:eq(7) input").val();
-            customer.Remarks = row.find("td:eq(8) input").val();
-            customers.push(customer);
-        });
-        $("#AddExpense tbody tr").each(function () {
-            var row = $(this);
-            var Expenses = new Object();
-            Expenses.ExpenseTypeId = row.find("td:eq(0) select option:selected").val();
-            Expenses.PaymentMethod = row.find("td:eq(1) select option:selected").val();
-            Expenses.BankBranch = row.find("td:eq(2) select option:selected").val();
-            Expenses.ChequeNo = row.find("td:eq(3) input").val();
-            Expenses.ChequeDate = row.find("td:eq(4) input").val();
-            Expenses.Amount = row.find("td:eq(5) input").val();
-            ExpenseArr.push(Expenses);
-        });
-        $("#AddDeisel tbody tr").each(function () {
-            var row = $(this);
-            var DiesalObj = new Object();
-            DiesalObj.VendorId = row.find("td:eq(1) select option:selected").val();
-            DiesalObj.Litre = row.find("td:eq(1) input").val();
-            DiesalObj.Rate = row.find("td:eq(2) input").val();
-            DiesalObj.Amount = row.find("td:eq(3) input").val();
-            DiesalArr.push(DiesalObj);
-        });
-        $.ajax({
-            type: "POST",
-            url: "/admin/InsertBilty",
-            data: { Details: customers, Expenses: ExpenseArr, Diesal: DiesalArr, Order: Order },
-            success: function (r) {
-                Message("Success", r.Message, "success");
-                window.location = "../Admin/BiltyGrid";
+        //    $("#txtTotal").val(parseFloat(Total).toFixed(2));
+        //}
+        });  
+
+        function Grandtotal(q, totalColumnIndex, type) {
+            let grTotal = 0;
+            for (var i = 0; i < $(q).find("tbody tr").length; i++) {
+
+                grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
             }
+            if (type == "weight") {
+                $(q).find("tr.grand_total td:eq(1)").text(grTotal);
+            }
+
+                //else if (type == "unit") {
+                //    $(q).find("tr.grand_total td:eq(2)").text(grTotal);
+                //}
+            else if (type == "qty") {
+                $(q).find("tr.grand_total td:eq(3)").text(grTotal);
+            }
+            //else if (type == "totalweight") {
+            //    $(q).find("tr.grand_total td:eq(4)").text(grTotal);
+            //}
+        }
+
+
+
+        function GrandtotalExpense(q, totalColumnIndex, exp) {
+            let grTotal = 0;
+            for (var i = 0; i < $(t).find("tbody tr").length; i++) {
+                grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
+            }
+            if (exp == "total") {
+                $(t).find("tr.grand_total td:eq(1)").text(grTotal);
+            }
+        }
+        //$("input").each(function () {
+        //    $(this).each(function () {
+        //        $(this).keyup(function () {
+        //            Sum.call(this);
+        //        })
+        //    })
+        //})
+
+        //function Sum() {
+        //    var sum = 0;
+        //    var thisrow = $(this).closest('tr');
+
+        //    $(thisrow).find("td:not(.txtTotalweight) input").each(function () {
+        //        sum += parseInt(this.value);
+        //    });
+
+        //    $(thisrow).find(".txtTotalweight").html(sum);
+        //}
+
+        $("body").on("click", "#Addbtn", function () {
+            let Order = {}
+            let OrderNo = $("#WorkOrderNo").val();
+            let OrderDate = $("#OrderDate").val();
+            let DeliveryDate = $("#DeliveryDate").val();
+            let billTo = $("#billTo").val();
+            let Sender = $("#sender").val();
+            let VehicleId = $("#VehicleID").val();
+            let Freight = $("#Freight").val();
+            if (OrderNo == "" || OrderDate == "" || billTo == "" || Sender == "") {
+                Message("Required", "Enter all requried fields", "error");
+                return;
+            }
+            Order.OrderNo = OrderNo;
+            Order.OrderDate = OrderDate;
+            Order.BillTo = billTo;
+            Order.Sender = Sender;
+            Order.VehicleID = VehicleId;
+            Order.Freight = Freight;
+            Order.DeliveryDate = DeliveryDate;
+            Order.OrderDetailsTotalQTY = $("#Add").find("tr.grand_total td:eq(2)").text();
+            Order.OrderDetailsTotalWeight = $("#Add").find("tr.grand_total td:eq(3)").text();
+            Order.VehicleExpensesGrandTotal = $("#AddExpense").find("tr.grand_total td:eq(5)").text();
+            Order.DieselExpensesGrandTotal = $("#AddDeisel").find("tr.grand_total td:eq(4)").text();
+
+
+            var customers = new Array();
+            var ExpenseArr = new Array();
+            var DiesalArr = new Array();
+            $("#Add tbody tr").each(function () {
+                var row = $(this);
+                var customer = {};
+                //customer.WordOrderID = row.find("td").eq(0).find("input").val();
+                customer.Reciever = row.find("td:eq(0) select option:selected").val();
+                customer.ProductBroker = row.find("td:eq(1) select option:selected").val();
+                customer.PackageType = row.find("td:eq(2) select option:selected").val();
+                customer.Product = row.find("td:eq(3) select option:selected").val();
+                customer.Weight = row.find("td:eq(4) input").val();
+                customer.unit = row.find("td:eq(5) input").val();
+                customer.Quantity = row.find("td:eq(6) input").val();
+                customer.TotalWeight = row.find("td:eq(7) input").val();
+                customer.Remarks = row.find("td:eq(8) input").val();
+                customers.push(customer);
+            });
+            $("#AddExpense tbody tr").each(function () {
+                var row = $(this);
+                var Expenses = new Object();
+                Expenses.ExpenseTypeId = row.find("td:eq(0) select option:selected").val();
+                Expenses.PaymentMethod = row.find("td:eq(1) select option:selected").val();
+                Expenses.BankBranch = row.find("td:eq(2) select option:selected").val();
+                Expenses.ChequeNo = row.find("td:eq(3) input").val();
+                Expenses.ChequeDate = row.find("td:eq(4) input").val();
+                Expenses.Amount = row.find("td:eq(5) input").val();
+                ExpenseArr.push(Expenses);
+            });
+            $("#AddDeisel tbody tr").each(function () {
+                var row = $(this);
+                var DiesalObj = new Object();
+                DiesalObj.VendorId = row.find("td:eq(1) select option:selected").val();
+                DiesalObj.Litre = row.find("td:eq(1) input").val();
+                DiesalObj.Rate = row.find("td:eq(2) input").val();
+                DiesalObj.Amount = row.find("td:eq(3) input").val();
+                DiesalArr.push(DiesalObj);
+            });
+            $.ajax({
+                type: "POST",
+                url: "/admin/InsertBilty",
+                data: { Details: customers, Expenses: ExpenseArr, Diesal: DiesalArr, Order: Order },
+                success: function (r) {
+                    Message("Success", r.Message, "success");
+                    window.location = "../Admin/BiltyGrid";
+                }
+            });
+
         });
 
-    });
 
-
-
+  
 
 </script>
