@@ -117,7 +117,7 @@
                 </tbody>
                 <tfoot>
                     <tr class="grand_total" style="font-weight:bold;">
-                        <td colspan="5">Grand Total</td>
+                        <td colspan="4">Grand Total</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -274,12 +274,12 @@
 <link rel="stylesheet" href="/css/customDataTable.css">
 <link rel="stylesheet" href="/css/DataTableThemeController.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
-<link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />
-<script src="~/Scripts/chosen.jquery.min.js"></script>
+@*<link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />
+<script src="~/Scripts/chosen.jquery.min.js"></script>*@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https:/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+@*<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
 
 <script>
     //$(document).ready(function () {
@@ -287,25 +287,25 @@
     //    $("#SrNo").attr('readonly', true);
     //});
 
-    $(document).ready(function () {
-        $("#OrderDate").datepicker({
-            altField: "#OrderDate",
-            altFormat: "d MM, yy"
-        });
-    });
-    $(document).ready(function () {
-        $("#DeliveryDate").datepicker({
-            altField: "#DeliveryDate",
-            altFormat: "d MM, yy"
-        });
-    });
+    //$(document).ready(function () {
+    //    $("#OrderDate").datepicker({
+    //        altField: "#OrderDate",
+    //        altFormat: "d MM, yy"
+    //    });
+    //});
+    //$(document).ready(function () {
+    //    $("#DeliveryDate").datepicker({
+    //        altField: "#DeliveryDate",
+    //        altFormat: "d MM, yy"
+    //    });
+    //});
     
-    $(document).ready(function () {
-        $("#txtChequeDate").datepicker({
-            altField: "#txtChequeDate",
-            altFormat: "d MM, yy"
-        });
-    });
+    //$(document).ready(function () {
+    //    $("#txtChequeDate").datepicker({
+    //        altField: "#txtChequeDate",
+    //        altFormat: "d MM, yy"
+    //    });
+    //});
     $(document).ready(function () {
         $("#example").DataTable({
             dom: 'Bfrtip',
@@ -508,10 +508,9 @@
         if (type == "weight") {
             $(q).find("tr.grand_total td:eq(1)").text(grTotal);
         }
-
-        else if (type == "unit") {
-            $(q).find("tr.grand_total td:eq(2)").text(grTotal);
-        }
+        //else if (type == "unit") {
+        //    $(q).find("tr.grand_total td:eq(2)").text(grTotal);
+        //}
         else if (type == "qty") {
             $(q).find("tr.grand_total td:eq(3)").text(grTotal);
         }
@@ -583,7 +582,7 @@
             //customer.WordOrderID = row.find("td").eq(0).find("input").val();
             customer.Reciever = row.find("td:eq(0) select option:selected").val();
             customer.ProductBroker = row.find("td:eq(1) select option:selected").val();
-            customer.PackageType = row.find("td:eq(2) select option:selected").val();
+            customer.ProductType = row.find("td:eq(2) select option:selected").val();
             customer.Product = row.find("td:eq(3) select option:selected").val();
             customer.Weight = row.find("td:eq(4) input").val();
             customer.unit = row.find("td:eq(5) input").val();
@@ -614,11 +613,11 @@
         });
         $.ajax({
             type: "POST",
-            url: "/admin/InsertBilty",
+            url: "/Admin/InsertBilty",
             data: { Details: customers, Expenses: ExpenseArr, Diesal: DiesalArr, Order: Order },
             success: function (r) {
                 Message("Success", r.Message, "success");
-                window.location = "../Admin/BiltyGrid";
+                window.location = "../Admin/Bilty";
             }
         });
 

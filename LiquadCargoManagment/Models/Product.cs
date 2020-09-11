@@ -17,8 +17,8 @@ namespace LiquadCargoManagment.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
             this.BiltyDetails = new HashSet<BiltyDetail>();
+            this.OrderDetails = new HashSet<OrderDetail>();
         }
     
         public long ID { get; set; }
@@ -41,11 +41,11 @@ namespace LiquadCargoManagment.Models
         public Nullable<bool> IsActive { get; set; }
         public Nullable<long> OwnCompanyId { get; set; }
     
-        public virtual Category Category1 { get; set; }
-        public virtual OwnCompany OwnCompany { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BiltyDetail> BiltyDetails { get; set; }
+        public virtual Category Category1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual OwnCompany OwnCompany { get; set; }
     }
 }

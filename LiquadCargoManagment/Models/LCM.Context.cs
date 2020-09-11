@@ -28,6 +28,8 @@ namespace LiquadCargoManagment.Models
         public virtual DbSet<Area> Areas { get; set; }
         public virtual DbSet<AssignDriver> AssignDrivers { get; set; }
         public virtual DbSet<Bank> Banks { get; set; }
+        public virtual DbSet<Bilty> Bilties { get; set; }
+        public virtual DbSet<BiltyDetail> BiltyDetails { get; set; }
         public virtual DbSet<Broker> Brokers { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<City> Cities { get; set; }
@@ -45,6 +47,7 @@ namespace LiquadCargoManagment.Models
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<DepartmentPerson> DepartmentPersons { get; set; }
         public virtual DbSet<Designation> Designations { get; set; }
+        public virtual DbSet<DieselExpense> DieselExpenses { get; set; }
         public virtual DbSet<DocumentType> DocumentTypes { get; set; }
         public virtual DbSet<Driver> Drivers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
@@ -57,6 +60,7 @@ namespace LiquadCargoManagment.Models
         public virtual DbSet<NavMenu> NavMenus { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<NoType> NoTypes { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Organization> Organizations { get; set; }
         public virtual DbSet<OwnCompany> OwnCompanies { get; set; }
         public virtual DbSet<OwnDepartment> OwnDepartments { get; set; }
@@ -84,14 +88,10 @@ namespace LiquadCargoManagment.Models
         public virtual DbSet<tblBrand> tblBrands { get; set; }
         public virtual DbSet<UserAccount> UserAccounts { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
+        public virtual DbSet<VehicleExpens> VehicleExpenses { get; set; }
         public virtual DbSet<VehicleType> VehicleTypes { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<VendorType> VendorTypes { get; set; }
         public virtual DbSet<WorkOrder> WorkOrders { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<DieselExpense> DieselExpenses { get; set; }
-        public virtual DbSet<VehicleExpens> VehicleExpenses { get; set; }
-        public virtual DbSet<Bilty> Bilties { get; set; }
-        public virtual DbSet<BiltyDetail> BiltyDetails { get; set; }
     }
 }
