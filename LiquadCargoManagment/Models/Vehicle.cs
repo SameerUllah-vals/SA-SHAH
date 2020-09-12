@@ -60,9 +60,9 @@ namespace LiquadCargoManagment.Models
         public Nullable<long> LoadingLimitNHA { get; set; }
         public Nullable<long> OwnCompanyId { get; set; }
     
-        public virtual OwnCompany OwnCompany { get; set; }
-        public virtual VehicleType VehicleType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bilty> Bilties { get; set; }
+        public virtual OwnCompany OwnCompany { get; set; }
+        public virtual VehicleType VehicleType { get; set; }
     }
 }

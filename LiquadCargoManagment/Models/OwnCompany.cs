@@ -24,16 +24,16 @@ namespace LiquadCargoManagment.Models
             this.CustomerCompanies = new HashSet<CustomerCompany>();
             this.CustomerGroups = new HashSet<CustomerGroup>();
             this.ExpensesTypes = new HashSet<ExpensesType>();
+            this.OrderDetails = new HashSet<OrderDetail>();
             this.Products = new HashSet<Product>();
             this.RevenueTypes = new HashSet<RevenueType>();
             this.Vehicles = new HashSet<Vehicle>();
             this.VehicleTypes = new HashSet<VehicleType>();
             this.Vendors = new HashSet<Vendor>();
             this.VendorTypes = new HashSet<VendorType>();
-            this.UserAccounts = new HashSet<UserAccount>();
             this.WorkOrders = new HashSet<WorkOrder>();
             this.WorkOrders1 = new HashSet<WorkOrder>();
-            this.OrderDetails = new HashSet<OrderDetail>();
+            this.UserAccounts = new HashSet<UserAccount>();
         }
     
         public long ID { get; set; }
@@ -68,6 +68,8 @@ namespace LiquadCargoManagment.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExpensesType> ExpensesTypes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RevenueType> RevenueTypes { get; set; }
@@ -81,12 +83,10 @@ namespace LiquadCargoManagment.Models
         public virtual ICollection<VendorType> VendorTypes { get; set; }
         public virtual OwnGroup OwnGroup { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserAccount> UserAccounts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkOrder> WorkOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkOrder> WorkOrders1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<UserAccount> UserAccounts { get; set; }
     }
 }

@@ -42,9 +42,9 @@ namespace LiquadCargoManagment.Models
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<long> OwnCompanyId { get; set; }
     
-        public virtual OwnCompany OwnCompany { get; set; }
-        public virtual VendorType VendorType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DieselExpense> DieselExpenses { get; set; }
+        public virtual OwnCompany OwnCompany { get; set; }
+        public virtual VendorType VendorType { get; set; }
     }
 }

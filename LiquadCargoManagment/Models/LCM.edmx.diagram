@@ -4,120 +4,120 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a780e3316b2a4a4989c77195441f2ec7" Name="Diagram1" ZoomLevel="76">
-        <EntityTypeShape EntityType="LCMModel.Area" Width="1.5" PointX="5.25" PointY="40.5" IsExpanded="true" />
+      <Diagram DiagramId="b502cb42ed8b45a983a0d8312a80db93" Name="Diagram1">
+        <EntityTypeShape EntityType="LCMModel.Area" Width="1.5" PointX="5.25" PointY="41.25" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.AssignDriver" Width="1.5" PointX="9" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Bank" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Bank" Width="1.5" PointX="5.25" PointY="64.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Bilty" Width="1.5" PointX="9.75" PointY="52.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.BiltyDetail" Width="1.5" PointX="10.75" PointY="37" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.Broker" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Category" Width="1.5" PointX="5.25" PointY="24.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.City" Width="1.5" PointX="8.25" PointY="38.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Company" Width="1.5" PointX="5.25" PointY="33.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Category" Width="1.5" PointX="5.25" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.City" Width="1.5" PointX="8.25" PointY="39.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Company" Width="1.5" PointX="5.25" PointY="34.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.ContactNoType" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Container" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.ContainerType" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Container" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.ContainerType" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.Country" Width="1.5" PointX="11.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.CurrencyType" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Customer" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.CustomerCompany" Width="1.5" PointX="7.5" PointY="43.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.CustomerGroup" Width="1.5" PointX="5.25" PointY="45.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.DamageType" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Customer" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.CustomerCompany" Width="1.5" PointX="7.5" PointY="44.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.CustomerGroup" Width="1.5" PointX="5.25" PointY="46.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.DamageType" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.DateType" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Department" Width="1.5" PointX="2.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.DepartmentPerson" Width="1.5" PointX="13.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Department" Width="1.5" PointX="12.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.DepartmentPerson" Width="1.5" PointX="2.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.Designation" Width="1.5" PointX="13.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.DocumentType" Width="1.5" PointX="8.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.DieselExpense" Width="1.5" PointX="12.75" PointY="61.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.DocumentType" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.Driver" Width="1.5" PointX="6.75" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Employee" Width="1.5" PointX="10.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.ExpensesType" Width="1.5" PointX="5.25" PointY="50.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Gener" Width="1.5" PointX="12.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Group" Width="1.5" PointX="14.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.LocationType" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Employee" Width="1.5" PointX="8.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.ExpensesType" Width="1.5" PointX="5.25" PointY="51.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Gener" Width="1.5" PointX="14.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Group" Width="1.5" PointX="10.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.LocationType" Width="1.5" PointX="12.75" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.Menu" Width="1.5" PointX="4.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Nature" Width="1.5" PointX="15.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.NavMenu" Width="1.5" PointX="15.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Notification" Width="1.5" PointX="16.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Nature" Width="1.5" PointX="14.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.NavMenu" Width="1.5" PointX="15.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Notification" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.NoType" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Organization" Width="1.5" PointX="16.75" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.OwnCompany" Width="1.5" PointX="3" PointY="36.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.OwnDepartment" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.OwnGroup" Width="1.5" PointX="0.75" PointY="38.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.PackageType" Width="1.5" PointX="7.5" PointY="66.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.PickDropLocation" Width="1.5" PointX="17.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.PrincipleCompany" Width="1.5" PointX="4.75" PointY="17.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Product" Width="1.5" PointX="7.5" PointY="31.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.ProductBroker" Width="1.5" PointX="7.5" PointY="71.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Province" Width="1.5" PointX="6" PointY="22.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Region" Width="1.5" PointX="0.75" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.RevenueType" Width="1.5" PointX="5.25" PointY="54.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.RolePermission" Width="1.5" PointX="6.75" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Role" Width="1.5" PointX="18.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.SecondLevelMenu" Width="1.5" PointX="18.75" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Section" Width="1.5" PointX="19.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.ShipmentType" Width="1.5" PointX="19.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.ShippingLine" Width="1.5" PointX="18.75" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.ShippingType" Width="1.5" PointX="19.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.OrderDetail" Width="1.5" PointX="12.75" PointY="56.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Organization" Width="1.5" PointX="16.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.OwnCompany" Width="1.5" PointX="3" PointY="37.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.OwnDepartment" Width="1.5" PointX="17.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.OwnGroup" Width="1.5" PointX="0.75" PointY="39.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.PackageType" Width="1.5" PointX="10.5" PointY="47" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.PickDropLocation" Width="1.5" PointX="4.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.PrincipleCompany" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Product" Width="1.5" PointX="7.5" PointY="32.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.ProductBroker" Width="1.5" PointX="10.5" PointY="66.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Province" Width="1.5" PointX="6" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Region" Width="1.5" PointX="18.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.RevenueType" Width="1.5" PointX="5.25" PointY="55.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.RolePermission" Width="1.5" PointX="12.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Role" Width="1.5" PointX="14.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.SecondLevelMenu" Width="1.5" PointX="18.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Section" Width="1.5" PointX="16.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.ShipmentType" Width="1.5" PointX="18.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.ShippingLine" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.ShippingType" Width="1.5" PointX="19.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.SoftwareSetup" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.SubcriptionModule" Width="1.5" PointX="7" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.Subcription" Width="1.5" PointX="4.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.TaxRateRegistration" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.TaxType" Width="1.5" PointX="20.75" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.tblBrand" Width="1.5" PointX="12.75" PointY="20.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.UserAccount" Width="1.5" PointX="5.25" PointY="58.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Vehicle" Width="1.5" PointX="7.5" PointY="49.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.VehicleType" Width="1.5" PointX="5.25" PointY="62.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Vendor" Width="1.5" PointX="7.5" PointY="59.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.VendorType" Width="1.5" PointX="5.25" PointY="82.625" IsExpanded="true" />
-        <AssociationConnector Association="LCMModel.FK__Area__OwnCompany__2645B050" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LCMModel.TaxType" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.tblBrand" Width="1.5" PointX="20.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.UserAccount" Width="1.5" PointX="5.25" PointY="59.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Vehicle" Width="1.5" PointX="7.5" PointY="55.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.VehicleExpens" Width="1.5" PointX="7.5" PointY="51.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.VehicleType" Width="1.5" PointX="5.25" PointY="74" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.Vendor" Width="1.5" PointX="10.5" PointY="59.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.VendorType" Width="1.5" PointX="5.25" PointY="84.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LCMModel.WorkOrder" Width="1.5" PointX="5.25" PointY="88.5" IsExpanded="true" />
+        <AssociationConnector Association="LCMModel.FK__Area__OwnCompany__2DE6D218" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_Area_City" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_BiltyDetails_CustomerCompany" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_AssignDrivers_Driver" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK__Category__OwnCom__29221CFB" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_VehicleExpenses_Banks" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_Bilty_BillToOwnCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_Bilty_OwnCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_Bilty_Vehicle" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_BiltyDetails_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_BiltyDetails_ProductBroker" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK__Category__OwnCom__367C1819" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_Product_Product" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_City_OwnCompany" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_City_Province" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK__Company__OwnComp__2BFE89A6" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK__Company__OwnComp__395884C4" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_SoftwareSetup_ContactNoType" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_SoftwareSetup_CurrencyType" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK__CustomerC__OwnCo__2CF2ADDF" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK__CustomerC__OwnCo__3A4CA8FD" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_CustomerCompany_CustomerGroup" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK__CustomerG__OwnCo__2EDAF651" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK__CustomerG__OwnCo__3C34F16F" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_SoftwareSetup_DateType" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK__ExpensesT__OwnCo__2FCF1A8A" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_DieselExpense_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK__ExpensesT__OwnCo__3E1D39E1" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_VehicleExpenses_ExpensesType" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_SubcriptionModules_Menu" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_SoftwareSetup_NoType" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK__Product__OwnComp__367C1819" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK__RevenueTy__OwnCo__3864608B" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK__Vehicle__OwnComp__40F9A68C" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK__VehicleTy__OwnCo__42E1EEFE" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_OrderDetail_OwnCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_OrderDetail_PackageType" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_OrderDetail_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_OrderDetail_ProductBroker" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_OrderDetail_WorkOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK__Product__OwnComp__44CA3770" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK__RevenueTy__OwnCo__46B27FE2" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK__Vehicle__OwnComp__4F47C5E3" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK__VehicleTy__OwnCo__531856C7" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK__Vendor__OwnCompa__7755B73D" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK__VendorTyp__OwnCo__45BE5BA9" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK__VendorTyp__OwnCo__55F4C372" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_OwnCompany_OwnGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_Reciver_OwnCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_Sender_OwnCompany" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_UserAccounts_OwnCompany" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_SubcriptionModules_SubcriptionModules" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_TaxRateRegistration_TaxRateRegistration" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_Vehicle_VehicleType" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_Vendor_VendorType" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="LCMModel.WorkOrder" Width="1.5" PointX="5.25" PointY="67.5" />
-        <AssociationConnector Association="LCMModel.FK_Reciver_OwnCompany" />
-        <AssociationConnector Association="LCMModel.FK_Sender_OwnCompany" />
-        <EntityTypeShape EntityType="LCMModel.OrderDetail" Width="1.5" PointX="9.75" PointY="50.75" />
-        <AssociationConnector Association="LCMModel.FK_OrderDetail_OwnCompany" />
-        <AssociationConnector Association="LCMModel.FK_OrderDetail_PackageType" />
-        <AssociationConnector Association="LCMModel.FK_OrderDetail_Product" />
-        <AssociationConnector Association="LCMModel.FK_OrderDetail_ProductBroker" />
-        <AssociationConnector Association="LCMModel.FK_OrderDetail_WorkOrder" />
-        <EntityTypeShape EntityType="LCMModel.DieselExpense" Width="1.5" PointX="9.75" PointY="61.25" />
-        <EntityTypeShape EntityType="LCMModel.VehicleExpens" Width="1.5" PointX="12" PointY="25.75" />
-        <AssociationConnector Association="LCMModel.FK_VehicleExpenses_Banks" />
-        <AssociationConnector Association="LCMModel.FK_DieselExpense_Vendor" />
-        <AssociationConnector Association="LCMModel.FK_VehicleExpenses_ExpensesType" />
-        <EntityTypeShape EntityType="LCMModel.Bilty" Width="1.5" PointX="9.75" PointY="44.875" />
-        <EntityTypeShape EntityType="LCMModel.BiltyDetail" Width="1.5" PointX="12.75" PointY="49" />
-        <AssociationConnector Association="LCMModel.FK_BiltyDetails_CustomerCompany" />
-        <AssociationConnector Association="LCMModel.FK_Bilty_BillToOwnCompany" />
-        <AssociationConnector Association="LCMModel.FK_Bilty_OwnCompany" />
-        <AssociationConnector Association="LCMModel.FK_Bilty_Vehicle" />
-        <AssociationConnector Association="LCMModel.FK_BiltyDetails_Product" />
-        <AssociationConnector Association="LCMModel.FK_BiltyDetails_ProductBroker" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
