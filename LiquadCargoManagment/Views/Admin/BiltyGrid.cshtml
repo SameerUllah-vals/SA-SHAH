@@ -1,0 +1,145 @@
+﻿@model IEnumerable<LiquadCargoManagment.Models.Bilty>
+@{
+    ViewBag.Title = "BiltyGrid";
+}
+
+<div class="block full">
+    <div class="block-title row">
+        <div class="col-md-12">
+            <h2>Bilty Grid</h2>
+            <a id="" class="btn btn-primary btn-sm pull-right" href="@Url.Action("Bilty","Admin")" style="margin-left:10px;">Add Bilty | <i class="fa fa-plus"></i></a>
+            <a id="" class="btn btn-primary btn-sm pull-right" onclick="$('#modal-search').modal('show');" href="#">Search | <i class="fa fa-search"></i></a>
+        </div>
+    </div>
+    <div class="" id="grid">
+        @Html.Partial("_BiltyGrid")
+    </div>
+</div>
+<!-- END Datatables Content -->
+
+<div id="modal-search" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        @*@using (Ajax.BeginForm("Search", "Admin", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "fnSuccess", OnFailure = "fnFailed" }))*@
+        @using (Ajax.BeginForm("SearchBilty", "Admin", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSearchSuccess" }))
+        {
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header text-center">
+                    <h2 class="modal-title">Search Bilty<i class="fa fa-pencil-alt"></i></h2>
+                </div>
+                <!-- END Modal Header -->
+                <!-- Modal Body -->
+                <div class="block full">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Date From</label>
+                            <input type="date" name="DateFrom" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Date To</label>
+                            <input type="date" name="DateTo" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Delivery Date</label>
+                            <input type="date" name="DeliDate" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Sender</label>
+                            @Html.DropDownList("SearchSender", ViewBag.Sender as SelectList, "Select", new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6">
+                            <label>Bill To</label>
+                            @Html.DropDownList("SearchBillTo", ViewBag.BillTo as SelectList, "Select", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <!-- END Modal Body -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary pull-right"><b><i class="fa fa-search"></i> Search</b></button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+@section Script{
+    <script>
+        $(document).ready(function () {
+            GetOrders();
+        });
+
+        function onSearchSuccess(response) {
+
+            $('#modal-search').modal('hide');
+            $("#grid").html(response.html);
+            GetOrders();
+
+        }
+
+        function Message(title, text, type) {
+            Swal.fire({
+                title: title + '!',
+                text: text,
+                icon: type,
+                confirmButtonText: 'OK'
+            })
+        }
+        function GetOrders() {
+            $("#example").DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ]
+            });
+        }
+
+        function ClearItem() {
+            $("input[type='text']").val('');
+            $("input[type='hidden']").val('');
+        }
+
+    function DeleteModel(Id) {
+        debugger;
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: `../Admin/DeleteBiltyGrid`,
+                    type: 'POST',
+                    data: { ID: Id },
+                    success: function (res) {
+                        if (res.Status != "OK") {
+                            Message("Error", res.Message, "error");
+                        }
+                        else {
+                            $("#grid").html(res.html);
+                            GetOrders();
+                            Message("Success", "Record Deleted Success", "success");
+                        }
+                    },
+                    error: function () {
+                        Message("Error","An Error Occured","error")
+                    }
+                });
+
+            }
+        })
+
+    }
+
+    </script>
+}

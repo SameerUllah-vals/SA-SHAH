@@ -104,7 +104,7 @@
                             <input type="text" class="form-control amount" autocomplete="off" onkeyup="Grandtotal('#Add',6,'qty')" name="Quantity" id="txtQuantity">
                         </td>
                         <td style="width:100px">
-                            <input type="text" class="form-control txtTotalWeight" autocomplete="off" readonly="readonly" name="TotalWeight" onkeyup="Grandtotal('#Add', 7,'totalweight')" id="txtTotalWeight">
+                            <input type="text" class="form-control" autocomplete="off" readonly="readonly" name="TotalWeight" onkeyup="Grandtotal('#Add', 7,'totalweight')" id="txtTotalWeight">
                         </td>
                         <td>
                             <input type="text" class="form-control" autocomplete="off" name="Remarks" id="txtRemarks">
@@ -500,27 +500,25 @@
         }
     };
 
-  
+
+ 
     $(document).ready(function () {
-        
-        //$("input[type=text]").change(function () {
-        //    CalculateTotal();
-        //})
-        alert("ok");
+        // Get value on keyup funtion
+        $("#txtWeight, #txtQuantity").keyup(function () {
 
-        //function CalculateTotal() {
-        //    var Weight = $("#txtWeight").val();
-        //    var Quantity = $("#txtQuantity").val();
-        //    var Total = (UnitPrice * Quantity);
+            var total = 0;
+            var x = Number($("#txtWeight").val());
+            var y = Number($("#txtQuantity").val());
+            var total = x * y;
 
+            $('#txtTotalWeight').val(total);
 
-        //    $("#txtTotal").val(parseFloat(Total).toFixed(2));
-        //}
-        });  
-
+        });
+    });
         function Grandtotal(q, totalColumnIndex, type) {
             let grTotal = 0;
             for (var i = 0; i < $(q).find("tbody tr").length; i++) {
+
 
                 grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
             }
@@ -534,9 +532,9 @@
             else if (type == "qty") {
                 $(q).find("tr.grand_total td:eq(3)").text(grTotal);
             }
-            //else if (type == "totalweight") {
-            //    $(q).find("tr.grand_total td:eq(4)").text(grTotal);
-            //}
+            else if (type == "totalweight") {
+                $(q).find("tr.grand_total td:eq(4)").text(grTotal);
+            }
         }
 
 
