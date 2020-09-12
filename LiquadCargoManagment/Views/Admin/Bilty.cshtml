@@ -174,7 +174,7 @@
                 <tbody>
                     <tr>
                         <td>
-                            @Html.DropDownList("ExpensesTypeName", ViewBag.Expense as SelectList, "Select", new { @class = "form-control Search", @id = "txtExpenseTypeName" })
+                            @*@Html.DropDownList("ID", ViewBag.vendor as SelectList,  new { @class = "form-control Search", @id = "txtExpenseTypeName" })*@
                         </td>
                         <td>
                             <select class="form-control">
@@ -225,14 +225,18 @@
                 <tbody>
                     <tr>
                         <td>
-                            <select class="form-control">
+                            @*<select class="form-control">
                                 <option>Item</option>
-                            </select>
+                            </select>*@
+                            @Html.DropDownList("Category", ViewBag.pt as SelectList, new { @class = "form-control Search", @id = "txtDiesel" , @disabled = "disabled" })
                         </td>
                         <td>
-                            <select class="form-control">
+                            @*<select class="form-control">
                                 <option>Item</option>
-                            </select>
+                            </select>*@
+                            @Html.DropDownList("Product", ViewBag.p as SelectList, "Select", new { @class = "form-control Search", @id = "txtAccount"  })
+
+                           
                         </td>
                         <td>
                             <input type="number" class="form-control" autocomplete="off" name="Liter" id="txtLiter">
@@ -336,6 +340,31 @@
 
 
     });
+
+
+    //Account and Diesel
+    
+
+    $("#txtDiesel").change(function () {
+
+        $.get("/Admin/getAccount", { ID: $("#txtDiesel").val() }, function (data) {
+
+            $("#txtAccount").empty();
+            $.each(data, function (index, row) {
+
+                $("#txtAccount").append("<option value='" + row.ID + "'>" + row.Name + "</option>")
+            });
+        });
+    });
+
+
+    
+
+
+
+
+
+
 
     //SEARCHABLE DROPDOWN
 
@@ -524,22 +553,7 @@
     };
 
 
-    $(document).ready(function () {
-
-        //$("input[type=text]").change(function () {
-        //    CalculateTotal();
-        //})
-       
-
-        //function CalculateTotal() {
-        //    var Weight = $("#txtWeight").val();
-        //    var Quantity = $("#txtQuantity").val();
-        //    var Total = (UnitPrice * Quantity);
-
-
-        //    $("#txtTotal").val(parseFloat(Total).toFixed(2));
-        //}
-        });
+   
 
         function Grandtotal(q, totalColumnIndex, type) {
             let grTotal = 0;
@@ -557,9 +571,9 @@
             else if (type == "qty") {
                 $(q).find("tr.grand_total td:eq(3)").text(grTotal);
             }
-            //else if (type == "totalweight") {
-            //    $(q).find("tr.grand_total td:eq(4)").text(grTotal);
-            //}
+            else if (type == "totalweight") {
+                $(q).find("tr.grand_total td:eq(4)").text(grTotal);
+            }
         }
 
 

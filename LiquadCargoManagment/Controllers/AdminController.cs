@@ -2214,6 +2214,9 @@ namespace LiquadCargoManagment.Controllers
             List<ExpensesType> expense = lcm.ExpensesTypes.ToList();
             ViewBag.Expense = new SelectList(expense, "ExpensesTypeID", "ExpensesTypeName");
 
+
+        
+
             List<ProductBroker> li = lcm.ProductBrokers.ToList();
             ViewBag.ProductBroker = new SelectList(li, "Id", "Name");
 
@@ -2248,6 +2251,17 @@ namespace LiquadCargoManagment.Controllers
         //Cascading dropdown of Product and PackageType
 
             public JsonResult getProductList(int ID)
+        {
+            context.Configuration.ProxyCreationEnabled = false;
+            List<Product> ProductList = context.Products.Where(x => x.ID == ID).ToList();
+            return Json(ProductList, JsonRequestBehavior.AllowGet);
+        }
+
+       
+
+
+
+        public JsonResult getAccount(int ID)
         {
             context.Configuration.ProxyCreationEnabled = false;
             List<Product> ProductList = context.Products.Where(x => x.ID == ID).ToList();
