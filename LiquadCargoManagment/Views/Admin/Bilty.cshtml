@@ -1,11 +1,26 @@
-﻿@model LiquadCargoManagment.Models.BiltyViewModel
-
+﻿@model LiquadCargoManagment.Models.WorkOrderViewModel
 @using LiquadCargoManagment.Models
 @{
     ViewBag.Title = "Bilty";
 }
 
 <div id="page-content" style="min-height: 199px;">
+
+    @*<div class="content-header">
+
+            <div class="header-section">
+                <h1>
+                    Create Bilty <br><small>Create Read Update Delete TaxRateRegistration</small>
+                </h1>
+            </div>
+
+        </div>
+        <ul class="breadcrumb breadcrumb-top">
+            <li>Admin</li>
+            <li><a href="javascript:;">Bilty</a></li>
+        </ul>*@
+    <!-- END Datatables Content -->
+
     <div class="block full">
 
         <div class="block-title row">
@@ -21,19 +36,19 @@
                 </div>*@
             <div class="col-md-2">
                 <label>Bilty Date</label>
-                <input type="text" class="form-control" id="OrderDate" value="" />
+                <input type="text" class="form-control" id="OrderDate" value="@Model.WorkOrder.OrderDate" required />
             </div>
             <div class="col-md-2">
                 <label>Delivery Date</label>
-                <input type="text" class="form-control" id="DeliveryDate" value="@Model.Bilty.DeliveryDate">
+                <input type="text" class="form-control" id="DeliveryDate">
             </div>
             <div class="col-md-2">
                 <label>Bill To</label>
-                @Html.DropDownList("billto", ViewBag.bill as SelectList, "Select", new { @class = "form-control Search", @id = "billTo", @value = "@Model.Bilty.BillTo" })
+                @Html.DropDownList("billto", ViewBag.bill as SelectList, "Select", new { @class = "form-control Search" })
             </div>
             <div class="col-md-2">
                 <label>Sender</label>
-                @Html.DropDownList("Sender", ViewBag.Sender as SelectList, "Select", new { @class = "form-control Search", @id = "Sender", @value = "@Model.Bilty.Sender" })
+                @Html.DropDownList("Sender", ViewBag.Sender as SelectList, "Select", new { @class = "form-control Search" })
 
             </div>
         </div>
@@ -67,7 +82,7 @@
                     <tr>
                         @*<td style="width:50px"><input type="text" class="form-control" autocomplete="off" name="SrNo" id="SrNo" disabled></td>*@
                         <td>
-                            @Html.DropDownList("Reciever", ViewBag.li as SelectList, "Select", new { @class = "form-control Search", @id = "txtReciever", value = "" })
+                            @Html.DropDownList("Reciever", ViewBag.li as SelectList, "Select", new { @class = "form-control Search", @id = "txtReciever" })
                             @Html.ValidationMessage("Reciever", new { @class = "text-danger" })
                         </td>
                         <td>
@@ -80,19 +95,19 @@
                             @Html.DropDownList("Product", ViewBag.p as SelectList, "Select", new { @class = "form-control Search", @id = "txtProduct" })
                         </td>
                         <td style="width:50px">
-                            <input type="text" class="form-control" value="@Model.Bilty.OrderDetailsTotalWeight" autocomplete="off" name="Weight" pattern="([0-9]{1,3}).([0-9]{1,3})" @*onkeypress="return inputLimiter(event,'custom')"*@ onkeyup="Grandtotal('#Add',4,'weight')" id="txtWeight">
+                            <input type="text" class="form-control amount" autocomplete="off" name="Weight" pattern="([0-9]{1,3}).([0-9]{1,3})" onkeypress="return inputLimiter(event,'custom')" onkeyup="Grandtotal('#Add',4,'weight')" id="txtWeight">
                         </td>
                         <td style="width:50px">
-                            <input type="text" class="form-control" value="" autocomplete="off" name="unit" onkeyup="Grandtotal('#Add',5,'unit')" id="txtunit">
+                            <input type="text" class="form-control "readonly="readonly" autocomplete="off" name="unit" onkeyup="Grandtotal('#Add',5,'unit')" id="txtunit" >
                         </td>
                         <td style="width:50px">
-                            <input type="text" class="form-control" value="@Model.Bilty.OrderDetailsTotalQTY" autocomplete="off" onkeyup="Grandtotal('#Add',6,'qty')" name="Quantity" id="txtQuantity">
+                            <input type="text" class="form-control amount" autocomplete="off" onkeyup="Grandtotal('#Add',6,'qty')" name="Quantity" id="txtQuantity">
                         </td>
                         <td style="width:100px">
-                            <input type="text" class="form-control" value="@Model.Bilty.OrderDetailsTotalWeight" autocomplete="off" name="TotalWeight" onkeyup="Grandtotal('#Add', 7,'totalweight')" id="txtTotalWeight" readonly>
+                            <input type="text" class="form-control txtTotalWeight" autocomplete="off" readonly="readonly" name="TotalWeight" onkeyup="Grandtotal('#Add', 7,'totalweight')" id="txtTotalWeight">
                         </td>
                         <td>
-                            <input type="text" class="form-control" value="" autocomplete="off" name="Remarks" id="txtRemarks">
+                            <input type="text" class="form-control" autocomplete="off" name="Remarks" id="txtRemarks">
                         </td>
                         @*<td><input type="button" value="Remove" onclick="Remove(this)" /></td>*@
                         <td><button type="button" id="btnSaveEdit" class="btn btn-info" onclick="AddRow(this)">Add Line</button></td>
@@ -123,16 +138,16 @@
             <div class="col-md-12">
                 <div class="col-md-3">
                     <label>Vehcile Type</label>
-                    @Html.DropDownList("ID", ViewBag.VehicleTypes as SelectList, "-Select-", new { @class = "form-control Search", @id = "txtVehicleType", @required = true })
+                    @Html.DropDownList("ID", ViewBag.VehicleTypes as SelectList, "-Select-", new { @class = "form-control Search", @required = true })
 
                 </div>
                 <div class="col-md-3">
                     <label>Vehicle Reg #</label>
-                    @Html.DropDownList("VehicleID", ViewBag.Reg as SelectList, "-Select-", new { @class = "form-control Search", @id = "txtVehicle", @required = true })
+                    @Html.DropDownList("VehicleID", ViewBag.Reg as SelectList, "-Select-", new { @class = "form-control Search", @required = true })
                 </div>
                 <div class="col-md-3">
                     <label>Freight</label>
-                    <input type="text" class="form-control" value="@Model.Bilty.Freight" id="Freight" />
+                    <input type="text" class="form-control" id="Freight" />
                 </div>
             </div>
         </div>
@@ -159,7 +174,7 @@
                 <tbody>
                     <tr>
                         <td>
-                            @Html.DropDownList("ExpensesTypeName", ViewBag.Expense as SelectList, "Select", new { @class = "form-control Search", @id = "txtExpenseTypeName" })
+                            @*@Html.DropDownList("ID", ViewBag.vendor as SelectList,  new { @class = "form-control Search", @id = "txtExpenseTypeName" })*@
                         </td>
                         <td>
                             <select class="form-control">
@@ -170,7 +185,7 @@
                             @Html.DropDownList("Name", ViewBag.Bank as SelectList, "Select", new { @class = "form-control Search", @id = "txtBank" })
                         </td>
                         <td>
-                            <input type="number" class="form-control" value="" autocomplete="off" name="Amount" id="txtChequeNo">
+                            <input type="number" class="form-control" autocomplete="off" name="Amount" id="txtChequeNo">
                         </td>
                         <td>
                             <input type="text" class="form-control" autocomplete="off" name="ChequeDate" id="txtChequeDate">
@@ -210,17 +225,21 @@
                 <tbody>
                     <tr>
                         <td>
-                            <select class="form-control">
+                            @*<select class="form-control">
                                 <option>Item</option>
-                            </select>
+                            </select>*@
+                            @Html.DropDownList("Category", ViewBag.pt as SelectList, new { @class = "form-control Search", @id = "txtDiesel" , @disabled = "disabled" })
                         </td>
                         <td>
-                            <select class="form-control">
+                            @*<select class="form-control">
                                 <option>Item</option>
-                            </select>
+                            </select>*@
+                            @Html.DropDownList("Product", ViewBag.p as SelectList, "Select", new { @class = "form-control Search", @id = "txtAccount"  })
+
+                           
                         </td>
                         <td>
-                            <input type="number" class="form-control" value="@Model.Bilty.TotalLiter" autocomplete="off" name="Liter" id="txtLiter">
+                            <input type="number" class="form-control" autocomplete="off" name="Liter" id="txtLiter">
                         </td>
                         <td>
                             <input type="number" class="form-control" autocomplete="off" name="Rate" id="txtRate">
@@ -256,14 +275,14 @@
 
 
 <script src="/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <link rel="stylesheet" href="/css/customDataTable.css">
 <link rel="stylesheet" href="/css/DataTableThemeController.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
-@*<link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />
-    <script src="~/Scripts/chosen.jquery.min.js"></script>*@
+<link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />
+<script src="~/Scripts/chosen.jquery.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-@*<link rel="stylesheet" href="https:/resources/demos/style.css">*@
+<link rel="stylesheet" href="https:/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
@@ -277,6 +296,7 @@
             altField: "#OrderDate",
             altFormat: "d MM, yy"
         });
+
     });
     $(document).ready(function () {
         $("#DeliveryDate").datepicker({
@@ -301,7 +321,58 @@
                 'pdfHtml5'
             ]
         });
+
+
+        //Product Cascading Dropdown
+
+
+        $("#txtPackageType").change(function () {
+
+            $.get("/Admin/getProductList", { ID: $("#txtPackageType").val() }, function (data) {
+
+                $("#txtProduct").empty();
+                $.each(data, function (index, row) {
+
+                    $("#txtProduct").append("<option value='" + row.ID + "'>" + row.Name + "</option>")
+                });
+            });
+        });
+
+
     });
+
+
+    //Account and Diesel
+    
+
+    $("#txtDiesel").change(function () {
+
+        $.get("/Admin/getAccount", { ID: $("#txtDiesel").val() }, function (data) {
+
+            $("#txtAccount").empty();
+            $.each(data, function (index, row) {
+
+                $("#txtAccount").append("<option value='" + row.ID + "'>" + row.Name + "</option>")
+            });
+        });
+    });
+
+
+    //$(function () {
+
+
+    //    $("#txtProduct").change(function () {
+
+    //        var displayUnit = $()
+    //    })
+    //})
+
+
+
+
+
+
+
     //SEARCHABLE DROPDOWN
 
     //$(document).ready(function () {
@@ -346,6 +417,11 @@
         var parent = $(A).parent("td").parent("tr").html();
         parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
         $("#Add").find("tbody").append(`<tr>${parent}</tr>`);
+
+
+
+
+        
     }
     function remove(e) {
         $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
@@ -371,6 +447,105 @@
         $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
     }
 
+    //$("body").on("click", "#btnAdd", function () {
+    //    //Reference the TextBoxes.
+
+
+    //    //Get the reference of the Table's TBODY element.
+    //    var tBody = $("#Add > tbody")[0];
+
+    //    //Add Row.
+    //    var row = tBody.insertRow(-1);
+
+    //    //Add Name cell.
+    //    var cell = $(row.insertCell(-1));
+    //    cell.html(txtSr.val());
+
+    //    //Add reciver cell.
+    //    cell = $(row.insertCell(-1));
+    //    cell.html(txtReciever.val());
+    //    //Add ProductBroker cell.
+    //    cell = $(row.insertCell(-1));
+    //    cell.html(txtProductBroker.val());
+    //    //Add PackageType cell.
+    //    cell = $(row.insertCell(-1));
+    //    cell.html(txtPackageType.val());
+
+    //    cell = $(row.insertCell(-1));
+    //    cell.html(txtProduct.val());
+    //    //Add Weight cell.
+    //    cell = $(row.insertCell(-1));
+    //    cell.html(txtWeight.val());
+
+    //    cell = $(row.insertCell(-1));
+    //    cell.html(txtunit.val());
+
+    //    cell = $(row.insertCell(-1));
+    //    cell.html(txtQuantity.val());
+
+    //    cell = $(row.insertCell(-1));
+    //    cell.html(txtTotalWeight.val());
+
+    //    cell = $(row.insertCell(-1));
+    //    cell.html(txtRemarks.val());
+
+
+    //    //Add Button cell.
+    //    cell = $(row.insertCell(-1));
+    //    var btnRemove = $("<input />");
+    //    btnRemove.attr("type", "button");
+    //    btnRemove.attr("onclick", "Remove(this);");
+    //    btnRemove.val("Remove");
+    //    cell.append(btnRemove);
+
+    //    //Clear the TextBoxes.
+    //    txtSr.val("");
+    //    txtReciever.val("");
+    //    txtProductBroker.val("");
+    //    txtPackageType.val("");
+    //    txtProduct.val("");
+    //    txtWeight.val("");
+    //    txtunit.val("");
+    //    txtQuantity.val("");
+    //    txtTotalWeight.val("");
+    //    txtRemarks.val("");
+    //});
+
+    // Broduct Broker Popup Script
+    function Successfully(response) {
+        console.log(response);
+        if (response.status != "OK") {
+            swal({
+                title: "Failed",
+                text: response.message,
+                icon: "error",
+                button: "Ok",
+                confirmButtonText: 'OK'
+            });
+        }
+        else {
+            $("#ProductBroker").html('');
+            for (var i = 0; i < response.list.length; i++) {
+                $("#ProductBroker").append(`<option value="${response.list[i].Id}">${response.list[i].Name}</option>`);
+            }
+            swal({
+                title: "Success",
+                text: response.message,
+                icon: "success",
+                button: "Ok",
+                confirmButtonText: 'OK'
+            });
+            $("#Inform").modal('hide');
+        }
+    }
+    function OnFailure() {
+        //alert("Request Failed");
+    }
+    //End PopUp Function
+
+
+
+
     function Remove(button) {
         //Determine the reference of the Row using the Button.
         var row = $(button).closest("tr");
@@ -384,110 +559,144 @@
         }
     };
 
-    $(document).ready(function () {
-        // Get value on keyup funtion
-        $("#txtWeight, #txtQuantity").keyup(function () {
 
-            var total = 0;
-            var x = Number($("#txtWeight").val());
-            var y = Number($("#txtQuantity").val());
-            var total = x * y;
+   
 
-            $('#txtTotalWeight').val(total);
+        function Grandtotal(q, totalColumnIndex, type) {
+            let grTotal = 0;
+            for (var i = 0; i < $(q).find("tbody tr").length; i++) {
 
-        });
-    });
-
-
-    function Grandtotal(q, totalColumnIndex, type) {
-        let grTotal = 0;
-        for (var i = 0; i < $(q).find("tbody tr").length; i++) {
-            grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
-        }
-        if (type == "weight") {
-            $(q).find("tr.grand_total td:eq(1)").text(grTotal);
-        }
-        else if (type == "qty") {
-            $(q).find("tr.grand_total td:eq(3)").text(grTotal);
-        }
-        else if (type == "totalweight") {
-            $(q).find("tr.grand_total td:eq(4)").text(grTotal);
-        }
-    }
-
-
-    $("body").on("click", "#Addbtn", function () {
-        let Order = {}
-        let OrderNo = $("#WorkOrderNo").val();
-        let OrderDate = $("#OrderDate").val();
-        let DeliveryDate = $("#DeliveryDate").val();
-        let billTo = $("#billTo").val();
-        let Sender = $("#Sender").val();
-        let VehicleId = $("#VehicleID").val();
-        let Freight = $("#Freight").val();
-        if (OrderNo == "" || OrderDate == "" || billTo == "" || Sender == "") {
-            Message("Required", "Enter all requried fields", "error");
-            return;
-        }
-        Order.OrderNo = OrderNo;
-        Order.OrderDate = OrderDate;
-        Order.BillTo = billTo;
-        Order.Sender = Sender;
-        Order.VehicleID = VehicleId;
-        Order.Freight = Freight;
-        Order.DeliveryDate = DeliveryDate;
-        Order.OrderDetailsTotalQTY = $("#Add").find("tr.grand_total td:eq(2)").text();
-        Order.OrderDetailsTotalWeight = $("#Add").find("tr.grand_total td:eq(3)").text();
-        Order.VehicleExpensesGrandTotal = $("#AddExpense").find("tr.grand_total td:eq(5)").text();
-        Order.DieselExpensesGrandTotal = $("#AddDeisel").find("tr.grand_total td:eq(4)").text();
-        var customers = new Array();
-        var ExpenseArr = new Array();
-        var DiesalArr = new Array();
-        $("#Add tbody tr").each(function () {
-            var row = $(this);
-            var customer = {};
-            //customer.WordOrderID = row.find("td").eq(0).find("input").val();
-            customer.Reciever = row.find("td:eq(0) select option:selected").val();
-            customer.ProductBroker = row.find("td:eq(1) select option:selected").val();
-            customer.ProductType = row.find("td:eq(2) select option:selected").val();
-            customer.Product = row.find("td:eq(3) select option:selected").val();
-            customer.Weight = row.find("td:eq(4) input").val();
-            customer.unit = row.find("td:eq(5) input").val();
-            customer.Quantity = row.find("td:eq(6) input").val();
-            customer.TotalWeight = row.find("td:eq(7) input").val();
-            customer.Remarks = row.find("td:eq(8) input").val();
-            customers.push(customer);
-        });
-        $("#AddExpense tbody tr").each(function () {
-            var row = $(this);
-            var Expenses = new Object();
-            Expenses.ExpenseTypeId = row.find("td:eq(0) select option:selected").val();
-            Expenses.PaymentMethod = row.find("td:eq(1) select option:selected").val();
-            Expenses.BankBranch = row.find("td:eq(2) select option:selected").val();
-            Expenses.ChequeNo = row.find("td:eq(3) input").val();
-            Expenses.ChequeDate = row.find("td:eq(4) input").val();
-            Expenses.Amount = row.find("td:eq(5) input").val();
-            ExpenseArr.push(Expenses);
-        });
-        $("#AddDeisel tbody tr").each(function () {
-            var row = $(this);
-            var DiesalObj = new Object();
-            DiesalObj.VendorId = row.find("td:eq(1) select option:selected").val();
-            DiesalObj.Litre = row.find("td:eq(1) input").val();
-            DiesalObj.Rate = row.find("td:eq(2) input").val();
-            DiesalObj.Amount = row.find("td:eq(3) input").val();
-            DiesalArr.push(DiesalObj);
-        });
-        $.ajax({
-            type: "POST",
-            url: "/Admin/InsertBilty",
-            data: { Details: customers, Expenses: ExpenseArr, Diesal: DiesalArr, Order: Order },
-            success: function (r) {
-                Message("Success", r.message, "success");
-                //window.location = "../Admin/BiltyGrid";
+                grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
             }
+            if (type == "weight") {
+                $(q).find("tr.grand_total td:eq(1)").text(grTotal);
+            }
+
+                //else if (type == "unit") {
+                //    $(q).find("tr.grand_total td:eq(2)").text(grTotal);
+                //}
+            else if (type == "qty") {
+                $(q).find("tr.grand_total td:eq(3)").text(grTotal);
+            }
+            else if (type == "totalweight") {
+                $(q).find("tr.grand_total td:eq(4)").text(grTotal);
+            }
+        }
+
+
+
+        function GrandtotalExpense(q, totalColumnIndex, exp) {
+            let grTotal = 0;
+            for (var i = 0; i < $(t).find("tbody tr").length; i++) {
+                grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
+            }
+            if (exp == "total") {
+                $(t).find("tr.grand_total td:eq(1)").text(grTotal);
+            }
+        }
+        //$("input").each(function () {
+        //    $(this).each(function () {
+        //        $(this).keyup(function () {
+        //            Sum.call(this);
+        //        })
+        //    })
+        //})
+
+        //function Sum() {
+        //    var sum = 0;
+        //    var thisrow = $(this).closest('tr');
+
+        //    $(thisrow).find("td:not(.txtTotalweight) input").each(function () {
+        //        sum += parseInt(this.value);
+        //    });
+
+        //    $(thisrow).find(".txtTotalweight").html(sum);
+        //}
+
+        $("body").on("click", "#Addbtn", function () {
+            let Order = {}
+            let OrderNo = $("#WorkOrderNo").val();
+            let OrderDate = $("#OrderDate").val();
+            let DeliveryDate = $("#DeliveryDate").val();
+            let billTo = $("#billTo").val();
+            let Sender = $("#sender").val();
+            let VehicleId = $("#VehicleID").val();
+            let Freight = $("#Freight").val();
+            if (OrderNo == "" || OrderDate == "" || billTo == "" || Sender == "") {
+                Message("Required", "Enter all requried fields", "error");
+                return;
+            }
+            Order.OrderNo = OrderNo;
+            Order.OrderDate = OrderDate;
+            Order.BillTo = billTo;
+            Order.Sender = Sender;
+            Order.VehicleID = VehicleId;
+            Order.Freight = Freight;
+            Order.DeliveryDate = DeliveryDate;
+            Order.OrderDetailsTotalQTY = $("#Add").find("tr.grand_total td:eq(2)").text();
+            Order.OrderDetailsTotalWeight = $("#Add").find("tr.grand_total td:eq(3)").text();
+            Order.VehicleExpensesGrandTotal = $("#AddExpense").find("tr.grand_total td:eq(5)").text();
+            Order.DieselExpensesGrandTotal = $("#AddDeisel").find("tr.grand_total td:eq(4)").text();
+
+
+            var customers = new Array();
+            var ExpenseArr = new Array();
+            var DiesalArr = new Array();
+            $("#Add tbody tr").each(function () {
+                var row = $(this);
+                var customer = {};
+                //customer.WordOrderID = row.find("td").eq(0).find("input").val();
+                customer.Reciever = row.find("td:eq(0) select option:selected").val();
+                customer.ProductBroker = row.find("td:eq(1) select option:selected").val();
+                customer.PackageType = row.find("td:eq(2) select option:selected").val();
+                customer.Product = row.find("td:eq(3) select option:selected").val();
+                customer.Weight = row.find("td:eq(4) input").val();
+                customer.unit = row.find("td:eq(5) input").val();
+                customer.Quantity = row.find("td:eq(6) input").val();
+                customer.TotalWeight = row.find("td:eq(7) input").val();
+                customer.Remarks = row.find("td:eq(8) input").val();
+                customers.push(customer);
+            });
+            $("#AddExpense tbody tr").each(function () {
+                var row = $(this);
+                var Expenses = new Object();
+                Expenses.ExpenseTypeId = row.find("td:eq(0) select option:selected").val();
+                Expenses.PaymentMethod = row.find("td:eq(1) select option:selected").val();
+                Expenses.BankBranch = row.find("td:eq(2) select option:selected").val();
+                Expenses.ChequeNo = row.find("td:eq(3) input").val();
+                Expenses.ChequeDate = row.find("td:eq(4) input").val();
+                Expenses.Amount = row.find("td:eq(5) input").val();
+                ExpenseArr.push(Expenses);
+            });
+            $("#AddDeisel tbody tr").each(function () {
+                var row = $(this);
+                var DiesalObj = new Object();
+                DiesalObj.VendorId = row.find("td:eq(1) select option:selected").val();
+                DiesalObj.Litre = row.find("td:eq(1) input").val();
+                DiesalObj.Rate = row.find("td:eq(2) input").val();
+                DiesalObj.Amount = row.find("td:eq(3) input").val();
+                DiesalArr.push(DiesalObj);
+            });
+            $.ajax({
+                type: "POST",
+                url: "/admin/InsertBilty",
+                data: { Details: customers, Expenses: ExpenseArr, Diesal: DiesalArr, Order: Order },
+                success: function (r) {
+                    Message("Success", r.Message, "success");
+                    window.location = "../Admin/BiltyGrid";
+                }
+            });
+
         });
 
-    });
+
+
+
+
+
+
+
+
+    
 
 </script>

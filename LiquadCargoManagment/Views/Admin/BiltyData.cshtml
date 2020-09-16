@@ -1,0 +1,56 @@
+﻿@model IEnumerable<LiquadCargoManagment.Models.Bilty>
+
+
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Orders</h2>
+<input type="button" id="" class="btn btn-success" value="add Bilty" @Url.Action("Bilty","Admin")/>
+
+<div class="table-responsive">
+    <table class="table display table-striped" id="example">
+        <thead>
+            <tr>
+                <td>Order No</td>
+                <td>Order Date</td>
+                <td>Bill To</td>
+                <td>Sender</td>
+                <td>Total Qty</td>
+                <td>Total Weight</td>
+                <td>User</td>
+                <td>Operation</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.OrderNo</td>
+                    <td>@item.OrderDate</td>
+                    <td>@item.BillTo</td>
+                    <td>@item.Sender</td>
+                    <td>@item.OrderDetailsTotalQTY</td>
+                    <td>@item.OrderDetailsTotalWeight</td>
+                   
+                    <td>
+                        <a href="" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a>
+                        <button type="button" onclick="viewRecord()" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button>
+                        <button type="button" onclick="DeleteModel()" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+

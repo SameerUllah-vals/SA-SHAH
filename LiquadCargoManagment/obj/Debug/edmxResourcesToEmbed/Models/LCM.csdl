@@ -98,8 +98,8 @@
     <Property Name="TotalWeight" Type="Double" />
     <Property Name="Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Area" Relationship="Self.FK_BiltyDetails_CustomerCompany" FromRole="BiltyDetails" ToRole="Area" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_BiltyDetails_Product" FromRole="BiltyDetails" ToRole="Product" />
     <NavigationProperty Name="ProductBroker" Relationship="Self.FK_BiltyDetails_ProductBroker" FromRole="BiltyDetails" ToRole="ProductBroker" />
-    <NavigationProperty Name="Product" Relationship="LCMModel.FK_BiltyDetails_Product" FromRole="BiltyDetail" ToRole="Product" />
   </EntityType>
   <EntityType Name="Broker">
     <Key>
@@ -120,6 +120,23 @@
     <Property Name="ModifiedBy" Type="Int64" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <Property Name="IsDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int64" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="OwnCompanyId" Type="Int64" />
+    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Category__OwnCom__29221CFB" FromRole="Category" ToRole="OwnCompany" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_Product" FromRole="Category" ToRole="Product" />
   </EntityType>
   <EntityType Name="City">
     <Key>
@@ -657,9 +674,9 @@
     <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="OwnCompany" Relationship="Self.FK_OrderDetail_OwnCompany" FromRole="OrderDetail" ToRole="OwnCompany" />
     <NavigationProperty Name="PackageType1" Relationship="Self.FK_OrderDetail_PackageType" FromRole="OrderDetail" ToRole="PackageType" />
+    <NavigationProperty Name="Product1" Relationship="Self.FK_OrderDetail_Product" FromRole="OrderDetail" ToRole="Product" />
     <NavigationProperty Name="ProductBroker1" Relationship="Self.FK_OrderDetail_ProductBroker" FromRole="OrderDetail" ToRole="ProductBroker" />
     <NavigationProperty Name="WorkOrder" Relationship="Self.FK_OrderDetail_WorkOrder" FromRole="OrderDetail" ToRole="WorkOrder" />
-    <NavigationProperty Name="Product1" Relationship="LCMModel.FK_OrderDetail_Product" FromRole="OrderDetail" ToRole="Product" />
   </EntityType>
   <EntityType Name="Organization">
     <Key>
@@ -699,12 +716,14 @@
     <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="IsActive" Type="Boolean" />
     <NavigationProperty Name="Areas" Relationship="Self.FK__Area__OwnCompany__2645B050" FromRole="OwnCompany" ToRole="Area" />
+    <NavigationProperty Name="Categories" Relationship="Self.FK__Category__OwnCom__29221CFB" FromRole="OwnCompany" ToRole="Category" />
     <NavigationProperty Name="Cities" Relationship="Self.FK_City_OwnCompany" FromRole="OwnCompany" ToRole="City" />
     <NavigationProperty Name="Companies" Relationship="Self.FK__Company__OwnComp__2BFE89A6" FromRole="OwnCompany" ToRole="Company" />
     <NavigationProperty Name="CustomerCompanies" Relationship="Self.FK__CustomerC__OwnCo__2CF2ADDF" FromRole="OwnCompany" ToRole="CustomerCompany" />
     <NavigationProperty Name="CustomerGroups" Relationship="Self.FK__CustomerG__OwnCo__2EDAF651" FromRole="OwnCompany" ToRole="CustomerGroup" />
     <NavigationProperty Name="ExpensesTypes" Relationship="Self.FK__ExpensesT__OwnCo__2FCF1A8A" FromRole="OwnCompany" ToRole="ExpensesType" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_OwnCompany" FromRole="OwnCompany" ToRole="OrderDetail" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Product__OwnComp__367C1819" FromRole="OwnCompany" ToRole="Product" />
     <NavigationProperty Name="RevenueTypes" Relationship="Self.FK__RevenueTy__OwnCo__3864608B" FromRole="OwnCompany" ToRole="RevenueType" />
     <NavigationProperty Name="Vehicles" Relationship="Self.FK__Vehicle__OwnComp__40F9A68C" FromRole="OwnCompany" ToRole="Vehicle" />
     <NavigationProperty Name="VehicleTypes" Relationship="Self.FK__VehicleTy__OwnCo__42E1EEFE" FromRole="OwnCompany" ToRole="VehicleType" />
@@ -714,8 +733,6 @@
     <NavigationProperty Name="WorkOrders" Relationship="Self.FK_Reciver_OwnCompany" FromRole="OwnCompany" ToRole="WorkOrder" />
     <NavigationProperty Name="WorkOrders1" Relationship="Self.FK_Sender_OwnCompany" FromRole="OwnCompany" ToRole="WorkOrder" />
     <NavigationProperty Name="UserAccounts" Relationship="Self.FK_UserAccounts_OwnCompany" FromRole="OwnCompany" ToRole="UserAccounts" />
-    <NavigationProperty Name="Categories" Relationship="LCMModel.FK__Category__OwnCom__29221CFB" FromRole="OwnCompany" ToRole="Category" />
-    <NavigationProperty Name="Products" Relationship="LCMModel.FK__Product__OwnComp__367C1819" FromRole="OwnCompany" ToRole="Product" />
   </EntityType>
   <EntityType Name="OwnDepartment">
     <Key>
@@ -819,6 +836,34 @@
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
     <Property Name="ModifiedBy" Type="Int64" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Category" Type="Int64" />
+    <Property Name="Weight" Type="Double" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int64" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="Width" Type="Double" />
+    <Property Name="Height" Type="Double" />
+    <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Volume" Type="Double" />
+    <Property Name="Length" Type="Double" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="OwnCompanyId" Type="Int64" />
+    <NavigationProperty Name="BiltyDetails" Relationship="Self.FK_BiltyDetails_Product" FromRole="Product" ToRole="BiltyDetails" />
+    <NavigationProperty Name="Category1" Relationship="Self.FK_Product_Product" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
+    <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Product__OwnComp__367C1819" FromRole="Product" ToRole="OwnCompany" />
   </EntityType>
   <EntityType Name="ProductBroker">
     <Key>
@@ -1318,6 +1363,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_BiltyDetails_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="BiltyDetails" Type="Self.BiltyDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BiltyDetails">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_BiltyDetails_ProductBroker">
     <End Role="ProductBroker" Type="Self.ProductBroker" Multiplicity="1" />
     <End Role="BiltyDetails" Type="Self.BiltyDetail" Multiplicity="*" />
@@ -1327,6 +1384,30 @@
       </Principal>
       <Dependent Role="BiltyDetails">
         <PropertyRef Name="ProductBrokerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Category__OwnCom__29221CFB">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="Category" Type="Self.Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Category">
+        <PropertyRef Name="OwnCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Product">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="Category" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1522,6 +1603,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_OrderDetail_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="Product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_OrderDetail_ProductBroker">
     <End Role="ProductBroker" Type="Self.ProductBroker" Multiplicity="0..1" />
     <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
@@ -1543,6 +1636,18 @@
       </Principal>
       <Dependent Role="OrderDetail">
         <PropertyRef Name="WorkOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__OwnComp__367C1819">
+    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnCompany">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="OwnCompanyId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1711,6 +1816,7 @@
     <EntitySet Name="Bilties" EntityType="Self.Bilty" />
     <EntitySet Name="BiltyDetails" EntityType="Self.BiltyDetail" />
     <EntitySet Name="Brokers" EntityType="Self.Broker" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="Cities" EntityType="Self.City" />
     <EntitySet Name="Companies" EntityType="Self.Company" />
     <EntitySet Name="ContactNoTypes" EntityType="Self.ContactNoType" />
@@ -1747,6 +1853,7 @@
     <EntitySet Name="PackageTypes" EntityType="Self.PackageType" />
     <EntitySet Name="PickDropLocations" EntityType="Self.PickDropLocation" />
     <EntitySet Name="PrincipleCompanies" EntityType="Self.PrincipleCompany" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
     <EntitySet Name="ProductBrokers" EntityType="Self.ProductBroker" />
     <EntitySet Name="Provinces" EntityType="Self.Province" />
     <EntitySet Name="Regions" EntityType="Self.Region" />
@@ -1803,9 +1910,21 @@
       <End Role="Vehicle" EntitySet="Vehicles" />
       <End Role="Bilty" EntitySet="Bilties" />
     </AssociationSet>
+    <AssociationSet Name="FK_BiltyDetails_Product" Association="Self.FK_BiltyDetails_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="BiltyDetails" EntitySet="BiltyDetails" />
+    </AssociationSet>
     <AssociationSet Name="FK_BiltyDetails_ProductBroker" Association="Self.FK_BiltyDetails_ProductBroker">
       <End Role="ProductBroker" EntitySet="ProductBrokers" />
       <End Role="BiltyDetails" EntitySet="BiltyDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Category__OwnCom__29221CFB" Association="Self.FK__Category__OwnCom__29221CFB">
+      <End Role="OwnCompany" EntitySet="OwnCompanies" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Product" Association="Self.FK_Product_Product">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
     </AssociationSet>
     <AssociationSet Name="FK_City_OwnCompany" Association="Self.FK_City_OwnCompany">
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
@@ -1871,6 +1990,10 @@
       <End Role="PackageType" EntitySet="PackageTypes" />
       <End Role="OrderDetail" EntitySet="OrderDetails" />
     </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_Product" Association="Self.FK_OrderDetail_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
     <AssociationSet Name="FK_OrderDetail_ProductBroker" Association="Self.FK_OrderDetail_ProductBroker">
       <End Role="ProductBroker" EntitySet="ProductBrokers" />
       <End Role="OrderDetail" EntitySet="OrderDetails" />
@@ -1878,6 +2001,10 @@
     <AssociationSet Name="FK_OrderDetail_WorkOrder" Association="Self.FK_OrderDetail_WorkOrder">
       <End Role="WorkOrder" EntitySet="WorkOrders" />
       <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__OwnComp__367C1819" Association="Self.FK__Product__OwnComp__367C1819">
+      <End Role="OwnCompany" EntitySet="OwnCompanies" />
+      <End Role="Product" EntitySet="Products" />
     </AssociationSet>
     <AssociationSet Name="FK__RevenueTy__OwnCo__3864608B" Association="Self.FK__RevenueTy__OwnCo__3864608B">
       <End Role="OwnCompany" EntitySet="OwnCompanies" />
@@ -1931,132 +2058,5 @@
       <End Role="VendorType" EntitySet="VendorTypes" />
       <End Role="Vendor" EntitySet="Vendors" />
     </AssociationSet>
-    <EntitySet Name="Categories" EntityType="LCMModel.Category" />
-    <EntitySet Name="Products" EntityType="LCMModel.Product" />
-    <AssociationSet Name="FK_BiltyDetails_Product" Association="LCMModel.FK_BiltyDetails_Product">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="BiltyDetail" EntitySet="BiltyDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Category__OwnCom__29221CFB" Association="LCMModel.FK__Category__OwnCom__29221CFB">
-      <End Role="OwnCompany" EntitySet="OwnCompanies" />
-      <End Role="Category" EntitySet="Categories" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Product_Category" Association="LCMModel.FK_Product_Category">
-      <End Role="Category" EntitySet="Categories" />
-      <End Role="Product" EntitySet="Products" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OrderDetail_Product" Association="LCMModel.FK_OrderDetail_Product">
-      <End Role="Product" EntitySet="Products" />
-      <End Role="OrderDetail" EntitySet="OrderDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Product__OwnComp__367C1819" Association="LCMModel.FK__Product__OwnComp__367C1819">
-      <End Role="OwnCompany" EntitySet="OwnCompanies" />
-      <End Role="Product" EntitySet="Products" />
-    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="Category">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="Status" Type="Boolean" />
-    <Property Name="CreatedBy" Type="Int64" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="Int64" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <Property Name="OwnCompanyId" Type="Int64" />
-    <NavigationProperty Name="OwnCompany" Relationship="LCMModel.FK__Category__OwnCom__29221CFB" FromRole="Category" ToRole="OwnCompany" />
-    <NavigationProperty Name="Products" Relationship="LCMModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
-  </EntityType>
-  <EntityType Name="Product">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Category" Type="Int64" />
-    <Property Name="Weight" Type="Double" />
-    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <Property Name="Status" Type="Boolean" />
-    <Property Name="CreatedBy" Type="Int64" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-    <Property Name="ModifiedBy" Type="Int64" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <Property Name="Width" Type="Double" />
-    <Property Name="Height" Type="Double" />
-    <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Volume" Type="Double" />
-    <Property Name="Length" Type="Double" />
-    <Property Name="IsDeleted" Type="Boolean" />
-    <Property Name="IsActive" Type="Boolean" />
-    <Property Name="OwnCompanyId" Type="Int64" />
-    <NavigationProperty Name="BiltyDetails" Relationship="LCMModel.FK_BiltyDetails_Product" FromRole="Product" ToRole="BiltyDetail" />
-    <NavigationProperty Name="Category1" Relationship="LCMModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
-    <NavigationProperty Name="OrderDetails" Relationship="LCMModel.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
-    <NavigationProperty Name="OwnCompany" Relationship="LCMModel.FK__Product__OwnComp__367C1819" FromRole="Product" ToRole="OwnCompany" />
-  </EntityType>
-  <Association Name="FK_BiltyDetails_Product">
-    <End Type="LCMModel.Product" Role="Product" Multiplicity="0..1" />
-    <End Type="LCMModel.BiltyDetail" Role="BiltyDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="BiltyDetail">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Category__OwnCom__29221CFB">
-    <End Type="LCMModel.OwnCompany" Role="OwnCompany" Multiplicity="0..1" />
-    <End Type="LCMModel.Category" Role="Category" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OwnCompany">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Category">
-        <PropertyRef Name="OwnCompanyId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Product_Category">
-    <End Type="LCMModel.Category" Role="Category" Multiplicity="0..1" />
-    <End Type="LCMModel.Product" Role="Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Category">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="Category" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_OrderDetail_Product">
-    <End Type="LCMModel.Product" Role="Product" Multiplicity="0..1" />
-    <End Type="LCMModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="OrderDetail">
-        <PropertyRef Name="Product" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Product__OwnComp__367C1819">
-    <End Type="LCMModel.OwnCompany" Role="OwnCompany" Multiplicity="0..1" />
-    <End Type="LCMModel.Product" Role="Product" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OwnCompany">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Product">
-        <PropertyRef Name="OwnCompanyId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

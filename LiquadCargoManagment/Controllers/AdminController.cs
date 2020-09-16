@@ -1,6 +1,7 @@
 ﻿using LiquadCargoManagment.DataTransferObject;
 using LiquadCargoManagment.Helpers;
 using LiquadCargoManagment.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -2207,17 +2208,20 @@ namespace LiquadCargoManagment.Controllers
             List<OwnCompany> Sender = lcm.OwnCompanies.ToList();
             ViewBag.Sender = new SelectList(Sender, "ID", "Name");
 
-            List<CustomerCompany> Receiver = lcm.CustomerCompanies.ToList();
-            ViewBag.li = new SelectList(Receiver, "ID", "Name");
+            List<CustomerCompany> Oc = lcm.CustomerCompanies.ToList();
+            ViewBag.li = new SelectList(Oc, "ID", "Name");
 
             List<ExpensesType> expense = lcm.ExpensesTypes.ToList();
             ViewBag.Expense = new SelectList(expense, "ExpensesTypeID", "ExpensesTypeName");
 
+
+        
+
             List<ProductBroker> li = lcm.ProductBrokers.ToList();
             ViewBag.ProductBroker = new SelectList(li, "Id", "Name");
 
-            List<Category> ProductType = lcm.Categories.ToList();
-            ViewBag.pt = new SelectList(ProductType, "ID", "Name");
+            List<Category> Pt = lcm.Categories.ToList();
+            ViewBag.pt = new SelectList(Pt, "ID", "Name");
 
             List<Product> P = lcm.Products.ToList();
             ViewBag.p = new SelectList(P, "ID", "Name");
@@ -2226,164 +2230,173 @@ namespace LiquadCargoManagment.Controllers
 
             ViewBag.VehicleTypes = new SelectList(context.VehicleTypes.ToList(), "ID", "Name");
 
-            List<Bank> Bank = lcm.Banks.ToList();
-            ViewBag.Bank = new SelectList(Bank, "BankID", "Name");
+            List<Bank> bnk = lcm.Banks.ToList();
+            ViewBag.Bank = new SelectList(bnk, "BankID", "Name");
 
-            BiltyViewModel vm = new BiltyViewModel();
+            WorkOrderViewModel vm = new WorkOrderViewModel();
             if (Id > 0)
             {
-                vm.lstBiltyDetail = context.BiltyDetails.Where(x => x.BiltyID == Id).OrderByDescending(x => x.ID).ToList();
-                vm.Bilty = context.Bilties.Where(x => x.ID == Id).FirstOrDefault();
+                vm.lstOrderDetail = context.OrderDetails.Where(x => x.WorkOrderID == Id).OrderByDescending(x => x.OrderId).ToList();
+                vm.WorkOrder = context.WorkOrders.Where(x => x.WorkorderId == Id).FirstOrDefault();
+
             }
             else
             {
-                vm.lstBiltyDetail = new List<BiltyDetail>();
-                vm.Bilty = new Bilty();
+                vm.lstOrderDetail = new List<OrderDetail>();
+                vm.WorkOrder = new WorkOrder();
             }
             return View(vm);
         }
 
-        [HttpPost]
+        //Cascading dropdown of Product and PackageType
 
-        public JsonResult InsertBilty(List<BiltyDetail> Details, List<VehicleExpens> Expenses, List<DieselExpense> Diesal, Bilty Order)
+            public JsonResult getProductList(int ID)
+        {
+            context.Configuration.ProxyCreationEnabled = false;
+            List<Product> ProductList = context.Products.Where(x => x.ID == ID).ToList();
+            return Json(ProductList, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+        public JsonResult getAccount(int ID)
+        {
+            context.Configuration.ProxyCreationEnabled = false;
+            List<Product> ProductList = context.Products.Where(x => x.ID == ID).ToList();
+            return Json(ProductList, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        public JsonResult InsertBilty(List<BiltyDetail> Details, List<VehicleExpens> Expenses, List<DieselExpense> Diesal,Bilty Order)
         {
             string message = "";
             string status = "OK";
-            using (LCMEntities lcm = new LCMEntities())
+            using (var transaction = context.Database.BeginTransaction())
             {
-                using (var transaction = lcm.Database.BeginTransaction())
+                try
                 {
-                    try
+
+                    long OrderID = 0;
+                    if (Order != null)
                     {
-
-                        long OrderID = 0;
-
-                        if (Order != null)
-                        {
-                            Order.CreatedBy = ApplicationHelper.UserID;
-                            Order.CreatedDate = DateTime.Now;
-                            lcm.Bilties.Add(Order);
-                            lcm.SaveChanges();
-                            OrderID = Order.ID;
-                        }
-                        if (Details == null)
-                        {
-                            Details = new List<BiltyDetail>();
-                        }
-
-
-                        foreach (BiltyDetail customers in Details)
-                        {
-                            customers.ID = OrderID;
-                            lcm.BiltyDetails.Add(customers);
-                        }
-                        lcm.SaveChanges();
-                        transaction.Commit();
-                        message = "Bilty Created Successfully ";
+                        Order.CreatedBy = ApplicationHelper.UserID;
+                        Order.CreatedDate = DateTime.Now;
+                        context.Bilties.Add(Order);
+                        context.SaveChanges();
+                        OrderID = Order.ID;
                     }
-                    catch (Exception ex)
+                    if (Details == null)
+                        Details = new List<BiltyDetail>();
+                    foreach (BiltyDetail bilty in Details)
                     {
-                        transaction.Rollback();
-                        status = ex.GetType().Name;
-                        message = ex.Message;
-                        if (ex.InnerException != null)
-                        {
-                            message += " Inner Exception: " + ex.InnerException.Message;
-                        }
+                        bilty.BiltyID = OrderID;
+                        context.BiltyDetails.Add(bilty);
+                    }
+                    if (Expenses == null)
+                        Expenses = new List<VehicleExpens>();
+                    foreach (var item in Expenses)
+                    {
+                        item.BiltyID = OrderID;
+                        context.VehicleExpenses.Add(item);
+                    }
+                    if (Diesal == null)                    
+                        Diesal = new List<DieselExpense>();                    
+                    foreach (var item in Diesal)
+                    {
+                        item.BiltyID = OrderID;
+                        context.DieselExpenses.Add(item);
+                    }
+                    context.SaveChanges();
+                    transaction.Commit();
+                    message = "Bilty has been created";
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    status = ex.GetType().Name;
+                    message = ex.Message;
+                    if (ex.InnerException != null)
+                    {
+                        message += " Inner Exception: " + ex.InnerException.Message;
                     }
                 }
-
-            }
-
+            }         
             return Json(new { message = message, status = status }, JsonRequestBehavior.AllowGet);
 
         }
 
         #endregion
-
-        #region BiltyGrid
-        public ActionResult BiltyGrid()
+        public ActionResult BiltyData()
         {
-            ViewBag.Sender = new SelectList(context.CustomerCompanies.ToList(), "ID", "Name");
-            ViewBag.BillTo = new SelectList(context.CustomerCompanies.ToList(), "ID", "Name");
-            return View(context.Bilties.OrderByDescending(x => x.ID).ToList());
+          
+            return View();
         }
         [HttpPost]
-        public JsonResult DeleteBiltyGrid(int id)
+        public ActionResult BiltyData(LiquadCargoManagment.Models.BiltyGrid grid)
         {
-            string Message = "";
-            string Status = "OK";
-            try
-            {
-                if (id > 0)
-                {
-                    var inRow = context.Bilties.Where(model => model.ID == id).FirstOrDefault();
-                    if (inRow != null)
-                    {
+           
 
-                        context.Entry(inRow).State = EntityState.Deleted;
-                        int a = context.SaveChanges();
-                        Message = "Record Deleted Successfully";
-
-                    }
-                    else
-                    {
-                        Message = "Application cannot find this record in database please refresh the browser";
-                        Status = "Exception";
-                    }
-                }
-                else
-                {
-                    Message = "Something Went Wrong";
-                    Status = "Exception";
-                }
-            }
-            catch (Exception ex)
-            {
-
-                Message = $"An error occured due to: {ex.Message}";
-                Status = "Exception";
-            }
-
-            string View = RenderPartialToString("~/Views/Shared/_BiltyGrid.cshtml", context.Bilties.OrderByDescending(x => x.ID).ToList());
-            return Json(new { Status = Status, Message = Message, html = View }, JsonRequestBehavior.AllowGet);
+            return View();
         }
-        #region Search
-        public ActionResult SearchBilty(DateTime? DateFrom, DateTime? DateTo, DateTime? DeliDate, int SearchSender, int SearchBillTo)
+        //[HttpPost]
+        //public ActionResult Orders(BiltyDetail bill)
+        //{
+        //    string Message = "";
+        //    string Status = "OK";
+        //    try
+        //    {
+        //        LCMEntities obj = new LCMEntities();
+        //        //List<Department> li = obj.Departments.ToList();
+        //        //ViewBag.dept_list = new SelectList(li, "dept_ID", "dept_Name");
+
+        //        Bilty bilty = new Bilty();
+        //        empl.emp_Name = emp.emp_Name;
+        //        empl.emp_Address = emp.emp_Address;
+        //        empl.emp_Gender = emp.emp_Gender;
+        //        empl.emp_dep_ID = emp.emp_dep_ID;
+        //        obj.Employees.Add(empl);
+        //        obj.SaveChanges();
+        //        int latestEmployeeID = empl.emp_ID;
+
+
+        //        Location loc = new Location();
+        //        loc.l_Name = emp.l_Name;
+        //        loc.l_emp_ID = latestEmployeeID;
+        //        obj.Locations.Add(loc);
+        //        obj.SaveChanges();
+        //        Message = "Saved successfully";
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        Message = ex.Message;
+        //        Status = ex.GetType().Name;
+
+        //    }
+        //    string view = RenderPartialToString("_List", obj.Employees.ToList());
+
+        //    return Json(new { message = Message, status = Status, html = view }, JsonRequestBehavior.AllowGet);
+        //}
+
+        //public string RenderPartialToString(string viewName, object model)
+        //{
+        //    ViewData.Model = model;
+        //    using (StringWriter writer = new StringWriter())
+        //    {
+        //        ViewEngineResult vResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
+        //        ViewContext vContext = new ViewContext(this.ControllerContext, vResult.View, ViewData, new TempDataDictionary(), writer);
+        //        vResult.View.Render(vContext, writer);
+        //        return writer.ToString();
+        //    }
+        //}
+        //Cascading Dropdown
+        public ActionResult products()
         {
-            List<Bilty> lstBilty = new List<Bilty>();
-            if (DeliDate != null)
-            {
-                lstBilty = context.Bilties.Where(x => x.DeliveryDate >= DeliDate).ToList();
-            }
-            else if (DateFrom != null && DateTo == null)
-            {
-                lstBilty = context.Bilties.Where(x => x.OrderDate >= DateFrom).ToList();
-            }
-            else if (DateFrom != null && DateTo != null)
-            {
-                lstBilty = context.Bilties.Where(x => x.OrderDate >= DateFrom && x.OrderDate <= DateTo).ToList();
-
-            }
-            else if (DateFrom == null && DateTo != null)
-            {
-                lstBilty = context.Bilties.Where(x => x.OrderDate <= DateTo).ToList();
-            }
-            else if (SearchSender.ToString() != null)
-            {
-                lstBilty = context.Bilties.Where(x => x.Sender <= SearchSender).ToList();
-            }
-            else if (SearchBillTo.ToString() != null)
-            {
-                lstBilty = context.Bilties.Where(x => x.BillTo <= SearchBillTo).ToList();
-            }
-            string view = RenderPartialToString("_BiltyGrid", lstBilty);
-            return Json(new { html = view }, JsonRequestBehavior.AllowGet);
+            return View();
         }
-
-        #endregion
-
-        #endregion
-
     }
 }
