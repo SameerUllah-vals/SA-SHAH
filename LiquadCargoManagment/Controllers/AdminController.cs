@@ -2208,7 +2208,7 @@ namespace LiquadCargoManagment.Controllers
             List<OwnCompany> Sender = lcm.OwnCompanies.ToList();
             ViewBag.Sender = new SelectList(Sender, "ID", "Name");
 
-            List<OwnCompany> Oc = lcm.OwnCompanies.ToList();
+            List<CustomerCompany> Oc = lcm.CustomerCompanies.ToList();
             ViewBag.li = new SelectList(Oc, "ID", "Name");
 
             List<ExpensesType> expense = lcm.ExpensesTypes.ToList();
@@ -2257,7 +2257,7 @@ namespace LiquadCargoManagment.Controllers
             return Json(ProductList, JsonRequestBehavior.AllowGet);
         }
 
-       
+
 
 
 
@@ -2267,6 +2267,8 @@ namespace LiquadCargoManagment.Controllers
             List<Product> ProductList = context.Products.Where(x => x.ID == ID).ToList();
             return Json(ProductList, JsonRequestBehavior.AllowGet);
         }
+
+
 
         public JsonResult InsertBilty(List<BiltyDetail> Details, List<VehicleExpens> Expenses, List<DieselExpense> Diesal,Bilty Order)
         {

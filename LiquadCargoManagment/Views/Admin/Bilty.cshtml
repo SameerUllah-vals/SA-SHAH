@@ -98,7 +98,7 @@
                             <input type="text" class="form-control amount" autocomplete="off" name="Weight" pattern="([0-9]{1,3}).([0-9]{1,3})" onkeypress="return inputLimiter(event,'custom')" onkeyup="Grandtotal('#Add',4,'weight')" id="txtWeight">
                         </td>
                         <td style="width:50px">
-                            <input type="text" class="form-control " autocomplete="off" name="unit" onkeyup="Grandtotal('#Add',5,'unit')" id="txtunit">
+                            <input type="text" class="form-control "readonly="readonly" autocomplete="off" name="unit" onkeyup="Grandtotal('#Add',5,'unit')" id="txtunit" >
                         </td>
                         <td style="width:50px">
                             <input type="text" class="form-control amount" autocomplete="off" onkeyup="Grandtotal('#Add',6,'qty')" name="Quantity" id="txtQuantity">
@@ -358,7 +358,14 @@
     });
 
 
-    
+    //$(function () {
+
+
+    //    $("#txtProduct").change(function () {
+
+    //        var displayUnit = $()
+    //    })
+    //})
 
 
 
@@ -684,5 +691,12 @@
 
 
 
+
+
+
+
+
+
+    
 
 </script>
