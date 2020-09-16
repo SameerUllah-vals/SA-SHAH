@@ -500,8 +500,6 @@
         }
     };
 
-
- 
     $(document).ready(function () {
         // Get value on keyup funtion
         $("#txtWeight, #txtQuantity").keyup(function () {
@@ -515,11 +513,13 @@
 
         });
     });
+ 
+    
         function Grandtotal(q, totalColumnIndex, type) {
             let grTotal = 0;
             for (var i = 0; i < $(q).find("tbody tr").length; i++) {
 
-
+                
                 grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
             }
             if (type == "weight") {
