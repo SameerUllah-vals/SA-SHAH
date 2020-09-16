@@ -82,7 +82,7 @@
     <Property Name="BiltyID" Type="bigint" />
     <Property Name="Receiver" Type="bigint" Nullable="false" />
     <Property Name="ProductBrokerID" Type="bigint" Nullable="false" />
-    <Property Name="PackageTypeId" Type="bigint" />
+    <Property Name="ProductTypeId" Type="bigint" />
     <Property Name="ProductId" Type="bigint" />
     <Property Name="Weight" Type="float" />
     <Property Name="Unit" Type="float" />
@@ -1346,10 +1346,10 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Bilty_BillToOwnCompany">
-    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="CustomerCompany" Type="Self.CustomerCompany" Multiplicity="0..1" />
     <End Role="Bilty" Type="Self.Bilty" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="OwnCompany">
+      <Principal Role="CustomerCompany">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Bilty">
@@ -1358,10 +1358,10 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Bilty_OwnCompany">
-    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="0..1" />
+    <End Role="CustomerCompany" Type="Self.CustomerCompany" Multiplicity="0..1" />
     <End Role="Bilty" Type="Self.Bilty" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="OwnCompany">
+      <Principal Role="CustomerCompany">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Bilty">
@@ -1382,26 +1382,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_BiltyDetails_CustomerCompany">
-    <End Role="OwnCompany" Type="Self.OwnCompany" Multiplicity="1" />
+    <End Role="Area" Type="Self.Area" Multiplicity="1" />
     <End Role="BiltyDetails" Type="Self.BiltyDetails" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="OwnCompany">
+      <Principal Role="Area">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="BiltyDetails">
         <PropertyRef Name="Receiver" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_BiltyDetails_PackageType">
-    <End Role="PackageType" Type="Self.PackageType" Multiplicity="0..1" />
-    <End Role="BiltyDetails" Type="Self.BiltyDetails" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PackageType">
-        <PropertyRef Name="PackageTypeID" />
-      </Principal>
-      <Dependent Role="BiltyDetails">
-        <PropertyRef Name="PackageTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1549,7 +1537,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Product_Product">
+  <Association Name="FK_Product_Category">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1857,11 +1845,11 @@
       <End Role="AssignDrivers" EntitySet="AssignDrivers" />
     </AssociationSet>
     <AssociationSet Name="FK_Bilty_BillToOwnCompany" Association="Self.FK_Bilty_BillToOwnCompany">
-      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="CustomerCompany" EntitySet="CustomerCompany" />
       <End Role="Bilty" EntitySet="Bilty" />
     </AssociationSet>
     <AssociationSet Name="FK_Bilty_OwnCompany" Association="Self.FK_Bilty_OwnCompany">
-      <End Role="OwnCompany" EntitySet="OwnCompany" />
+      <End Role="CustomerCompany" EntitySet="CustomerCompany" />
       <End Role="Bilty" EntitySet="Bilty" />
     </AssociationSet>
     <AssociationSet Name="FK_Bilty_Vehicle" Association="Self.FK_Bilty_Vehicle">
@@ -1869,11 +1857,7 @@
       <End Role="Bilty" EntitySet="Bilty" />
     </AssociationSet>
     <AssociationSet Name="FK_BiltyDetails_CustomerCompany" Association="Self.FK_BiltyDetails_CustomerCompany">
-      <End Role="OwnCompany" EntitySet="OwnCompany" />
-      <End Role="BiltyDetails" EntitySet="BiltyDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_BiltyDetails_PackageType" Association="Self.FK_BiltyDetails_PackageType">
-      <End Role="PackageType" EntitySet="PackageType" />
+      <End Role="Area" EntitySet="Area" />
       <End Role="BiltyDetails" EntitySet="BiltyDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_BiltyDetails_Product" Association="Self.FK_BiltyDetails_Product">
@@ -1924,7 +1908,7 @@
       <End Role="OwnGroups" EntitySet="OwnGroups" />
       <End Role="OwnCompany" EntitySet="OwnCompany" />
     </AssociationSet>
-    <AssociationSet Name="FK_Product_Product" Association="Self.FK_Product_Product">
+    <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="Product" EntitySet="Product" />
     </AssociationSet>

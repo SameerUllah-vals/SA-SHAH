@@ -18,14 +18,12 @@ namespace LiquadCargoManagment.Models
         public OwnCompany()
         {
             this.Areas = new HashSet<Area>();
-            this.Categories = new HashSet<Category>();
             this.Cities = new HashSet<City>();
             this.Companies = new HashSet<Company>();
             this.CustomerCompanies = new HashSet<CustomerCompany>();
             this.CustomerGroups = new HashSet<CustomerGroup>();
             this.ExpensesTypes = new HashSet<ExpensesType>();
             this.OrderDetails = new HashSet<OrderDetail>();
-            this.Products = new HashSet<Product>();
             this.RevenueTypes = new HashSet<RevenueType>();
             this.Vehicles = new HashSet<Vehicle>();
             this.VehicleTypes = new HashSet<VehicleType>();
@@ -34,6 +32,8 @@ namespace LiquadCargoManagment.Models
             this.WorkOrders = new HashSet<WorkOrder>();
             this.WorkOrders1 = new HashSet<WorkOrder>();
             this.UserAccounts = new HashSet<UserAccount>();
+            this.Categories = new HashSet<Category>();
+            this.Products = new HashSet<Product>();
         }
     
         public long ID { get; set; }
@@ -56,8 +56,6 @@ namespace LiquadCargoManagment.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Area> Areas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Categories { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<City> Cities { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Company> Companies { get; set; }
@@ -69,8 +67,6 @@ namespace LiquadCargoManagment.Models
         public virtual ICollection<ExpensesType> ExpensesTypes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RevenueType> RevenueTypes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -88,5 +84,9 @@ namespace LiquadCargoManagment.Models
         public virtual ICollection<WorkOrder> WorkOrders1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserAccount> UserAccounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Category> Categories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

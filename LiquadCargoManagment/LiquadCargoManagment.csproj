@@ -4499,6 +4499,8 @@
     <Content Include="Web1.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-chosen.scss" />
+    <Content Include="Content\bootstrap-chosen.less" />
     <EntityDeploy Include="Models\LCM.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LCM.Designer.cs</LastGenOutput>
@@ -4506,8 +4508,6 @@
     <Content Include="Models\LCM.edmx.diagram">
       <DependentUpon>LCM.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\bootstrap-chosen.scss" />
-    <Content Include="Content\bootstrap-chosen.less" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -4579,6 +4579,7 @@
     <Content Include="Views\Shared\_WorkOrderGrid.cshtml" />
     <Content Include="Views\Admin\Bilty.cshtml" />
     <Content Include="Views\Shared\_BiltyGrid.cshtml" />
+    <Content Include="Views\Admin\BiltyGrid.cshtml" />
     <None Include="Web.Debug.config" />
     <None Include="Web.Release.config" />
   </ItemGroup>

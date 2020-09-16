@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="LCMModel.Bilty" Width="1.5" PointX="9.75" PointY="52.375" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.BiltyDetail" Width="1.5" PointX="10.75" PointY="37" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.Broker" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Category" Width="1.5" PointX="5.25" PointY="25.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.City" Width="1.5" PointX="8.25" PointY="39.25" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.Company" Width="1.5" PointX="5.25" PointY="34.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.ContactNoType" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
@@ -48,7 +47,6 @@
         <EntityTypeShape EntityType="LCMModel.PackageType" Width="1.5" PointX="10.5" PointY="47" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.PickDropLocation" Width="1.5" PointX="4.75" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.PrincipleCompany" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LCMModel.Product" Width="1.5" PointX="7.5" PointY="32.625" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.ProductBroker" Width="1.5" PointX="10.5" PointY="66.125" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.Province" Width="1.5" PointX="6" PointY="23.375" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.Region" Width="1.5" PointX="18.75" PointY="10.75" IsExpanded="true" />
@@ -81,10 +79,7 @@
         <AssociationConnector Association="LCMModel.FK_Bilty_BillToOwnCompany" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_Bilty_OwnCompany" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_Bilty_Vehicle" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK_BiltyDetails_Product" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_BiltyDetails_ProductBroker" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK__Category__OwnCom__29221CFB" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK_Product_Product" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_City_OwnCompany" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_City_Province" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK__Company__OwnComp__2BFE89A6" ManuallyRouted="false" />
@@ -101,10 +96,8 @@
         <AssociationConnector Association="LCMModel.FK_SoftwareSetup_NoType" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_OrderDetail_OwnCompany" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_OrderDetail_PackageType" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK_OrderDetail_Product" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_OrderDetail_ProductBroker" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_OrderDetail_WorkOrder" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK__Product__OwnComp__367C1819" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK__RevenueTy__OwnCo__3864608B" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK__Vehicle__OwnComp__40F9A68C" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK__VehicleTy__OwnCo__42E1EEFE" ManuallyRouted="false" />
@@ -118,6 +111,13 @@
         <AssociationConnector Association="LCMModel.FK_TaxRateRegistration_TaxRateRegistration" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_Vehicle_VehicleType" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_Vendor_VendorType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LCMModel.Category" Width="1.5" PointX="5.25" PointY="29.5" />
+        <EntityTypeShape EntityType="LCMModel.Product" Width="1.5" PointX="7.5" PointY="32.5" />
+        <AssociationConnector Association="LCMModel.FK_BiltyDetails_Product" />
+        <AssociationConnector Association="LCMModel.FK__Category__OwnCom__29221CFB" />
+        <AssociationConnector Association="LCMModel.FK_Product_Category" />
+        <AssociationConnector Association="LCMModel.FK_OrderDetail_Product" />
+        <AssociationConnector Association="LCMModel.FK__Product__OwnComp__367C1819" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

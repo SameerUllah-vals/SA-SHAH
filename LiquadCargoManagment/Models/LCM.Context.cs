@@ -31,7 +31,6 @@ namespace LiquadCargoManagment.Models
         public virtual DbSet<Bilty> Bilties { get; set; }
         public virtual DbSet<BiltyDetail> BiltyDetails { get; set; }
         public virtual DbSet<Broker> Brokers { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<ContactNoType> ContactNoTypes { get; set; }
@@ -68,7 +67,6 @@ namespace LiquadCargoManagment.Models
         public virtual DbSet<PackageType> PackageTypes { get; set; }
         public virtual DbSet<PickDropLocation> PickDropLocations { get; set; }
         public virtual DbSet<PrincipleCompany> PrincipleCompanies { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductBroker> ProductBrokers { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<Region> Regions { get; set; }
@@ -93,5 +91,7 @@ namespace LiquadCargoManagment.Models
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<VendorType> VendorTypes { get; set; }
         public virtual DbSet<WorkOrder> WorkOrders { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     }
 }
