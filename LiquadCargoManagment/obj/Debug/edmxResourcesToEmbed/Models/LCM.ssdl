@@ -1537,7 +1537,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Product_Category">
+  <Association Name="FK_Product_Product">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1908,7 +1908,7 @@
       <End Role="OwnGroups" EntitySet="OwnGroups" />
       <End Role="OwnCompany" EntitySet="OwnCompany" />
     </AssociationSet>
-    <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
+    <AssociationSet Name="FK_Product_Product" Association="Self.FK_Product_Product">
       <End Role="Category" EntitySet="Category" />
       <End Role="Product" EntitySet="Product" />
     </AssociationSet>

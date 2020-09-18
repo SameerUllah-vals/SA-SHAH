@@ -25,32 +25,32 @@
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header text-center">
-                    <h2 class="modal-title">Search Bilty<i class="fa fa-pencil-alt"></i></h2>
+                    <h2 class="modal-title">Search Bilty | <i class="fa fa-search"></i></h2>
                 </div>
                 <!-- END Modal Header -->
                 <!-- Modal Body -->
                 <div class="block full">
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label>Date From</label>
                             <input type="date" name="DateFrom" class="form-control">
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label>Date To</label>
                             <input type="date" name="DateTo" class="form-control">
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label>Delivery Date</label>
                             <input type="date" name="DeliDate" class="form-control">
                         </div>
                         <div class="col-md-6">
-                            <label>Sender</label>
-                            @Html.DropDownList("SearchSender", ViewBag.Sender as SelectList, "Select", new { @class = "form-control" })
+                            <label>BillTo</label>
+                            @Html.DropDownList("BillTo", ViewBag.BillTo as SelectList, "Select", new { @class = "form-control" })
                         </div>
                         <div class="col-md-6">
-                            <label>Bill To</label>
-                            @Html.DropDownList("SearchBillTo", ViewBag.BillTo as SelectList, "Select", new { @class = "form-control" })
+                            <label>Sender</label>
+                            @Html.DropDownList("Sender", ViewBag.Sender as SelectList, "Select", new { @class = "form-control" })
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,6 @@
             $('#modal-search').modal('hide');
             $("#grid").html(response.html);
             GetOrders();
-
         }
 
         function Message(title, text, type) {
@@ -103,6 +102,7 @@
         function ClearItem() {
             $("input[type='text']").val('');
             $("input[type='hidden']").val('');
+            $("input[type='date']").val('');
         }
 
     function DeleteModel(Id) {

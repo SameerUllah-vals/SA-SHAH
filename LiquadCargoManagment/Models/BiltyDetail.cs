@@ -27,7 +27,7 @@ namespace LiquadCargoManagment.Models
         public string Remarks { get; set; }
     
         public virtual Area Area { get; set; }
-        public virtual ProductBroker ProductBroker { get; set; }
         public virtual Product Product { get; set; }
+        public virtual ProductBroker ProductBroker { get; set; }
     }
 }

@@ -28,8 +28,8 @@ namespace LiquadCargoManagment.Models
     
         public virtual OwnCompany OwnCompany { get; set; }
         public virtual PackageType PackageType1 { get; set; }
+        public virtual Product Product1 { get; set; }
         public virtual ProductBroker ProductBroker1 { get; set; }
         public virtual WorkOrder WorkOrder { get; set; }
-        public virtual Product Product1 { get; set; }
     }
 }

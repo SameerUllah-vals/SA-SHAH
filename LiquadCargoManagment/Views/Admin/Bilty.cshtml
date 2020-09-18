@@ -1,5 +1,4 @@
-﻿@model LiquadCargoManagment.Models.WorkOrderViewModel
-@using LiquadCargoManagment.Models
+﻿
 @{
     ViewBag.Title = "Bilty";
 }
@@ -36,11 +35,11 @@
                 </div>*@
             <div class="col-md-2">
                 <label>Bilty Date</label>
-                <input type="text" class="form-control" id="OrderDate" value="@Model.WorkOrder.OrderDate" required />
+                <input type="date" class="form-control" id="OrderDate" required />
             </div>
             <div class="col-md-2">
                 <label>Delivery Date</label>
-                <input type="text" class="form-control" id="DeliveryDate">
+                <input type="date" class="form-control" id="DeliveryDate">
             </div>
             <div class="col-md-2">
                 <label>Bill To</label>
@@ -98,13 +97,13 @@
                             <input type="text" class="form-control amount" autocomplete="off" name="Weight" pattern="([0-9]{1,3}).([0-9]{1,3})" onkeypress="return inputLimiter(event,'custom')" onkeyup="Grandtotal('#Add',4,'weight')" id="txtWeight">
                         </td>
                         <td style="width:50px">
-                            <input type="text" class="form-control "readonly="readonly" autocomplete="off" name="unit" onkeyup="Grandtotal('#Add',5,'unit')" id="txtunit" >
+                            <input type="text" class="form-control "readonly="readonly" autocomplete="off" name="Unit" onkeyup="Grandtotal('#Add',5,'unit')" id="txtunit" >
                         </td>
                         <td style="width:50px">
                             <input type="text" class="form-control amount" autocomplete="off" onkeyup="Grandtotal('#Add',6,'qty')" name="Quantity" id="txtQuantity">
                         </td>
                         <td style="width:100px">
-                            <input type="text" class="form-control txtTotalWeight" autocomplete="off" readonly="readonly" name="TotalWeight" onkeyup="Grandtotal('#Add', 7,'totalweight')" id="txtTotalWeight">
+                            <input type="text" class="form-control txtTotalWeight" autocomplete="off" readonly name="TotalWeight" onkeyup="Grandtotal('#Add', 7,'totalweight')" id="txtTotalWeight">
                         </td>
                         <td>
                             <input type="text" class="form-control" autocomplete="off" name="Remarks" id="txtRemarks">
@@ -174,7 +173,7 @@
                 <tbody>
                     <tr>
                         <td>
-                            @*@Html.DropDownList("ID", ViewBag.vendor as SelectList,  new { @class = "form-control Search", @id = "txtExpenseTypeName" })*@
+                            @Html.DropDownList("ID", ViewBag.Expense as SelectList, "-Select-",  new { @class = "form-control Search", @id = "txtExpenseTypeName" })
                         </td>
                         <td>
                             <select class="form-control">
@@ -188,7 +187,7 @@
                             <input type="number" class="form-control" autocomplete="off" name="Amount" id="txtChequeNo">
                         </td>
                         <td>
-                            <input type="text" class="form-control" autocomplete="off" name="ChequeDate" id="txtChequeDate">
+                            <input type="date" class="form-control" autocomplete="off" name="ChequeDate" id="txtChequeDate">
                         </td>
                         <td>
                             <input type="number" class="form-control" autocomplete="off" name="Amount" onkeyup="GrandtotalExpense('#Add', 1,'Amount')" id="txtAmount">
@@ -286,31 +285,32 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
+
     //$(document).ready(function () {
     //    $("#SrNo").val(1);
     //    $("#SrNo").attr('readonly', true);
     //});
 
-    $(document).ready(function () {
-        $("#OrderDate").datepicker({
-            altField: "#OrderDate",
-            altFormat: "d MM, yy"
-        });
+    //$(document).ready(function () {
+    //    $("#OrderDate").datepicker({
+    //        altField: "#OrderDate",
+    //        altFormat: "d MM, yy"
+    //    });
 
-    });
-    $(document).ready(function () {
-        $("#DeliveryDate").datepicker({
-            altField: "#DeliveryDate",
-            altFormat: "d MM, yy"
-        });
-    });
+    //});
+    //$(document).ready(function () {
+    //    $("#DeliveryDate").datepicker({
+    //        altField: "#DeliveryDate",
+    //        altFormat: "d MM, yy"
+    //    });
+    //});
 
-    $(document).ready(function () {
-        $("#txtChequeDate").datepicker({
-            altField: "#txtChequeDate",
-            altFormat: "d MM, yy"
-        });
-    });
+    //$(document).ready(function () {
+    //    $("#txtChequeDate").datepicker({
+    //        altField: "#txtChequeDate",
+    //        altFormat: "d MM, yy"
+    //    });
+    //});
     $(document).ready(function () {
         $("#example").DataTable({
             dom: 'Bfrtip',
@@ -417,11 +417,6 @@
         var parent = $(A).parent("td").parent("tr").html();
         parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
         $("#Add").find("tbody").append(`<tr>${parent}</tr>`);
-
-
-
-
-        
     }
     function remove(e) {
         $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
@@ -559,6 +554,13 @@
         }
     };
 
+    $("table").on("change", "input", function () {  
+        var tableRow = $(this).closest("tr");
+        var one = Number(tableRow.find("#txtWeight").val()); 
+        var two = Number(tableRow.find("#txtQuantity").val()); 
+        var total = one * two;  //calculate total
+        tableRow.find("#txtTotalWeight").val(total);  //set value
+    });
 
    
 

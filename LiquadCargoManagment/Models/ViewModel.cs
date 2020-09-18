@@ -10,12 +10,6 @@ namespace LiquadCargoManagment.Models
         public Role Role { get; set; }
         public List<NavMenu> lstForms { get; set; }
     }
-    public class BiltyViewModel
-    {
-        public Bilty Bilty { get; set; }
-        public List<Bilty> lstBilty { get; set; }
-        public List<BiltyDetail> lstBiltyDetail { get; set; }
-    }
 
     public class WorkOrderViewModel
     {
