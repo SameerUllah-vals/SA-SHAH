@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+*.config
+/.vs/LiquadCargoManagment/v16/Server/sqlite3/storage.ide
+/.vs/LiquadCargoManagment/v16/Server/sqlite3/db.lock
+/.vs/LiquadCargoManagment/v16/Server/sqlite3/storage.ide-wal
+/.vs/LiquadCargoManagment/v16/Server/sqlite3/storage.ide-shm
