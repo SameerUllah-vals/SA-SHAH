@@ -2214,8 +2214,12 @@ namespace LiquadCargoManagment.Controllers
             List<ExpensesType> expense = lcm.ExpensesTypes.ToList();
             ViewBag.Expense = new SelectList(expense, "ExpensesTypeID", "ExpensesTypeName");
 
-          
 
+            List<Vendor> vendor = lcm.Vendors.ToList();
+            ViewBag.ven = new SelectList(vendor, "ID", "Name");
+
+            List<VendorType> vendortype = lcm.VendorTypes.ToList();
+            ViewBag.ventype = new SelectList(vendortype, "ID", "Name");
 
             List<ProductBroker> li = lcm.ProductBrokers.ToList();
             ViewBag.ProductBroker = new SelectList(li, "Id", "Name");
@@ -2262,6 +2266,12 @@ namespace LiquadCargoManagment.Controllers
             var vehicles = context.Vehicles.Where(x => x.VehicleID == VehicleID).FirstOrDefault();
             var vehicleTypes = context.VehicleTypes.Where(x => x.ID == vehicles.VehicleTypeID).FirstOrDefault();
             return Json(vehicleTypes.Name, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult getVendors(int ID)
+        {
+            var vendors = context.Vendors.Where(x => x.VendorTypeID == ID).ToList();
+            return Json(vendors, JsonRequestBehavior.AllowGet);
         }
 
 

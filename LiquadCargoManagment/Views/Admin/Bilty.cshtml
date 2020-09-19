@@ -179,7 +179,7 @@
                 <tbody>
                     <tr>
                         <td>
-                            @*@Html.DropDownList("ID", ViewBag.vendor as SelectList,  new { @class = "form-control Search", @id = "txtExpenseTypeName" })*@
+                           @*@Html.DropDownList("ID", ViewBag.vendor as SelectList,  new { @class = "form-control Search", @id = "txtExpenseTypeName" })*@
                         </td>
                         <td>
                             <select class="form-control">
@@ -233,15 +233,13 @@
                             @*<select class="form-control">
                                 <option>Item</option>
                             </select>*@
-                            @Html.DropDownList("Category", ViewBag.pt as SelectList, new { @class = "form-control Search", @id = "txtDiesel" , @disabled = "disabled" })
+                            @Html.DropDownList("ID", ViewBag.ven as SelectList, "-Select-", new { @class = "form-control Search", @id = "txtVendor", @required = true })
                         </td>
                         <td>
                             @*<select class="form-control">
                                 <option>Item</option>
                             </select>*@
-                            @Html.DropDownList("Product", ViewBag.p as SelectList, "Select", new { @class = "form-control Search", @id = "txtAccount",
-                          
-                       })
+                            @Html.DropDownList("ID", ViewBag.ventype as SelectList, "-Select-", new { @class = "form-control Search", @id = "txtVendorType", @required = true })
 
                            
                         </td>
@@ -368,75 +366,7 @@
                     alert('request failed');
                 }
             });
-        });
-  
-   
-
-        //unit 
-        //    $(document).ready(function(){
-        //        $.ajax({
-        //            type: "GET",
-        //            url: "/Admin/GetData",
-        //            data: "{}",
-        //            success: function (data) {
-        //                var s = '<option value="-1">Please Select a Car</option>';
-        //                for (var i = 0; i < data.length; i++) {
-        //                    s += '<option value="' + data[i].Unit + '">' + data[i].Name+ '</option>';
-        //                }
-        //                $("#txtProduct").html(s);
-        //            }
-        //        });
-        //    });
-    
-
-        //function getValue() {
-        //    var myVal = $("#txtProduct").val();
-        //    $("#txtunit").val(myVal);
-        //}
-
-        //Working Unit
-    
-        //$(document).ready(function () {
-
-        //    $("#Product").val(0);
-        //    $("#Product").change(function () {
-
-
-        //        var ID = $("#Product").val();
-        //        GetItemUnitPrice(ID);
-        //    });
-
-
-
-        //function GetItemUnitPrice(ID) {
-
-
-        //    //alert(itemId)
-        //    $.ajax({
-        //        async: true,
-        //        type: 'Get',
-        //        dataType: 'JSON',
-        //        contentType: 'application/json; charset = utf-8',
-        //        url: '/Home/getItemUnitPrice',
-        //        data: { ID: ID },
-        //        success: function (data) {
-        //            $("#txtunit").val(parseFloat(data).toFixed(2));
-        //        },
-
-        //        error: function () {
-
-
-        //            //alert("There is some problem to get the Unit Price");
-        //        }
-
-
-        //    });
-        //}
-
-
-        //Account and Diesel
-    
-
+        });     
         $("#txtDiesel").change(function () {
 
             $.get("/Admin/getAccount", { ID: $("#txtDiesel").val() }, function (data) {
@@ -448,370 +378,7 @@
                 });
             });
         });
-
-
-
-
-
-
-
-        //SEARCHABLE DROPDOWN
-
-        //$(document).ready(function () {
-        //    $(".Search").chosen();
-        //})
-
-        //SEARCHABLE DROPDOWN
-
-        function Successfully(response) {
-            if (response.Status != "OK") {
-                message("Required", response.message, "error");
-            }
-            else {
-                $('#modal-add').modal('hide');
-                message("Success", "Record Saved Success", "success");
-                $("#grid").html(response.html);
-                ClearItem();
-                GetOrders();
-            }
-        }
-
-        function Message(title, text, type) {
-            Swal.fire({
-                title: title + '!',
-                text: text,
-                icon: type,
-                confirmButtonText: 'OK'
-            })
-        }
-        function GetOrders() {
-            $('#example').DataTable();
-        }
-
-        function ClearItem() {
-            $("input[type='text']").val('');
-            $("input[type='hidden']").val('');
-        }
-
-        // Add line Method Working
-        function AddRow(A) {
-            debugger;
-            var parent = $(A).parent("td").parent("tr").html();
-            parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
-            $("#Add").find("tbody").append(`<tr>${parent}</tr>`);
-
-
-
-
-        
-        }
-        //$("#btnSaveEdit").on("click",  function () {
-        //    debugger;
-        //        var parent = $(A).parent("td").parent("tr").html();
-        //        parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
-        //      $("#Add").find("tbody").append(`<tr>${parent}</tr>`);
-
-
-        //});
-
-
-        // $("body").on("click", "#btnSaveEdit", function () {
-
-
-        //    //Reference the Name ContactNo and Address Textboxes
-        //     var txtReciever = $("#txtName");
-        //     var txtProductBroker = $("#txtProductBroker");
-        //     var txtPackageType = $("#txtPackageType");
-        //     var txtProduct = $("#txtProduct");
-        //     var txtWeight = $("#txtWeight");
-        //     var txtUnit = $("#txtunit");
-        //     var txtQuantity = $("#txtQuantity");
-        //     var txtWeight = $("#txtTotalWeight");
-        //     var txtRemarks= $("#txtRemarks");
-        
-
-
-
-        //    //Get the Reference of the table tbody element
-
-        //     var tBody = $("#Add > TBODY")[0];
-
-
-        //    //Add Row
-        //    var row = tBody.insertRow(-1);
-
-        //    //Add Receiver Cell
-        //    var cell = $(row.insertCell(-1));
-        //    cell.html(txtReciever.val());
-
-
-        //    //Add ContactNo Cell
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtProductBroker.val());
-
-        //    //Add Address Cell
-
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtPackageType.val());
-
-
-        //     //Add Address Cell
-
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtProduct.val());
-
-        //     //Add Address Cell
-
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtWeight.val());
-
-        //     //Add Address Cell
-
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtUnit.val());
-
-        //     //Add Address Cell
-
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtQuantity.val());
-
-        //     //Add Address Cell
-
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtWeight.val());
-
-        //     //Add Address Cell
-
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtRemarks.val());
-
-        //    //Add Button Cell
-        //    cell = $(row.insertCell(-1));
-        //    var btnRemove = $("<input/>");
-        //    btnRemove.attr("type", "button");
-        //    btnRemove.attr("onclick", "Remove(this);");
-        //    btnRemove.val("Remove");
-        //    cell.append(btnRemove);
-
-
-        //   //Clear textboxes
-        //    txtReciever.val("");
-        //    txtProductBroker.val("");
-        //    txtPackageType.val("");
-        //    txtProduct.val("");
-        //    txtWeight.val("");
-        //    txtUnit.val("");
-        //    txtQuantity.val("");
-        //    txtWeight.val("");
-        //    txtRemarks.val("");
-
-        //});
-
-
-
-
-        function remove(e) {
-            $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
-        }
-
-        function AddRowExpense(A) {
-            debugger;
-            var parent = $(A).parent("td").parent("tr").html();
-            parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
-            $("#AddExpense").find("tbody").append(`<tr>${parent}</tr>`);
-        }
-        function removeExpense(e) {
-            $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
-        }
-
-        function AddRowDeisel(A) {
-            debugger;
-            var parent = $(A).parent("td").parent("tr").html();
-            parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
-            $("#AddDeisel").find("tbody").append(`<tr>${parent}</tr>`);
-        }
-        function removeDeisel(e) {
-            $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
-        }
-
-        //$("body").on("click", "#btnAdd", function () {
-        //    //Reference the TextBoxes.
-
-
-        //    //Get the reference of the Table's TBODY element.
-        //    var tBody = $("#Add > tbody")[0];
-
-        //    //Add Row.
-        //    var row = tBody.insertRow(-1);
-
-        //    //Add Name cell.
-        //    var cell = $(row.insertCell(-1));
-        //    cell.html(txtSr.val());
-
-        //    //Add reciver cell.
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtReciever.val());
-        //    //Add ProductBroker cell.
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtProductBroker.val());
-        //    //Add PackageType cell.
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtPackageType.val());
-
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtProduct.val());
-        //    //Add Weight cell.
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtWeight.val());
-
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtunit.val());
-
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtQuantity.val());
-
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtTotalWeight.val());
-
-        //    cell = $(row.insertCell(-1));
-        //    cell.html(txtRemarks.val());
-
-
-        //    //Add Button cell.
-        //    cell = $(row.insertCell(-1));
-        //    var btnRemove = $("<input />");
-        //    btnRemove.attr("type", "button");
-        //    btnRemove.attr("onclick", "Remove(this);");
-        //    btnRemove.val("Remove");
-        //    cell.append(btnRemove);
-
-        //    //Clear the TextBoxes.
-        //    txtSr.val("");
-        //    txtReciever.val("");
-        //    txtProductBroker.val("");
-        //    txtPackageType.val("");
-        //    txtProduct.val("");
-        //    txtWeight.val("");
-        //    txtunit.val("");
-        //    txtQuantity.val("");
-        //    txtTotalWeight.val("");
-        //    txtRemarks.val("");
-        //});
-
-        // Broduct Broker Popup Script
-        function Successfully(response) {
-            console.log(response);
-            if (response.status != "OK") {
-                swal({
-                    title: "Failed",
-                    text: response.message,
-                    icon: "error",
-                    button: "Ok",
-                    confirmButtonText: 'OK'
-                });
-            }
-            else {
-                $("#ProductBroker").html('');
-                for (var i = 0; i < response.list.length; i++) {
-                    $("#ProductBroker").append(`<option value="${response.list[i].Id}">${response.list[i].Name}</option>`);
-                }
-                swal({
-                    title: "Success",
-                    text: response.message,
-                    icon: "success",
-                    button: "Ok",
-                    confirmButtonText: 'OK'
-                });
-                $("#Inform").modal('hide');
-            }
-        }
-        function OnFailure() {
-            //alert("Request Failed");
-        }
-        //End PopUp Function
-
-
-
-
-        function Remove(button) {
-            //Determine the reference of the Row using the Button.
-            var row = $(button).closest("tr");
-            var name = $("tr", row).eq(0).html();
-            if (confirm("Do you want to delete: " + name)) {
-                //Get the reference of the Table.
-                var table = $("#Add")[0];
-
-                //Delete the Table row using it's Index.
-                table.deleteRow(row[0].rowIndex);
-            }
-        };
-
-
-   
-
-        function Grandtotal(q, totalColumnIndex, type) {
-            let grTotal = 0;
-            for (var i = 0; i < $(q).find("tbody tr").length; i++) {
-
-                grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
-            }
-            if (type == "weight") {
-                $(q).find("tr.grand_total td:eq(1)").text(grTotal);
-            }
-
-                //else if (type == "unit") {
-                //    $(q).find("tr.grand_total td:eq(2)").text(grTotal);
-                //}
-            else if (type == "qty") {
-                $(q).find("tr.grand_total td:eq(3)").text(grTotal);
-            }
-            else if (type == "totalweight") {
-                $(q).find("tr.grand_total td:eq(4)").text(grTotal);
-            }
-        }
-
-        $(document).ready(function () {
-            // Get value on keyup funtion
-            $("#txtWeight, #txtQuantity").keyup(function () {
-
-                var total = 0;
-                var x = Number($("#txtWeight").val());
-                var y = Number($("#txtQuantity").val());
-                var total = x * y;
-
-                $('#txtTotalWeight').val(total);
-
-            });
-        });
-
-        function GrandtotalExpense(q, totalColumnIndex, exp) {
-            let grTotal = 0;
-            for (var i = 0; i < $(t).find("tbody tr").length; i++) {
-                grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
-            }
-            if (exp == "total") {
-                $(t).find("tr.grand_total td:eq(1)").text(grTotal);
-            }
-        }
-        //$("input").each(function () {
-        //    $(this).each(function () {
-        //        $(this).keyup(function () {
-        //            Sum.call(this);
-        //        })
-        //    })
-        //})
-
-        //function Sum() {
-        //    var sum = 0;
-        //    var thisrow = $(this).closest('tr');
-
-        //    $(thisrow).find("td:not(.txtTotalweight) input").each(function () {
-        //        sum += parseInt(this.value);
-        //    });
-
-        //    $(thisrow).find(".txtTotalweight").html(sum);
-        //}
-
+        //SEARCHABLE DROPDOWN    
         $("body").on("click", "#Addbtn", function () {
             let Order = {}
             let OrderNo = $("#WorkOrderNo").val();
@@ -888,19 +455,144 @@
 
         });
 
+    });
+    function Successfully(response) {
+        if (response.Status != "OK") {
+            message("Required", response.message, "error");
+        }
+        else {
+            $('#modal-add').modal('hide');
+            message("Success", "Record Saved Success", "success");
+            $("#grid").html(response.html);
+            ClearItem();
+            GetOrders();
+        }
+    }
+
+    function Message(title, text, type) {
+        Swal.fire({
+            title: title + '!',
+            text: text,
+            icon: type,
+            confirmButtonText: 'OK'
+        })
+    }
+    function GetOrders() {
+        $('#example').DataTable();
+    }
+    function ClearItem() {
+        $("input[type='text']").val('');
+        $("input[type='hidden']").val('');
+    }
+
+    // Add line Method Working
+    function AddRow(A) {
+        debugger;
+        var parent = $(A).parent("td").parent("tr").html();
+        parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
+        $("#Add").find("tbody").append(`<tr>${parent}</tr>`);
 
 
 
 
 
-        
+    }
 
+    function remove(e) {
+        $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
+    }
 
+    function AddRowExpense(A) {
+        debugger;
+        var parent = $(A).parent("td").parent("tr").html();
+        parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
+        $("#AddExpense").find("tbody").append(`<tr>${parent}</tr>`);
+    }
+    function removeExpense(e) {
+        $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
+    }
 
+    function AddRowDeisel(A) {
+        debugger;
+        var parent = $(A).parent("td").parent("tr").html();
+        parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
+        $("#AddDeisel").find("tbody").append(`<tr>${parent}</tr>`);
+    }
+    function removeDeisel(e) {
+        $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
+    }
 
+    // Broduct Broker Popup Script
+    function Successfully(response) {
+        console.log(response);
+        if (response.status != "OK") {
+            swal({
+                title: "Failed",
+                text: response.message,
+                icon: "error",
+                button: "Ok",
+                confirmButtonText: 'OK'
+            });
+        }
+        else {
+            $("#ProductBroker").html('');
+            for (var i = 0; i < response.list.length; i++) {
+                $("#ProductBroker").append(`<option value="${response.list[i].Id}">${response.list[i].Name}</option>`);
+            }
+            swal({
+                title: "Success",
+                text: response.message,
+                icon: "success",
+                button: "Ok",
+                confirmButtonText: 'OK'
+            });
+            $("#Inform").modal('hide');
+        }
+    }
+    function OnFailure() {
+        //alert("Request Failed");
+    }
+    //End PopUp Function
+    function Remove(button) {
+        //Determine the reference of the Row using the Button.
+        var row = $(button).closest("tr");
+        var name = $("tr", row).eq(0).html();
+        if (confirm("Do you want to delete: " + name)) {
+            //Get the reference of the Table.
+            var table = $("#Add")[0];
 
+            //Delete the Table row using it's Index.
+            table.deleteRow(row[0].rowIndex);
+        }
+    };
+    function Grandtotal(q, totalColumnIndex, type) {
+        let grTotal = 0;
+        for (var i = 0; i < $(q).find("tbody tr").length; i++) {
 
+            grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
+        }
+        if (type == "weight") {
+            $(q).find("tr.grand_total td:eq(1)").text(grTotal);
+        }
 
-    
-    })
-</script>
+            //else if (type == "unit") {
+            //    $(q).find("tr.grand_total td:eq(2)").text(grTotal);
+            //}
+        else if (type == "qty") {
+            $(q).find("tr.grand_total td:eq(3)").text(grTotal);
+        }
+        else if (type == "totalweight") {
+            $(q).find("tr.grand_total td:eq(4)").text(grTotal);
+        }
+    }
+    function GrandtotalExpense(q, totalColumnIndex, exp) {
+        let grTotal = 0;
+        for (var i = 0; i < $(t).find("tbody tr").length; i++) {
+            grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
+        }
+        if (exp == "total") {
+            $(t).find("tr.grand_total td:eq(1)").text(grTotal);
+        }
+    }
+
+       </script>

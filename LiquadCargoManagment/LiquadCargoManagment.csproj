@@ -4583,6 +4583,7 @@
     <Content Include="Views\Admin\Bilty.cshtml" />
     <Content Include="Views\Shared\_BiltyGrid.cshtml" />
     <Content Include="Views\Admin\BiltyData.cshtml" />
+    <Content Include="Views\Admin\BiltyGrid.cshtml" />
     <None Include="Web.Debug.config" />
     <None Include="Web.Release.config" />
   </ItemGroup>
