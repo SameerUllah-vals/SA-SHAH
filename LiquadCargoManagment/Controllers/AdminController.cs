@@ -2200,37 +2200,47 @@ namespace LiquadCargoManagment.Controllers
         #region Bilty
         public ActionResult Bilty(long? Id)
         {
-            LCMEntities lcm = new LCMEntities();
-            List<OwnCompany> Billto = lcm.OwnCompanies.ToList();
+            List<OwnCompany> Billto = context.OwnCompanies.ToList();
             ViewBag.bill = new SelectList(Billto, "ID", "Name");
 
-            List<OwnCompany> Sender = lcm.OwnCompanies.ToList();
+            List<OwnCompany> Sender = context.OwnCompanies.ToList();
             ViewBag.Sender = new SelectList(Sender, "ID", "Name");
 
-            List<CustomerCompany> Oc = lcm.CustomerCompanies.ToList();
+            List<CustomerCompany> Oc = context.CustomerCompanies.ToList();
             ViewBag.li = new SelectList(Oc, "ID", "Name");
 
-            List<ExpensesType> expense = lcm.ExpensesTypes.ToList();
-            ViewBag.Expense = new SelectList(expense, "ExpensesTypeID", "ExpensesTypeName");
+            List<ExpensesType> expense = context.ExpensesTypes.ToList();
+            ViewBag.Expense = new SelectList(expense, "ExpensesTypeID", "ExpensesTypeName");        
 
-
-        
-
-            List<ProductBroker> li = lcm.ProductBrokers.ToList();
+            List<ProductBroker> li = context.ProductBrokers.ToList();
             ViewBag.ProductBroker = new SelectList(li, "Id", "Name");
 
-            List<Category> Pt = lcm.Categories.ToList();
+            List<Category> Pt = context.Categories.ToList();
             ViewBag.pt = new SelectList(Pt, "ID", "Name");
 
-            List<Product> P = lcm.Products.ToList();
+            List<Product> P = context.Products.ToList();
             ViewBag.p = new SelectList(P, "ID", "Name");
 
             ViewBag.Reg = new SelectList(context.Vehicles.ToList(), "VehicleID", "RegNo");
 
             ViewBag.VehicleTypes = new SelectList(context.VehicleTypes.ToList(), "ID", "Name");
 
-            List<Bank> bnk = lcm.Banks.ToList();
+            List<Bank> bnk = context.Banks.ToList();
             ViewBag.Bank = new SelectList(bnk, "BankID", "Name");
+
+            var vendors = context.Vendors.ToList();
+            ViewBag.vendors = new SelectList(vendors, "ID", "Name");
+            var vendorsTypes = context.VendorTypes.ToList();
+            var selectedvalue = vendorsTypes.Where(x => x.Name.ToLower().Contains("filling station")).FirstOrDefault();
+            var newStation = new VendorType() { Code = "FS", Name = "Filling Station" };
+            if (selectedvalue == null)
+            {
+                context.VendorTypes.Add(newStation);
+                context.SaveChanges();
+                selectedvalue = newStation;
+            }                
+            ViewBag.vendorTypes = new SelectList(vendorsTypes, "ID", "Name",selectedvalue.ID);
+
 
             return View();
         }

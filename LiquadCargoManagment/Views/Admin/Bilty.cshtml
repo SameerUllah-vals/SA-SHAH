@@ -227,13 +227,13 @@
                             @*<select class="form-control">
                                 <option>Item</option>
                             </select>*@
-                            @Html.DropDownList("Category", ViewBag.pt as SelectList, new { @class = "form-control Search", @id = "txtDiesel" , @disabled = "disabled" })
+                            @Html.DropDownList("VendorType", ViewBag.vendorTypes as SelectList, new { @class = "form-control Search" , @disabled = "disabled" })
                         </td>
                         <td>
                             @*<select class="form-control">
                                 <option>Item</option>
                             </select>*@
-                            @Html.DropDownList("Product", ViewBag.p as SelectList, "Select", new { @class = "form-control Search", @id = "txtAccount"  })
+                            @Html.DropDownList("VendorType", ViewBag.vendors as SelectList, "Select", new { @class = "form-control Search" })
 
                            
                         </td>
@@ -615,82 +615,50 @@
         //    $(thisrow).find(".txtTotalweight").html(sum);
         //}
 
-        $("body").on("click", "#Addbtn", function () {
-            let Order = {}
-            let OrderNo = $("#WorkOrderNo").val();
-            let OrderDate = $("#OrderDate").val();
-            let DeliveryDate = $("#DeliveryDate").val();
-            let billTo = $("#billTo").val();
-            let Sender = $("#sender").val();
-            let VehicleId = $("#VehicleID").val();
-            let Freight = $("#Freight").val();
-            if (OrderNo == "" || OrderDate == "" || billTo == "" || Sender == "") {
-                Message("Required", "Enter all requried fields", "error");
-                return;
+    $("body").on("click", "#Addbtn", function () {
+        let Order = {}
+        //let OrderNo = $("input[name='WorkOrderNo']").val();
+        let OrderDate = $('#OrderDate').val();
+        let DeliveryDate = $('#DeliveryDate').val();
+        let billTo = $("#billTo").val();
+        let Sender = $("#sender").val();
+        if (OrderNo == "" || OrderDate == "" || billTo == "" || Sender == "") {
+            Message("Required", "Enter all requried fields", "error");
+            return;
+        }
+        Order.WorkOrderNo = OrderNo;
+        Order.OrderDate = OrderDate;
+        Order.billto = billTo;
+        Order.Sender = Sender;
+        Order.totalquantity = $("#Add").find("tr.grand_total td:eq(1)").text();
+        Order.totalweight = $("#Add").find("tr.grand_total td:eq(2)").text();
+        var customers = new Array();
+        $("#Add tbody tr").each(function () {
+            var row = $(this);
+            var customer = {};
+            //customer.WordOrderID = row.find("td").eq(0).find("input").val();
+            customer.Reciever = row.find("td:eq(0) select option:selected").val();
+            customer.ProductBroker = row.find("td:eq(1) select option:selected").val();
+            customer.PackageType = row.find("td:eq(2) select option:selected").val();
+            customer.Product = row.find("td:eq(3) select option:selected").val();
+            customer.Weight = row.find("td:eq(4) input").val();
+            customer.unit = row.find("td:eq(5) input").val();
+            customer.Quantity = row.find("td:eq(6) input").val();
+            customer.TotalWeight = row.find("td:eq(7) input").val();
+            customer.Remarks = row.find("td:eq(8) input").val();
+            customers.push(customer);
+        });
+        $.ajax({
+            type: "POST",
+            url: "/admin/InsertCustomers",
+            data: { Details: customers, Order: Order },
+            success: function (r) {
+                Message("Success", r.Message, "success");
+                window.location = "../Admin/WorkOrderGrid";
             }
-            Order.OrderNo = OrderNo;
-            Order.OrderDate = OrderDate;
-            Order.BillTo = billTo;
-            Order.Sender = Sender;
-            Order.VehicleID = VehicleId;
-            Order.Freight = Freight;
-            Order.DeliveryDate = DeliveryDate;
-            Order.OrderDetailsTotalQTY = $("#Add").find("tr.grand_total td:eq(2)").text();
-            Order.OrderDetailsTotalWeight = $("#Add").find("tr.grand_total td:eq(3)").text();
-            Order.VehicleExpensesGrandTotal = $("#AddExpense").find("tr.grand_total td:eq(5)").text();
-            Order.DieselExpensesGrandTotal = $("#AddDeisel").find("tr.grand_total td:eq(4)").text();
-
-
-            var customers = new Array();
-            var ExpenseArr = new Array();
-            var DiesalArr = new Array();
-            $("#Add tbody tr").each(function () {
-                var row = $(this);
-                var customer = {};
-                //customer.WordOrderID = row.find("td").eq(0).find("input").val();
-                customer.Reciever = row.find("td:eq(0) select option:selected").val();
-                customer.ProductBroker = row.find("td:eq(1) select option:selected").val();
-                customer.PackageType = row.find("td:eq(2) select option:selected").val();
-                customer.Product = row.find("td:eq(3) select option:selected").val();
-                customer.Weight = row.find("td:eq(4) input").val();
-                customer.unit = row.find("td:eq(5) input").val();
-                customer.Quantity = row.find("td:eq(6) input").val();
-                customer.TotalWeight = row.find("td:eq(7) input").val();
-                customer.Remarks = row.find("td:eq(8) input").val();
-                customers.push(customer);
-            });
-            $("#AddExpense tbody tr").each(function () {
-                var row = $(this);
-                var Expenses = new Object();
-                Expenses.ExpenseTypeId = row.find("td:eq(0) select option:selected").val();
-                Expenses.PaymentMethod = row.find("td:eq(1) select option:selected").val();
-                Expenses.BankBranch = row.find("td:eq(2) select option:selected").val();
-                Expenses.ChequeNo = row.find("td:eq(3) input").val();
-                Expenses.ChequeDate = row.find("td:eq(4) input").val();
-                Expenses.Amount = row.find("td:eq(5) input").val();
-                ExpenseArr.push(Expenses);
-            });
-            $("#AddDeisel tbody tr").each(function () {
-                var row = $(this);
-                var DiesalObj = new Object();
-                DiesalObj.VendorId = row.find("td:eq(1) select option:selected").val();
-                DiesalObj.Litre = row.find("td:eq(1) input").val();
-                DiesalObj.Rate = row.find("td:eq(2) input").val();
-                DiesalObj.Amount = row.find("td:eq(3) input").val();
-                DiesalArr.push(DiesalObj);
-            });
-            $.ajax({
-                type: "POST",
-                url: "/admin/InsertBilty",
-                data: { Details: customers, Expenses: ExpenseArr, Diesal: DiesalArr, Order: Order },
-                success: function (r) {
-                    Message("Success", r.Message, "success");
-                    window.location = "../Admin/BiltyGrid";
-                }
-            });
-
         });
 
+    });
 
 
 
