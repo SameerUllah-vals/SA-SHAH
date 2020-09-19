@@ -2201,10 +2201,10 @@ namespace LiquadCargoManagment.Controllers
         public ActionResult Bilty(long? Id)
         {
             LCMEntities lcm = new LCMEntities();
-            List<OwnCompany> Billto = lcm.OwnCompanies.ToList();
+            List<CustomerCompany> Billto = lcm.CustomerCompanies.ToList();
             ViewBag.bill = new SelectList(Billto, "ID", "Name");
 
-            List<OwnCompany> Sender = lcm.OwnCompanies.ToList();
+            List<CustomerCompany> Sender = lcm.CustomerCompanies.ToList();
             ViewBag.Sender = new SelectList(Sender, "ID", "Name");
 
             List<CustomerCompany> Oc = lcm.CustomerCompanies.ToList();
@@ -2212,9 +2212,6 @@ namespace LiquadCargoManagment.Controllers
 
             List<ExpensesType> expense = lcm.ExpensesTypes.ToList();
             ViewBag.Expense = new SelectList(expense, "ExpensesTypeID", "ExpensesTypeName");
-
-
-        
 
             List<ProductBroker> li = lcm.ProductBrokers.ToList();
             ViewBag.ProductBroker = new SelectList(li, "Id", "Name");
@@ -2237,15 +2234,12 @@ namespace LiquadCargoManagment.Controllers
 
         //Cascading dropdown of Product and PackageType
 
-            public JsonResult getProductList(int ID)
+        public JsonResult getProductList(int ID)
         {
             context.Configuration.ProxyCreationEnabled = false;
             List<Product> ProductList = context.Products.Where(x => x.ID == ID).ToList();
             return Json(ProductList, JsonRequestBehavior.AllowGet);
         }
-
-
-
 
 
         public JsonResult getAccount(int ID)
