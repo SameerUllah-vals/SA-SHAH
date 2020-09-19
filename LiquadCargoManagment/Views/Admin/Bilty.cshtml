@@ -88,10 +88,10 @@
                             @Html.DropDownList("ProductBroker", ViewBag.pb as SelectList, "Select", new { @class = "form-control Search", @id = "txtProductBroker" })
                         </td>
                         <td>
-                            @Html.DropDownList("Category", ViewBag.pt as SelectList, "Select", new { @class = "form-control Search", @id = "txtPackageType" })
+                            @Html.DropDownList("ProductType", ViewBag.pt as SelectList, "Select", new { @class = "form-control Search", onchange= "getProducts(this)" })
                         </td>
                         <td>
-                            @Html.DropDownList("Product", ViewBag.p as SelectList, "Select", new { @class = "form-control Search", @id = "txtProduct" })
+                          <select class="form-control"></select>
                         </td>
                         <td style="width:50px">
                             <input type="text" class="form-control amount" autocomplete="off" name="Weight" pattern="([0-9]{1,3}).([0-9]{1,3})" onkeypress="return inputLimiter(event,'custom')" onkeyup="Grandtotal('#Add',4,'weight')" id="txtWeight">
@@ -136,14 +136,16 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-3">
-                    <label>Vehcile Type</label>
-                    @Html.DropDownList("ID", ViewBag.VehicleTypes as SelectList, "-Select-", new { @class = "form-control Search", @required = true })
-
+                    <label>Vehicle Reg #</label>
+                    @Html.DropDownList("txtVehicleReg", ViewBag.Reg as SelectList, "-Select-", new { @class = "form-control Search", @required = true })
                 </div>
                 <div class="col-md-3">
-                    <label>Vehicle Reg #</label>
-                    @Html.DropDownList("VehicleID", ViewBag.Reg as SelectList, "-Select-", new { @class = "form-control Search", @required = true })
+                    <label>Vehcile Type</label>
+                    @*@Html.DropDownList("ID", ViewBag.VehicleTypes as SelectList, "-Select-", new { @class = "form-control Search", @required = true })*@
+                    <input type="text" id="txtVehicleType" class="form-control" readonly />
+
                 </div>
+            
                 <div class="col-md-3">
                     <label>Freight</label>
                     <input type="text" class="form-control" id="Freight" />
@@ -228,13 +230,13 @@
                             @*<select class="form-control">
                                 <option>Item</option>
                             </select>*@
-                            @Html.DropDownList("VendorType", ViewBag.vendorTypes as SelectList, new { @class = "form-control Search" , @disabled = "disabled" })
+                            @Html.DropDownList("ddlVendorType", ViewBag.vendorTypes as SelectList, new { @class = "form-control Search" , @disabled = "disabled" })
                         </td>
                         <td>
                             @*<select class="form-control">
                                 <option>Item</option>
                             </select>*@
-                            @Html.DropDownList("VendorType", ViewBag.vendors as SelectList, "Select", new { @class = "form-control Search" })
+                           <select id="ddlVendor" class="form-control"></select>
 
                            
                         </td>
@@ -342,17 +344,10 @@
         //Product Cascading Dropdown
 
 
-        $("#txtPackageType").change(function () {
+        //$("#Add tbody tr td:eq(2) select").change(function () {
 
-            $.get("/Admin/getProductList", { ID: $("#txtPackageType").val() }, function (data) {
-
-                $("#txtProduct").empty();
-                $.each(data, function (index, row) {
-
-                    $("#txtProduct").append("<option value='" + row.ID + "'>" + row.Name + "</option>")
-                });
-            });
-        });
+            
+        //});
 
 
     });
@@ -540,10 +535,60 @@
 
 
 
+       
 
+        $(document).ready(function () {
+            $.ajax({
+                url: "../Admin/getVendors?ID=" + $("#ddlVendorType").val(),
+                type: "GET",
+                success: function (data) {
+                    if (data.length > 0)
+                    {
+                        $("#ddlVendor").empty();
+                        $.each(data, function (index, row) {
 
+                            $("#ddlVendor").append("<option value='" + row.ID + "'>" + row.Name + "</option>")
+                        });
+                    }
+                    else
+                    {
+                        $("#ddlVendor").append("<option value=''>-Select-</option>")
+                    }
+                    
+                },
+                error: function () {
+                    alert('Vendors not loaded properly please contact for administrator');
+                }
+            });
+            $("#txtVehicleReg").change(function () {
 
+                $.ajax({
+                    url: "../Admin/getVehicleType?VehicleID=" + $("#txtVehicleReg").val(),
+                    type: "GET",
+                    success: function (data) {
+                        $("#txtVehicleType").empty();
+                        $("#txtVehicleType").val(data);
+                    },
+                    error: function () {
+                        alert('request failed');
+                    }
+                });
 
+            });
+
+    });
     
+
+        function getProducts(e)
+        {
+            $.get("../Admin/getProductList", { ID: $(e).val() }, function (data) {
+                let currIndex = $(e).parent("td").parent("tr").closest("tr").index();
+                let ddl = $(`#Add tbody tr:eq(${currIndex}) td:eq(3) select`);
+                ddl.empty();
+                $.each(data, function (index, row) {
+                    ddl.append("<option value='" + row.Value + "'>" + row.Text + "</option>");
+                });
+            });
+        }
 
 </script>

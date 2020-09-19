@@ -2247,11 +2247,12 @@ namespace LiquadCargoManagment.Controllers
 
         //Cascading dropdown of Product and PackageType
 
-            public JsonResult getProductList(int ID)
+        public JsonResult getProductList(int ID)
         {
-            context.Configuration.ProxyCreationEnabled = false;
-            List<Product> ProductList = context.Products.Where(x => x.ID == ID).ToList();
-            return Json(ProductList, JsonRequestBehavior.AllowGet);
+           
+            List<Product> ProductList = context.Products.Where(x => x.Category == ID).ToList();
+            var pList = new SelectList(ProductList, "ID", "Name");
+            return Json(pList, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -2423,5 +2424,23 @@ namespace LiquadCargoManagment.Controllers
         }
 
         #endregion
+
+        public JsonResult getVehicleType(int VehicleID)
+        {
+            var vehicles = context.Vehicles.Where(x => x.VehicleID == VehicleID).FirstOrDefault();
+            var vehicleTypes = context.VehicleTypes.Where(x => x.ID == vehicles.VehicleTypeID).FirstOrDefault();
+            return Json(vehicleTypes.Name, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult getVendors(int ID)
+        {
+            var vendors = context.Vendors.Where(x => x.VendorTypeID == ID).ToList();
+            return Json(vendors, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
     }
 }
