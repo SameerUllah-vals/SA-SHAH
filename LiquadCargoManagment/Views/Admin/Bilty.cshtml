@@ -36,7 +36,7 @@
                 </div>*@
             <div class="col-md-2">
                 <label>Bilty Date</label>
-                <input type="text" class="form-control" id="OrderDate" value="@Model.WorkOrder.OrderDate" required />
+                <input type="text" class="form-control" id="OrderDate" value="" required />
             </div>
             <div class="col-md-2">
                 <label>Delivery Date</label>
@@ -89,7 +89,7 @@
                             @Html.DropDownList("ProductBroker", ViewBag.pb as SelectList, "Select", new { @class = "form-control Search", @id = "txtProductBroker" })
                         </td>
                         <td>
-                            @Html.DropDownList("Category", ViewBag.pt as SelectList, "Select", new { @class = "form-control Search", @id = "txtPackageType" })
+                            @Html.DropDownList("Category", ViewBag.pt as SelectList, "Select", new { @class = "form-control Search", @id = "txtPackageType", @onchange = "getValue()" })
                         </td>
                         <td>
                             @Html.DropDownList("Product", ViewBag.p as SelectList, "Select", new { @class = "form-control Search", @id = "txtProduct" })
@@ -98,7 +98,8 @@
                             <input type="text" class="form-control amount" autocomplete="off" name="Weight" pattern="([0-9]{1,3}).([0-9]{1,3})" onkeypress="return inputLimiter(event,'custom')" onkeyup="Grandtotal('#Add',4,'weight')" id="txtWeight">
                         </td>
                         <td style="width:50px">
-                            <input type="text" class="form-control "readonly="readonly" autocomplete="off" name="unit" onkeyup="Grandtotal('#Add',5,'unit')" id="txtunit" >
+                            <input type="text" class="form-control " autocomplete="off" name="unit" onkeyup="Grandtotal('#Add',5,'unit')" id="txtunit">
+
                         </td>
                         <td style="width:50px">
                             <input type="text" class="form-control amount" autocomplete="off" onkeyup="Grandtotal('#Add',6,'qty')" name="Quantity" id="txtQuantity">
@@ -127,6 +128,7 @@
                     </tr>
                 </tfoot>
             </table>
+
         </div>
         <br />
         <div class="block-title row">
@@ -137,13 +139,16 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-3">
-                    <label>Vehcile Type</label>
-                    @Html.DropDownList("ID", ViewBag.VehicleTypes as SelectList, "-Select-", new { @class = "form-control Search", @required = true })
+                    <label>Vehicle Reg #</label>
+                    @Html.DropDownList("VehicleID", ViewBag.Reg as SelectList, "-Select-", new { @class = "form-control Search", @id = "txtVehicleReg", @required = true })
+
 
                 </div>
                 <div class="col-md-3">
-                    <label>Vehicle Reg #</label>
-                    @Html.DropDownList("VehicleID", ViewBag.Reg as SelectList, "-Select-", new { @class = "form-control Search", @required = true })
+                   
+                    <label>Vehcile Type</label>
+                    @*@Html.DropDownList("ID", ViewBag.VehicleTypes as SelectList, "-Select-", new { @class = "form-control Search",@id = "txtVehicleType", @required = true })*@
+                    <input type="text" class="form-control" id="txtVehicleType" readonly />
                 </div>
                 <div class="col-md-3">
                     <label>Freight</label>
@@ -188,7 +193,7 @@
                             <input type="number" class="form-control" autocomplete="off" name="Amount" id="txtChequeNo">
                         </td>
                         <td>
-                            <input type="text" class="form-control" autocomplete="off" name="ChequeDate" id="txtChequeDate">
+                            <input type="date" class="form-control" autocomplete="off" name="ChequeDate" id="txtChequeDate">
                         </td>
                         <td>
                             <input type="number" class="form-control" autocomplete="off" name="Amount" onkeyup="GrandtotalExpense('#Add', 1,'Amount')" id="txtAmount">
@@ -234,7 +239,9 @@
                             @*<select class="form-control">
                                 <option>Item</option>
                             </select>*@
-                            @Html.DropDownList("Product", ViewBag.p as SelectList, "Select", new { @class = "form-control Search", @id = "txtAccount"  })
+                            @Html.DropDownList("Product", ViewBag.p as SelectList, "Select", new { @class = "form-control Search", @id = "txtAccount",
+                          
+                       })
 
                            
                         </td>
@@ -305,12 +312,12 @@
         });
     });
 
-    $(document).ready(function () {
-        $("#txtChequeDate").datepicker({
-            altField: "#txtChequeDate",
-            altFormat: "d MM, yy"
-        });
-    });
+    //$(document).ready(function () {
+    //    $("#txtChequeDate").datepicker({
+    //        altField: "#txtChequeDate",
+    //        altFormat: "d MM, yy"
+    //    });
+    //});
     $(document).ready(function () {
         $("#example").DataTable({
             dom: 'Bfrtip',
@@ -322,242 +329,422 @@
             ]
         });
 
+    });
 
-        //Product Cascading Dropdown
 
 
-        $("#txtPackageType").change(function () {
+    //Product Cascading Dropdown
 
-            $.get("/Admin/getProductList", { ID: $("#txtPackageType").val() }, function (data) {
 
-                $("#txtProduct").empty();
+    $("#txtPackageType").change(function () {
+
+        $.get("/Admin/getProductList", { ID: $("#txtPackageType").val() }, function (data) {
+
+            $("#txtProduct").empty();
+            $.each(data, function (index, row) {
+
+                $("#txtProduct").append("<option value='" + row.ID + "'>" + row.Name + "</option>")
+
+
+            });
+
+          
+        });
+
+    });
+        //Vehicle Cascading
+
+    $(document).ready(function () {
+        $("#txtVehicleReg").change(function () {
+       
+            $.ajax({
+                url: "../Admin/getVehicleType?VehicleID=" + $("#txtVehicleReg").val(),
+                type: "GET",
+                success: function (data) {
+                    $("#txtVehicleType").empty();
+                    $("#txtVehicleType").val(data);
+                },
+                error: function () {
+                    alert('request failed');
+                }
+            });
+        });
+  
+   
+
+        //unit 
+        //    $(document).ready(function(){
+        //        $.ajax({
+        //            type: "GET",
+        //            url: "/Admin/GetData",
+        //            data: "{}",
+        //            success: function (data) {
+        //                var s = '<option value="-1">Please Select a Car</option>';
+        //                for (var i = 0; i < data.length; i++) {
+        //                    s += '<option value="' + data[i].Unit + '">' + data[i].Name+ '</option>';
+        //                }
+        //                $("#txtProduct").html(s);
+        //            }
+        //        });
+        //    });
+    
+
+        //function getValue() {
+        //    var myVal = $("#txtProduct").val();
+        //    $("#txtunit").val(myVal);
+        //}
+
+        //Working Unit
+    
+        //$(document).ready(function () {
+
+        //    $("#Product").val(0);
+        //    $("#Product").change(function () {
+
+
+        //        var ID = $("#Product").val();
+        //        GetItemUnitPrice(ID);
+        //    });
+
+
+
+        //function GetItemUnitPrice(ID) {
+
+
+        //    //alert(itemId)
+        //    $.ajax({
+        //        async: true,
+        //        type: 'Get',
+        //        dataType: 'JSON',
+        //        contentType: 'application/json; charset = utf-8',
+        //        url: '/Home/getItemUnitPrice',
+        //        data: { ID: ID },
+        //        success: function (data) {
+        //            $("#txtunit").val(parseFloat(data).toFixed(2));
+        //        },
+
+        //        error: function () {
+
+
+        //            //alert("There is some problem to get the Unit Price");
+        //        }
+
+
+        //    });
+        //}
+
+
+        //Account and Diesel
+    
+
+        $("#txtDiesel").change(function () {
+
+            $.get("/Admin/getAccount", { ID: $("#txtDiesel").val() }, function (data) {
+
+                $("#txtAccount").empty();
                 $.each(data, function (index, row) {
 
-                    $("#txtProduct").append("<option value='" + row.ID + "'>" + row.Name + "</option>")
+                    $("#txtAccount").append("<option value='" + row.ID + "'>" + row.Name + "</option>")
                 });
             });
         });
 
 
-    });
-
-
-    //Account and Diesel
-    
-
-    $("#txtDiesel").change(function () {
-
-        $.get("/Admin/getAccount", { ID: $("#txtDiesel").val() }, function (data) {
-
-            $("#txtAccount").empty();
-            $.each(data, function (index, row) {
-
-                $("#txtAccount").append("<option value='" + row.ID + "'>" + row.Name + "</option>")
-            });
-        });
-    });
-
-
-    //$(function () {
-
-
-    //    $("#txtProduct").change(function () {
-
-    //        var displayUnit = $()
-    //    })
-    //})
 
 
 
 
 
+        //SEARCHABLE DROPDOWN
 
+        //$(document).ready(function () {
+        //    $(".Search").chosen();
+        //})
 
-    //SEARCHABLE DROPDOWN
+        //SEARCHABLE DROPDOWN
 
-    //$(document).ready(function () {
-    //    $(".Search").chosen();
-    //})
-
-    //SEARCHABLE DROPDOWN
-
-    function Successfully(response) {
-        if (response.Status != "OK") {
-            message("Required", response.message, "error");
+        function Successfully(response) {
+            if (response.Status != "OK") {
+                message("Required", response.message, "error");
+            }
+            else {
+                $('#modal-add').modal('hide');
+                message("Success", "Record Saved Success", "success");
+                $("#grid").html(response.html);
+                ClearItem();
+                GetOrders();
+            }
         }
-        else {
-            $('#modal-add').modal('hide');
-            message("Success", "Record Saved Success", "success");
-            $("#grid").html(response.html);
-            ClearItem();
-            GetOrders();
+
+        function Message(title, text, type) {
+            Swal.fire({
+                title: title + '!',
+                text: text,
+                icon: type,
+                confirmButtonText: 'OK'
+            })
         }
-    }
+        function GetOrders() {
+            $('#example').DataTable();
+        }
 
-    function Message(title, text, type) {
-        Swal.fire({
-            title: title + '!',
-            text: text,
-            icon: type,
-            confirmButtonText: 'OK'
-        })
-    }
-    function GetOrders() {
-        $('#example').DataTable();
-    }
+        function ClearItem() {
+            $("input[type='text']").val('');
+            $("input[type='hidden']").val('');
+        }
 
-    function ClearItem() {
-        $("input[type='text']").val('');
-        $("input[type='hidden']").val('');
-    }
-
-
-    function AddRow(A) {
-        debugger;
-        var parent = $(A).parent("td").parent("tr").html();
-        parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
-        $("#Add").find("tbody").append(`<tr>${parent}</tr>`);
+        // Add line Method Working
+        function AddRow(A) {
+            debugger;
+            var parent = $(A).parent("td").parent("tr").html();
+            parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
+            $("#Add").find("tbody").append(`<tr>${parent}</tr>`);
 
 
 
 
         
-    }
-    function remove(e) {
-        $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
-    }
-
-    function AddRowExpense(A) {
-        debugger;
-        var parent = $(A).parent("td").parent("tr").html();
-        parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
-        $("#AddExpense").find("tbody").append(`<tr>${parent}</tr>`);
-    }
-    function removeExpense(e) {
-        $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
-    }
-
-    function AddRowDeisel(A) {
-        debugger;
-        var parent = $(A).parent("td").parent("tr").html();
-        parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
-        $("#AddDeisel").find("tbody").append(`<tr>${parent}</tr>`);
-    }
-    function removeDeisel(e) {
-        $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
-    }
-
-    //$("body").on("click", "#btnAdd", function () {
-    //    //Reference the TextBoxes.
-
-
-    //    //Get the reference of the Table's TBODY element.
-    //    var tBody = $("#Add > tbody")[0];
-
-    //    //Add Row.
-    //    var row = tBody.insertRow(-1);
-
-    //    //Add Name cell.
-    //    var cell = $(row.insertCell(-1));
-    //    cell.html(txtSr.val());
-
-    //    //Add reciver cell.
-    //    cell = $(row.insertCell(-1));
-    //    cell.html(txtReciever.val());
-    //    //Add ProductBroker cell.
-    //    cell = $(row.insertCell(-1));
-    //    cell.html(txtProductBroker.val());
-    //    //Add PackageType cell.
-    //    cell = $(row.insertCell(-1));
-    //    cell.html(txtPackageType.val());
-
-    //    cell = $(row.insertCell(-1));
-    //    cell.html(txtProduct.val());
-    //    //Add Weight cell.
-    //    cell = $(row.insertCell(-1));
-    //    cell.html(txtWeight.val());
-
-    //    cell = $(row.insertCell(-1));
-    //    cell.html(txtunit.val());
-
-    //    cell = $(row.insertCell(-1));
-    //    cell.html(txtQuantity.val());
-
-    //    cell = $(row.insertCell(-1));
-    //    cell.html(txtTotalWeight.val());
-
-    //    cell = $(row.insertCell(-1));
-    //    cell.html(txtRemarks.val());
-
-
-    //    //Add Button cell.
-    //    cell = $(row.insertCell(-1));
-    //    var btnRemove = $("<input />");
-    //    btnRemove.attr("type", "button");
-    //    btnRemove.attr("onclick", "Remove(this);");
-    //    btnRemove.val("Remove");
-    //    cell.append(btnRemove);
-
-    //    //Clear the TextBoxes.
-    //    txtSr.val("");
-    //    txtReciever.val("");
-    //    txtProductBroker.val("");
-    //    txtPackageType.val("");
-    //    txtProduct.val("");
-    //    txtWeight.val("");
-    //    txtunit.val("");
-    //    txtQuantity.val("");
-    //    txtTotalWeight.val("");
-    //    txtRemarks.val("");
-    //});
-
-    // Broduct Broker Popup Script
-    function Successfully(response) {
-        console.log(response);
-        if (response.status != "OK") {
-            swal({
-                title: "Failed",
-                text: response.message,
-                icon: "error",
-                button: "Ok",
-                confirmButtonText: 'OK'
-            });
         }
-        else {
-            $("#ProductBroker").html('');
-            for (var i = 0; i < response.list.length; i++) {
-                $("#ProductBroker").append(`<option value="${response.list[i].Id}">${response.list[i].Name}</option>`);
+        //$("#btnSaveEdit").on("click",  function () {
+        //    debugger;
+        //        var parent = $(A).parent("td").parent("tr").html();
+        //        parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
+        //      $("#Add").find("tbody").append(`<tr>${parent}</tr>`);
+
+
+        //});
+
+
+        // $("body").on("click", "#btnSaveEdit", function () {
+
+
+        //    //Reference the Name ContactNo and Address Textboxes
+        //     var txtReciever = $("#txtName");
+        //     var txtProductBroker = $("#txtProductBroker");
+        //     var txtPackageType = $("#txtPackageType");
+        //     var txtProduct = $("#txtProduct");
+        //     var txtWeight = $("#txtWeight");
+        //     var txtUnit = $("#txtunit");
+        //     var txtQuantity = $("#txtQuantity");
+        //     var txtWeight = $("#txtTotalWeight");
+        //     var txtRemarks= $("#txtRemarks");
+        
+
+
+
+        //    //Get the Reference of the table tbody element
+
+        //     var tBody = $("#Add > TBODY")[0];
+
+
+        //    //Add Row
+        //    var row = tBody.insertRow(-1);
+
+        //    //Add Receiver Cell
+        //    var cell = $(row.insertCell(-1));
+        //    cell.html(txtReciever.val());
+
+
+        //    //Add ContactNo Cell
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtProductBroker.val());
+
+        //    //Add Address Cell
+
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtPackageType.val());
+
+
+        //     //Add Address Cell
+
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtProduct.val());
+
+        //     //Add Address Cell
+
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtWeight.val());
+
+        //     //Add Address Cell
+
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtUnit.val());
+
+        //     //Add Address Cell
+
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtQuantity.val());
+
+        //     //Add Address Cell
+
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtWeight.val());
+
+        //     //Add Address Cell
+
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtRemarks.val());
+
+        //    //Add Button Cell
+        //    cell = $(row.insertCell(-1));
+        //    var btnRemove = $("<input/>");
+        //    btnRemove.attr("type", "button");
+        //    btnRemove.attr("onclick", "Remove(this);");
+        //    btnRemove.val("Remove");
+        //    cell.append(btnRemove);
+
+
+        //   //Clear textboxes
+        //    txtReciever.val("");
+        //    txtProductBroker.val("");
+        //    txtPackageType.val("");
+        //    txtProduct.val("");
+        //    txtWeight.val("");
+        //    txtUnit.val("");
+        //    txtQuantity.val("");
+        //    txtWeight.val("");
+        //    txtRemarks.val("");
+
+        //});
+
+
+
+
+        function remove(e) {
+            $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
+        }
+
+        function AddRowExpense(A) {
+            debugger;
+            var parent = $(A).parent("td").parent("tr").html();
+            parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
+            $("#AddExpense").find("tbody").append(`<tr>${parent}</tr>`);
+        }
+        function removeExpense(e) {
+            $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
+        }
+
+        function AddRowDeisel(A) {
+            debugger;
+            var parent = $(A).parent("td").parent("tr").html();
+            parent = parent.replace("btn-info", "btn-danger").replace("Add Line", "Remove").replace("AddRow", "remove");
+            $("#AddDeisel").find("tbody").append(`<tr>${parent}</tr>`);
+        }
+        function removeDeisel(e) {
+            $(e).parent("td").parent("tr").fadeOut(300, function () { $(this).remove(); });
+        }
+
+        //$("body").on("click", "#btnAdd", function () {
+        //    //Reference the TextBoxes.
+
+
+        //    //Get the reference of the Table's TBODY element.
+        //    var tBody = $("#Add > tbody")[0];
+
+        //    //Add Row.
+        //    var row = tBody.insertRow(-1);
+
+        //    //Add Name cell.
+        //    var cell = $(row.insertCell(-1));
+        //    cell.html(txtSr.val());
+
+        //    //Add reciver cell.
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtReciever.val());
+        //    //Add ProductBroker cell.
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtProductBroker.val());
+        //    //Add PackageType cell.
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtPackageType.val());
+
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtProduct.val());
+        //    //Add Weight cell.
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtWeight.val());
+
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtunit.val());
+
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtQuantity.val());
+
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtTotalWeight.val());
+
+        //    cell = $(row.insertCell(-1));
+        //    cell.html(txtRemarks.val());
+
+
+        //    //Add Button cell.
+        //    cell = $(row.insertCell(-1));
+        //    var btnRemove = $("<input />");
+        //    btnRemove.attr("type", "button");
+        //    btnRemove.attr("onclick", "Remove(this);");
+        //    btnRemove.val("Remove");
+        //    cell.append(btnRemove);
+
+        //    //Clear the TextBoxes.
+        //    txtSr.val("");
+        //    txtReciever.val("");
+        //    txtProductBroker.val("");
+        //    txtPackageType.val("");
+        //    txtProduct.val("");
+        //    txtWeight.val("");
+        //    txtunit.val("");
+        //    txtQuantity.val("");
+        //    txtTotalWeight.val("");
+        //    txtRemarks.val("");
+        //});
+
+        // Broduct Broker Popup Script
+        function Successfully(response) {
+            console.log(response);
+            if (response.status != "OK") {
+                swal({
+                    title: "Failed",
+                    text: response.message,
+                    icon: "error",
+                    button: "Ok",
+                    confirmButtonText: 'OK'
+                });
             }
-            swal({
-                title: "Success",
-                text: response.message,
-                icon: "success",
-                button: "Ok",
-                confirmButtonText: 'OK'
-            });
-            $("#Inform").modal('hide');
+            else {
+                $("#ProductBroker").html('');
+                for (var i = 0; i < response.list.length; i++) {
+                    $("#ProductBroker").append(`<option value="${response.list[i].Id}">${response.list[i].Name}</option>`);
+                }
+                swal({
+                    title: "Success",
+                    text: response.message,
+                    icon: "success",
+                    button: "Ok",
+                    confirmButtonText: 'OK'
+                });
+                $("#Inform").modal('hide');
+            }
         }
-    }
-    function OnFailure() {
-        //alert("Request Failed");
-    }
-    //End PopUp Function
-
-
-
-
-    function Remove(button) {
-        //Determine the reference of the Row using the Button.
-        var row = $(button).closest("tr");
-        var name = $("tr", row).eq(0).html();
-        if (confirm("Do you want to delete: " + name)) {
-            //Get the reference of the Table.
-            var table = $("#Add")[0];
-
-            //Delete the Table row using it's Index.
-            table.deleteRow(row[0].rowIndex);
+        function OnFailure() {
+            //alert("Request Failed");
         }
-    };
+        //End PopUp Function
+
+
+
+
+        function Remove(button) {
+            //Determine the reference of the Row using the Button.
+            var row = $(button).closest("tr");
+            var name = $("tr", row).eq(0).html();
+            if (confirm("Do you want to delete: " + name)) {
+                //Get the reference of the Table.
+                var table = $("#Add")[0];
+
+                //Delete the Table row using it's Index.
+                table.deleteRow(row[0].rowIndex);
+            }
+        };
 
 
    
@@ -583,7 +770,19 @@
             }
         }
 
+        $(document).ready(function () {
+            // Get value on keyup funtion
+            $("#txtWeight, #txtQuantity").keyup(function () {
 
+                var total = 0;
+                var x = Number($("#txtWeight").val());
+                var y = Number($("#txtQuantity").val());
+                var total = x * y;
+
+                $('#txtTotalWeight').val(total);
+
+            });
+        });
 
         function GrandtotalExpense(q, totalColumnIndex, exp) {
             let grTotal = 0;
@@ -694,9 +893,14 @@
 
 
 
+        
+
+
+
+
 
 
 
     
-
+    })
 </script>

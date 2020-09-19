@@ -2214,8 +2214,8 @@ namespace LiquadCargoManagment.Controllers
             List<ExpensesType> expense = lcm.ExpensesTypes.ToList();
             ViewBag.Expense = new SelectList(expense, "ExpensesTypeID", "ExpensesTypeName");
 
+          
 
-        
 
             List<ProductBroker> li = lcm.ProductBrokers.ToList();
             ViewBag.ProductBroker = new SelectList(li, "Id", "Name");
@@ -2250,12 +2250,42 @@ namespace LiquadCargoManagment.Controllers
 
         //Cascading dropdown of Product and PackageType
 
-            public JsonResult getProductList(int ID)
+         public JsonResult getProductList(int ID)
         {
-            context.Configuration.ProxyCreationEnabled = false;
             List<Product> ProductList = context.Products.Where(x => x.ID == ID).ToList();
             return Json(ProductList, JsonRequestBehavior.AllowGet);
         }
+
+
+        public JsonResult getVehicleType(int VehicleID)
+        {
+            var vehicles = context.Vehicles.Where(x => x.VehicleID == VehicleID).FirstOrDefault();
+            var vehicleTypes = context.VehicleTypes.Where(x => x.ID == vehicles.VehicleTypeID).FirstOrDefault();
+            return Json(vehicleTypes.Name, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //public ActionResult GetData(int ID)
+        //{
+        //    context.Configuration.ProxyCreationEnabled = false;
+        //    List<Product> ProductList = context.Products.Where(x => x.ID == ID).ToList();
+        //    return Json(ProductList, JsonRequestBehavior.AllowGet);
+        //}
+        //Working Unit Code
+
+        //public JsonResult getItemUnitPrice(int ID)
+        //{
+
+        //    var UnitPrice = context.Products.Single(model => model.ID == ID).Unit;
+        //    return Json(UnitPrice, JsonRequestBehavior.AllowGet);
+        //}
+        //unit on change
+
+        //public ActionResult GetData()
+        //{
+        //    var data = from als in context.Products select new { als.Name, als.Unit };
+        //    return Json(data.ToList(), JsonRequestBehavior.AllowGet);
+        //}
 
 
 
@@ -2267,7 +2297,7 @@ namespace LiquadCargoManagment.Controllers
             List<Product> ProductList = context.Products.Where(x => x.ID == ID).ToList();
             return Json(ProductList, JsonRequestBehavior.AllowGet);
         }
-
+        
 
 
         public JsonResult InsertBilty(List<BiltyDetail> Details, List<VehicleExpens> Expenses, List<DieselExpense> Diesal,Bilty Order)
@@ -2323,11 +2353,24 @@ namespace LiquadCargoManagment.Controllers
                         message += " Inner Exception: " + ex.InnerException.Message;
                     }
                 }
-            }         
-            return Json(new { message = message, status = status }, JsonRequestBehavior.AllowGet);
+            }
+            string view = RenderPartialToStrings("_addLine", context.Bilties.ToList());
+            return Json(new { message = message, status = status ,html = view}, JsonRequestBehavior.AllowGet);
 
         }
 
+
+        public string RenderPartialToStrings(string viewName, object model)
+        {
+            ViewData.Model = model;
+            using (StringWriter writer = new StringWriter())
+            {
+                ViewEngineResult vResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
+                ViewContext vContext = new ViewContext(this.ControllerContext, vResult.View, ViewData, new TempDataDictionary(), writer);
+                vResult.View.Render(vContext, writer);
+                return writer.ToString();
+            }
+        }
         #endregion
         public ActionResult BiltyData()
         {
