@@ -2200,10 +2200,10 @@ namespace LiquadCargoManagment.Controllers
         #region Bilty
         public ActionResult Bilty(long? Id)
         {
-            List<OwnCompany> Billto = context.OwnCompanies.ToList();
+            List<CustomerCompany> Billto = context.CustomerCompanies.ToList();
             ViewBag.bill = new SelectList(Billto, "ID", "Name");
 
-            List<OwnCompany> Sender = context.OwnCompanies.ToList();
+            List<CustomerCompany> Sender = context.CustomerCompanies.ToList();
             ViewBag.Sender = new SelectList(Sender, "ID", "Name");
 
             List<CustomerCompany> Oc = context.CustomerCompanies.ToList();
@@ -2245,28 +2245,6 @@ namespace LiquadCargoManagment.Controllers
             return View();
         }
 
-        //Cascading dropdown of Product and PackageType
-
-            public JsonResult getProductList(int ID)
-        {
-            context.Configuration.ProxyCreationEnabled = false;
-            List<Product> ProductList = context.Products.Where(x => x.ID == ID).ToList();
-            return Json(ProductList, JsonRequestBehavior.AllowGet);
-        }
-
-
-
-
-
-        public JsonResult getAccount(int ID)
-        {
-            context.Configuration.ProxyCreationEnabled = false;
-            List<Product> ProductList = context.Products.Where(x => x.ID == ID).ToList();
-            return Json(ProductList, JsonRequestBehavior.AllowGet);
-        }
-
-
-
         public JsonResult InsertBilty(List<BiltyDetail> Details, List<VehicleExpens> Expenses, List<DieselExpense> Diesal,Bilty Order)
         {
             string message = "";
@@ -2291,6 +2269,7 @@ namespace LiquadCargoManagment.Controllers
                     {
                         bilty.BiltyID = OrderID;
                         context.BiltyDetails.Add(bilty);
+                        context.SaveChanges();
                     }
                     if (Expenses == null)
                         Expenses = new List<VehicleExpens>();
@@ -2298,6 +2277,7 @@ namespace LiquadCargoManagment.Controllers
                     {
                         item.BiltyID = OrderID;
                         context.VehicleExpenses.Add(item);
+                        context.SaveChanges();
                     }
                     if (Diesal == null)                    
                         Diesal = new List<DieselExpense>();                    
@@ -2305,6 +2285,7 @@ namespace LiquadCargoManagment.Controllers
                     {
                         item.BiltyID = OrderID;
                         context.DieselExpenses.Add(item);
+                        context.SaveChanges();
                     }
                     context.SaveChanges();
                     transaction.Commit();
@@ -2323,6 +2304,20 @@ namespace LiquadCargoManagment.Controllers
             }         
             return Json(new { message = message, status = status }, JsonRequestBehavior.AllowGet);
 
+        }
+
+        public JsonResult getProductList(int ID)
+        {
+
+            List<Product> ProductList = context.Products.Where(x => x.Category == ID).ToList();
+            var pList = new SelectList(ProductList, "ID", "Name");
+            return Json(pList, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult getAccount(int ID)
+        {
+            context.Configuration.ProxyCreationEnabled = false;
+            List<Product> ProductList = context.Products.Where(x => x.ID == ID).ToList();
+            return Json(ProductList, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
@@ -2423,5 +2418,18 @@ namespace LiquadCargoManagment.Controllers
         }
 
         #endregion
+
+        public JsonResult getVehicleType(int VehicleID)
+        {
+            var vehicles = context.Vehicles.Where(x => x.VehicleID == VehicleID).FirstOrDefault();
+            var vehicleTypes = context.VehicleTypes.Where(x => x.ID == vehicles.VehicleTypeID).FirstOrDefault();
+            return Json(vehicleTypes.Name, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult getVendors(int ID)
+        {
+            var vendors = context.Vendors.Where(x => x.VendorTypeID == ID).ToList();
+            return Json(vendors, JsonRequestBehavior.AllowGet);
+        }
     }
 }
