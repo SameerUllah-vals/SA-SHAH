@@ -43,11 +43,11 @@
             </div>
             <div class="col-md-2">
                 <label>Bill To</label>
-                @Html.DropDownList("billto", ViewBag.bill as SelectList, "Select", new { @class = "form-control Search" })
+                @Html.DropDownList("billto", ViewBag.bill as SelectList, "Select", new { @class = "form-control Search",@id="ddlBillTo" })
             </div>
             <div class="col-md-2">
                 <label>Sender</label>
-                @Html.DropDownList("Sender", ViewBag.Sender as SelectList, "Select", new { @class = "form-control Search" })
+                @Html.DropDownList("Sender", ViewBag.Sender as SelectList, "Select", new { @class = "form-control Search",@id="ddlSender" })
 
             </div>
         </div>
@@ -81,23 +81,23 @@
                     <tr>
                         @*<td style="width:50px"><input type="text" class="form-control" autocomplete="off" name="SrNo" id="SrNo" disabled></td>*@
                         <td>
-                            @Html.DropDownList("Reciever", ViewBag.li as SelectList, "Select", new { @class = "form-control Search", @id = "txtReciever" })
+                            @Html.DropDownList("ddlReciever", ViewBag.li as SelectList, "Select", new { @class = "form-control Search" })
                             @Html.ValidationMessage("Reciever", new { @class = "text-danger" })
                         </td>
                         <td>
-                            @Html.DropDownList("ProductBroker", ViewBag.pb as SelectList, "Select", new { @class = "form-control Search", @id = "txtProductBroker" })
+                            @Html.DropDownList("ddlProductBroker", ViewBag.ProductBroker as SelectList, "Select", new { @class = "form-control Search" })
                         </td>
                         <td>
-                            @Html.DropDownList("ProductType", ViewBag.pt as SelectList, "Select", new { @class = "form-control Search", onchange= "getProducts(this)" })
+                            @Html.DropDownList("ddlProductType", ViewBag.pt as SelectList, "Select", new { @class = "form-control Search",onchange = "getProducts(this)" })
                         </td>
                         <td>
-                          <select class="form-control"></select>
+                            <select class="form-control"></select>
                         </td>
                         <td style="width:50px">
                             <input type="text" class="form-control amount" autocomplete="off" name="Weight" pattern="([0-9]{1,3}).([0-9]{1,3})" onkeypress="return inputLimiter(event,'custom')" onkeyup="Grandtotal('#Add',4,'weight')" id="txtWeight">
                         </td>
                         <td style="width:50px">
-                            <input type="text" class="form-control "readonly="readonly" autocomplete="off" name="Unit" onkeyup="Grandtotal('#Add',5,'unit')" id="txtunit" >
+                            <input type="text" class="form-control " readonly="readonly" autocomplete="off" name="Unit" onkeyup="Grandtotal('#Add',5,'unit')" id="txtUnit">
                         </td>
                         <td style="width:50px">
                             <input type="text" class="form-control amount" autocomplete="off" onkeyup="Grandtotal('#Add',6,'qty')" name="Quantity" id="txtQuantity">
@@ -141,14 +141,11 @@
                 </div>
                 <div class="col-md-3">
                     <label>Vehcile Type</label>
-                    @*@Html.DropDownList("ID", ViewBag.VehicleTypes as SelectList, "-Select-", new { @class = "form-control Search", @required = true })*@
                     <input type="text" id="txtVehicleType" class="form-control" readonly />
-
                 </div>
-            
                 <div class="col-md-3">
                     <label>Freight</label>
-                    <input type="text" class="form-control" id="Freight" />
+                    <input type="text" class="form-control" id="txtFreight" />
                 </div>
             </div>
         </div>
@@ -193,7 +190,7 @@
                             <input type="date" class="form-control" autocomplete="off" name="ChequeDate" id="txtChequeDate">
                         </td>
                         <td>
-                            <input type="number" class="form-control" autocomplete="off" name="Amount" onkeyup="GrandtotalExpense('#Add', 1,'Amount')" id="txtAmount">
+                            <input type="number" class="form-control" autocomplete="off" name="Amount" onkeyup="GrandtotalExpense('#AddExpense', 5,'Amount')" id="txtAmount">
                         </td>
                         @*<td><input type="button" value="Remove" onclick="Remove(this)" /></td>*@
                         <td><button type="button" id="btnSaveEdit" class="btn btn-info" onclick="AddRowExpense(this)">Add Line</button></td>
@@ -203,7 +200,7 @@
                 </tbody>
                 <tfoot>
                     <tr class="grand_total">
-                        <td colspan="6"></td>
+                        <td colspan="5"></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -227,18 +224,10 @@
                 <tbody>
                     <tr>
                         <td>
-                            @*<select class="form-control">
-                                <option>Item</option>
-                            </select>*@
-                            @Html.DropDownList("ddlVendorType", ViewBag.vendorTypes as SelectList, new { @class = "form-control Search" , @disabled = "disabled" })
+                            @Html.DropDownList("ddlVendorType", ViewBag.vendorTypes as SelectList, new { @class = "form-control Search", @disabled = "disabled" })
                         </td>
                         <td>
-                            @*<select class="form-control">
-                                <option>Item</option>
-                            </select>*@
-                           <select id="ddlVendor" class="form-control"></select>
-
-                           
+                            <select id="ddlVendor" class="form-control"></select>
                         </td>
                         <td>
                             <input type="number" class="form-control" autocomplete="off" name="Liter" id="txtLiter">
@@ -247,7 +236,7 @@
                             <input type="number" class="form-control" autocomplete="off" name="Rate" id="txtRate">
                         </td>
                         <td>
-                            <input type="number" class="form-control" autocomplete="off" name="Amount" id="txtAmount">
+                            <input type="number" class="form-control" autocomplete="off" name="Amount" onkeyup="TotalDieselExpense('#AddDeisel', 4,'DieselAmount')" id="txtAmount">
                         </td>
                         @*<td><input type="button" value="Remove" onclick="Remove(this)" /></td>*@
                         <td><button type="button" id="btnSaveEdit" class="btn btn-info" onclick="AddRowDeisel(this)">Add Line</button></td>
@@ -257,7 +246,7 @@
                 </tbody>
                 <tfoot>
                     <tr class="grand_total">
-                        <td colspan="6"></td>
+                        <td colspan="4"></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -478,11 +467,21 @@
 
         function GrandtotalExpense(q, totalColumnIndex, exp) {
             let grTotal = 0;
-            for (var i = 0; i < $(t).find("tbody tr").length; i++) {
+            for (var i = 0; i < $(q).find("tbody tr").length; i++) {
                 grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
             }
-            if (exp == "total") {
-                $(t).find("tr.grand_total td:eq(1)").text(grTotal);
+            if (exp == "Amount") {
+                $(q).find("tr.grand_total td:eq(1)").text(grTotal);
+            }
+    }
+
+    function TotalDieselExpense(q, totalColumnIndex, exp) {
+            let grTotal = 0;
+            for (var i = 0; i < $(q).find("tbody tr").length; i++) {
+                grTotal += parseFloat($(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim() == "" ? 0 : $(q).find(`tbody tr:eq(${i}) td:eq(${totalColumnIndex}) input`).val().trim());
+            }
+            if (exp == "DieselAmount") {
+                $(q).find("tr.grand_total td:eq(1)").text(grTotal);
             }
         }
 
@@ -492,41 +491,75 @@
         //let OrderNo = $("input[name='WorkOrderNo']").val();
         let OrderDate = $('#OrderDate').val();
         let DeliveryDate = $('#DeliveryDate').val();
-        let billTo = $("#billTo").val();
-        let Sender = $("#sender").val();
-        if (OrderNo == "" || OrderDate == "" || billTo == "" || Sender == "") {
+        let BillTo = $("#ddlBillTo").val();
+        let Sender = $("#ddlSender").val();
+        let VehicleType = $("#ddlVehicleType").val();
+        let VehicleReg = $("#ddlVehicleReg").val();
+        let Freight = $("#txtFreight").val();
+        if ( OrderDate == "" || DeliveryDate == "" || BillTo == "" || Sender == "" || VehicleType == "" || VehicleReg == "" || Freight == "") {
             Message("Required", "Enter all requried fields", "error");
             return;
         }
-        Order.WorkOrderNo = OrderNo;
+        //Order.WorkOrderNo = OrderNo;
         Order.OrderDate = OrderDate;
-        Order.billto = billTo;
+        Order.BillTo = BillTo;
         Order.Sender = Sender;
-        Order.totalquantity = $("#Add").find("tr.grand_total td:eq(1)").text();
-        Order.totalweight = $("#Add").find("tr.grand_total td:eq(2)").text();
+        //Order.VehicleType = VehicleType;
+        Order.VehicleID = VehicleReg;
+        Order.Freight = Freight;
+        Order.OrderDetailsTotalQTY = $("#Add").find("tfoot tr.grand_total td:eq(6)").text();
+        Order.OrderDetailsTotalWeight = $("#Add").find("tfoot tr.grand_total td:eq(7)").text();
+        Order.VehicleExpensesGrandTotal = $("#AddExpense").find("tfoot tr.grand_total td:eq(5)").text();
+        Order.DieselExpensesGrandTotal = $("#AddDeisel").find("tfoot tr.grand_total td:eq(4)").text();
+        
         var customers = new Array();
         $("#Add tbody tr").each(function () {
             var row = $(this);
             var customer = {};
             //customer.WordOrderID = row.find("td").eq(0).find("input").val();
-            customer.Reciever = row.find("td:eq(0) select option:selected").val();
-            customer.ProductBroker = row.find("td:eq(1) select option:selected").val();
-            customer.PackageType = row.find("td:eq(2) select option:selected").val();
-            customer.Product = row.find("td:eq(3) select option:selected").val();
+            customer.Receiver = row.find("td:eq(0) select option:selected").val();
+            customer.ProductBrokerID = row.find("td:eq(1) select option:selected").val();
+            customer.ProductTypeId = row.find("td:eq(2) select option:selected").val();
+            customer.ProductId = row.find("td:eq(3) select option:selected").val();
             customer.Weight = row.find("td:eq(4) input").val();
-            customer.unit = row.find("td:eq(5) input").val();
-            customer.Quantity = row.find("td:eq(6) input").val();
+            customer.Unit = row.find("td:eq(5) input").val();
+            customer.QTY = row.find("td:eq(6) input").val();
             customer.TotalWeight = row.find("td:eq(7) input").val();
             customer.Remarks = row.find("td:eq(8) input").val();
+            //customer = row.find("td:eq(8) input").val();
             customers.push(customer);
+        });
+        var VehicleExpenseArr = [];
+        $("#AddExpense tbody tr").each(function () {
+            var row = $(this);
+            var VehicleExpense = {};
+            VehicleExpense.ExpenseTypeId = row.find("td:eq(0) select").val();
+            VehicleExpense.PaymentMethod = row.find("td:eq(1) select").val();
+            VehicleExpense.BankBranch = row.find("td:eq(2) select").val();
+            VehicleExpense.ChequeNo = row.find("td:eq(3) input").val();
+            VehicleExpense.ChequeDate = row.find("td:eq(4) input").val();
+            VehicleExpense.Amount = row.find("td:eq(5) input").val();
+            //VehicleExpense = row.find("td:eq(8) input").val();
+            VehicleExpenseArr.push(VehicleExpense);
+        });
+        var DeiselArr = [];
+        $("#AddDeisel tbody tr").each(function () {
+            var row = $(this);
+            var Deisel = {};
+            //Deisel.VendorId = row.find("td:eq(0) select").val();
+            Deisel.Account = row.find("td:eq(1) select").val();
+            Deisel.Litre = row.find("td:eq(2) input").val();
+            Deisel.Rate = row.find("td:eq(3) input").val();
+            //Deisel.Amount = row.find("td:eq(4) input").val();
+            DeiselArr.push(Deisel);
         });
         $.ajax({
             type: "POST",
-            url: "/admin/InsertCustomers",
-            data: { Details: customers, Order: Order },
+            url: "../Admin/InsertBilty",
+            data: { Details: customers, Order: Order , Expenses: VehicleExpenseArr , Diesal:DeiselArr},
             success: function (r) {
                 Message("Success", r.Message, "success");
-                window.location = "../Admin/WorkOrderGrid";
+                window.location = "../Admin/BiltyGrid";
             }
         });
 
@@ -534,61 +567,57 @@
 
 
 
+    $(document).ready(function () {
+        $.ajax({
+            url: "../Admin/getVendors?ID=" + $("#ddlVendorType").val(),
+            type: "GET",
+            success: function (data) {
+                if (data.length > 0) {
+                    $("#ddlVendor").empty();
+                    $.each(data, function (index, row) {
 
-       
+                        $("#ddlVendor").append("<option value='" + row.ID + "'>" + row.Name + "</option>")
+                    });
+                }
+                else {
+                    $("#ddlVendor").append("<option value=''>-Select-</option>")
+                }
 
-        $(document).ready(function () {
+            },
+            error: function () {
+                alert('Vendors not loaded properly please contact for administrator');
+            }
+        });
+        $("#txtVehicleReg").change(function () {
+
             $.ajax({
-                url: "../Admin/getVendors?ID=" + $("#ddlVendorType").val(),
+                url: "../Admin/getVehicleType?VehicleID=" + $("#txtVehicleReg").val(),
                 type: "GET",
                 success: function (data) {
-                    if (data.length > 0)
-                    {
-                        $("#ddlVendor").empty();
-                        $.each(data, function (index, row) {
-
-                            $("#ddlVendor").append("<option value='" + row.ID + "'>" + row.Name + "</option>")
-                        });
-                    }
-                    else
-                    {
-                        $("#ddlVendor").append("<option value=''>-Select-</option>")
-                    }
-                    
+                    $("#txtVehicleType").empty();
+                    $("#txtVehicleType").val(data);
                 },
                 error: function () {
-                    alert('Vendors not loaded properly please contact for administrator');
+                    alert('request failed');
                 }
             });
-            $("#txtVehicleReg").change(function () {
 
-                $.ajax({
-                    url: "../Admin/getVehicleType?VehicleID=" + $("#txtVehicleReg").val(),
-                    type: "GET",
-                    success: function (data) {
-                        $("#txtVehicleType").empty();
-                        $("#txtVehicleType").val(data);
-                    },
-                    error: function () {
-                        alert('request failed');
-                    }
-                });
-
-            });
+        });
 
     });
-    
 
-        function getProducts(e)
-        {
-            $.get("../Admin/getProductList", { ID: $(e).val() }, function (data) {
-                let currIndex = $(e).parent("td").parent("tr").closest("tr").index();
-                let ddl = $(`#Add tbody tr:eq(${currIndex}) td:eq(3) select`);
-                ddl.empty();
-                $.each(data, function (index, row) {
-                    ddl.append("<option value='" + row.Value + "'>" + row.Text + "</option>");
-                });
+
+    function getProducts(e) {
+        $.get("../Admin/getProductList", { ID: $(e).val() }, function (data) {
+            let currIndex = $(e).parent("td").parent("tr").closest("tr").index();
+            let ddl = $(`#Add tbody tr:eq(${currIndex}) td:eq(3) select`);
+            ddl.empty();
+            $.each(data, function (index, row) {
+                ddl.append("<option value='" + row.Value + "'>" + row.Text + "</option>");
             });
-        }
+        });
+    }
+
+
 
 </script>
