@@ -1542,7 +1542,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Product">
+        <Association Name="FK_Product_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1913,7 +1913,7 @@
             <End Role="OwnGroups" EntitySet="OwnGroups" />
             <End Role="OwnCompany" EntitySet="OwnCompany" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Product" Association="Self.FK_Product_Product">
+          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
@@ -2115,7 +2115,7 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="OwnCompanyId" Type="Int64" />
           <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Category__OwnCom__367C1819" FromRole="Category" ToRole="OwnCompany" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_Product_Product" FromRole="Category" ToRole="Product" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -2840,7 +2840,7 @@
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="OwnCompanyId" Type="Int64" />
           <NavigationProperty Name="BiltyDetails" Relationship="Self.FK_BiltyDetails_Product" FromRole="Product" ToRole="BiltyDetails" />
-          <NavigationProperty Name="Category1" Relationship="Self.FK_Product_Product" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Category1" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_Product" FromRole="Product" ToRole="OrderDetail" />
           <NavigationProperty Name="OwnCompany" Relationship="Self.FK__Product__OwnComp__44CA3770" FromRole="Product" ToRole="OwnCompany" />
         </EntityType>
@@ -3378,7 +3378,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Product">
+        <Association Name="FK_Product_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -3901,7 +3901,7 @@
             <End Role="OwnCompany" EntitySet="OwnCompanies" />
             <End Role="Category" EntitySet="Categories" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Product" Association="Self.FK_Product_Product">
+          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b502cb42ed8b45a983a0d8312a80db93" Name="Diagram1">
+      <Diagram DiagramId="ba08419ddb4e44d89e5b57f609e518e8" Name="Diagram1">
         <EntityTypeShape EntityType="LCMModel.Area" Width="1.5" PointX="5.25" PointY="41.25" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.AssignDriver" Width="1.5" PointX="9" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="LCMModel.Bank" Width="1.5" PointX="5.25" PointY="64.375" IsExpanded="true" />
@@ -84,7 +84,7 @@
         <AssociationConnector Association="LCMModel.FK_BiltyDetails_Product" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_BiltyDetails_ProductBroker" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK__Category__OwnCom__367C1819" ManuallyRouted="false" />
-        <AssociationConnector Association="LCMModel.FK_Product_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="LCMModel.FK_Product_Category" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_City_OwnCompany" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK_City_Province" ManuallyRouted="false" />
         <AssociationConnector Association="LCMModel.FK__Company__OwnComp__395884C4" ManuallyRouted="false" />
