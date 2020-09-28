@@ -1430,8 +1430,6 @@ namespace LiquadCargoManagment.Controllers
             context.SaveChanges();
             string View = RenderPartialToString("~/Views/Shared/_City.cshtml", context.Cities.OrderByDescending(x => x.CityID).ToList());
             return Json(new { Status = Status, Message = Message, html = View }, JsonRequestBehavior.AllowGet);
-
-
         }
         public JsonResult DeleteCity(int id)
         {
@@ -1619,6 +1617,7 @@ namespace LiquadCargoManagment.Controllers
             return RedirectToAction("Login", "Account");
         }
         #endregion
+
         #region CustomerGroup
         [HttpGet]
         public ActionResult CustomerGroup(string auth)
